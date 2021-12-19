@@ -4,12 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.27309782608695654" />
+        <entry key="app/src/main/res/layout/exams_fragment.xml" value="0.3197463768115942" />
         <entry key="app/src/main/res/layout/fragment_congrats.xml" value="0.32971014492753625" />
         <entry key="app/src/main/res/layout/fragment_failed.xml" value="0.32971014492753625" />
         <entry key="app/src/main/res/layout/fragment_game.xml" value="0.32971014492753625" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.19791666666666666" />
         <entry key="app/src/main/res/layout/fragment_quiz_list.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_topics_list.xml" value="0.32971014492753625" />
+        <entry key="app/src/main/res/layout/mistakes_fragment.xml" value="0.3197463768115942" />
         <entry key="app/src/main/res/layout/statistics_fragment.xml" value="0.3197463768115942" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.35572916666666665" />
       </map>

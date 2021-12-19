@@ -1,14 +1,22 @@
 <resources>
     <string name="app_name">MiningQuiz</string>
-<!--    bottom navigation items-->
+    <!--    bottom navigation items-->
     <string name="home">Home</string>
     <string name="new_quiz">New Quiz</string>
     <string name="statistics">Statistics</string>
+
+    <!--    QuizListFragment Tabs-->
+    <string name="quiz">Quiz</string>
+    <string name="topics">Topics</string>
+    <string name="mistakes">Mistakes</string>
+
 
     <string name="solve_by_topic">Solve by topic</string>
     <string name="choose_exam">Choose the exam:</string>
     <string name="choose_topic">Choose the topic:</string>
     <string name="postpone">Postpone</string>
     <string name="exit_game">Quit the test</string>
+
+
 
 </resources>
