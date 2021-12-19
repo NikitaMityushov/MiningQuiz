@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Экзамен ТБ</string>
+    <!--    bottom navigation items-->
+    <string name="home">Домашняя</string>
+    <string name="new_quiz">Экзамен</string>
+    <string name="statistics">Статистика</string>
+
+
+
+    <string name="solve_by_topic">Решать по теме</string>
+    <string name="choose_exam">Выберите экзамен:</string>
+    <string name="choose_topic">Выберите тему:</string>
+    <string name="postpone">Пропустить</string>
+    <string name="exit_game">Завершить тест</string>
+</resources>
