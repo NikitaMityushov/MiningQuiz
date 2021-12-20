@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/examsFragment">
+
+    <fragment
+        android:id="@+id/examsFragment"
+        android:name="com.mityushovn.miningquiz.screens.main.examsfragment.ExamsFragment"
+        android:label="exams_fragment"
+        tools:layout="@layout/exams_fragment" >
+        <action
+            android:id="@+id/action_examsFragment_to_previewGameFragment"
+            app:destination="@id/previewGameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/failedFragment3"
+        android:name="com.mityushovn.miningquiz.screens.main.failedfragment.FailedFragment"
+        android:label="fragment_failed"
+        tools:layout="@layout/fragment_failed" >
+        <action
+            android:id="@+id/action_failedFragment3_to_examsFragment"
+            app:destination="@id/examsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/congratsFragment3"
+        android:name="com.mityushovn.miningquiz.screens.main.congratsfragment.CongratsFragment"
+        android:label="fragment_congrats"
+        tools:layout="@layout/fragment_congrats" >
+        <action
+            android:id="@+id/action_congratsFragment3_to_examsFragment"
+            app:destination="@id/examsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameFragment3"
+        android:name="com.mityushovn.miningquiz.screens.main.gamefragment.GameFragment"
+        android:label="GameFragment" >
+        <action
+            android:id="@+id/action_gameFragment3_to_congratsFragment3"
+            app:destination="@id/congratsFragment3" />
+        <action
+            android:id="@+id/action_gameFragment3_to_failedFragment3"
+            app:destination="@id/failedFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/previewGameFragment"
+        android:name="com.mityushovn.miningquiz.screens.main.previewgamefragment.PreviewGameFragment"
+        android:label="fragment_preview_game"
+        tools:layout="@layout/fragment_preview_game" >
+        <action
+            android:id="@+id/action_previewGameFragment_to_gameFragment3"
+            app:destination="@id/gameFragment3" />
+    </fragment>
+</navigation>

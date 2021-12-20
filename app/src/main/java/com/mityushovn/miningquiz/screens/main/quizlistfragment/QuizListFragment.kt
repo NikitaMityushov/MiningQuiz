@@ -32,7 +32,7 @@ class QuizListFragment : Fragment() {
         binding = FragmentQuizListBinding.inflate(inflater, container, false)
         pager = binding.quizListFrViewpager
         tabLayout = binding.quizListFrTabLayout
-        pager.adapter = QuizListAdapter(parentFragmentManager, lifecycle)
+        pager.adapter = QuizListAdapter(childFragmentManager, lifecycle)
         TabLayoutMediator(tabLayout, pager) {
             tab, position ->
                 tab.setText(tabTitles[position])
@@ -43,7 +43,6 @@ class QuizListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
     }
 }
