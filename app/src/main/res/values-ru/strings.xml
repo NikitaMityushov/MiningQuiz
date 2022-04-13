@@ -16,5 +16,13 @@
     <string name="choose_topic">Выберите тему:</string>
     <string name="postpone">Пропустить</string>
     <string name="exit_game">Завершить тест</string>
+    <string name="please_choose_the_exam">Выберите экзамен:</string>
+    <string name="there_are_no_the_right_answers_in_this_questions">На данные вопросы были даны неправильные ответы:</string>
+    <string name="continue_btn">Продолжить</string>
+    <string name="repeat_btn">Начать заново</string>
+    <string name="let_s_start_btn">Начать экзамен</string>
+    <string name="correct_answer">Верно!</string>
+    <string name="incorrect_answer">Неверно!</string>
+    <string name="hello_word">Здравствуйте!</string>
 
 </resources>

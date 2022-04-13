@@ -33,9 +33,8 @@ class QuizListFragment : Fragment() {
         pager = binding.quizListFrViewpager
         tabLayout = binding.quizListFrTabLayout
         pager.adapter = QuizListAdapter(childFragmentManager, lifecycle)
-        TabLayoutMediator(tabLayout, pager) {
-            tab, position ->
-                tab.setText(tabTitles[position])
+        TabLayoutMediator(tabLayout, pager) { tab, position ->
+            tab.setText(tabTitles[position])
         }.attach()
 
         return binding.root

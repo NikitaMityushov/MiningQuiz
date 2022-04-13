@@ -1,0 +1,99 @@
+package com.mityushovn.miningquiz.database.attemptTopicDao
+
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
+import com.mityushovn.miningquiz.database.AppSQLiteContract
+import com.mityushovn.miningquiz.models.AttemptTopic
+import com.mityushovn.miningquiz.utils.toIntForDB
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import timber.log.Timber
+
+private val STRING_ARRAY_OF_COLUMNS = arrayOf(
+    AppSQLiteContract.Common.NUMBER_OF_ATTEMPTS
+)
+
+/**
+ * @author Nikita Mityushov 8.04.22
+ * @since 1.0
+ * Implementation of AttemptTopicDaoAPI interface.
+ * @see AttemptTopic
+ */
+class AttemptTopicDao(
+    private val db: SQLiteDatabase
+) : AttemptTopicDaoAPI {
+
+    /**
+     * @see AttemptTopicDaoAPI.insertAttemptTopic
+     */
+    override suspend fun insertAttemptTopic(attemptTopic: AttemptTopic): Flow<Boolean> = flow {
+        try {
+            db.execSQL(
+                "INSERT INTO attempt_topic(topic_id, passed_at, success) VALUES (${attemptTopic.topicId}, ${attemptTopic.passedAt.time}, ${attemptTopic.success.toIntForDB()});"
+            )
+            emit(true)
+        } catch (e: Exception) {
+            Timber.e(e)
+            emit(false)
+        }
+    }
+
+    /**
+     * @see AttemptTopicDaoAPI.getNumberOfTopicSolvingAttempts
+     */
+    override suspend fun getNumberOfTopicSolvingAttempts(): Int {
+        // 1) db query
+        val cursor = db.rawQuery(
+            AppSQLiteContract.AttemptTopicTable.GET_NUMBER_OF_ALL_TOPICS_SOLVING_ATTEMPTS_QUERY,
+            STRING_ARRAY_OF_COLUMNS
+        )
+        // 2) handle response(cursor)
+        return handleCursorInt(cursor)
+    }
+
+    /**
+     * @see AttemptTopicDaoAPI.getNumberOfSuccessfulTopicSolvingAttempts
+     */
+    override suspend fun getNumberOfSuccessfulTopicSolvingAttempts(): Int {
+        // 1) db query
+        val cursor = db.rawQuery(
+            AppSQLiteContract.AttemptTopicTable.GET_NUMBER_OF_SUCCESS_TOPIC_SOLVING_ATTEMPTS_QUERY,
+            STRING_ARRAY_OF_COLUMNS
+        )
+        // 2) handle response(cursor)
+        return handleCursorInt(cursor)
+    }
+
+    /**
+     * @see AttemptTopicDaoAPI.getNumberOfFailedTopicSolvingAttempts
+     */
+    override suspend fun getNumberOfFailedTopicSolvingAttempts(): Int {
+        // 1) db query
+        val cursor = db.rawQuery(
+            AppSQLiteContract.AttemptTopicTable.GET_NUMBER_OF_FAILED_TOPIC_SOLVING_ATTEMPTS_QUERY,
+            STRING_ARRAY_OF_COLUMNS
+        )
+        // 2) handle response(cursor)
+        return handleCursorInt(cursor)
+    }
+
+    /*
+ * private methods
+ */
+    /**
+     * Method executes common routine: reads data from Cursor instance, write to List with
+     * Question init, and close the Cursor resource.
+     */
+    private suspend inline fun handleCursorInt(
+        cursor: Cursor
+    ): Int {
+        cursor.use {
+            return if (cursor.count == 0) {
+                0
+            } else {
+                cursor.moveToFirst()
+                cursor.getInt(cursor.getColumnIndexOrThrow(AppSQLiteContract.Common.NUMBER_OF_ATTEMPTS))
+            }
+        }
+    }
+}

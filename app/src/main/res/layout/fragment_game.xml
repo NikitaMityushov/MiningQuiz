@@ -24,65 +24,101 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Тема: влияние некоторых музыкальных инструментов на личную жизнь крупного рогатого скота." />
 
+        <ScrollView
+            android:id="@+id/game_fr_sv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/game_fr_result_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/game_fr_topic">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/game_fr_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/title_text_margin_start"
+                    android:layout_marginTop="@dimen/title_text_margin_top"
+                    android:layout_marginEnd="@dimen/title_text_margin_end"
+                    android:textSize="@dimen/question_text_size"
+                    tools:text="Вопрос №1 из 12: какое количество коров находится на рисунке при условии, что одна явно нарушает правила ОТ и ПБ?" />
+
+                <Button
+                    android:id="@+id/game_fr_answer_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/recycler_view_margin_start"
+                    android:layout_marginTop="@dimen/recycler_view_margin_top"
+                    android:layout_marginEnd="@dimen/recycler_view_margin_end"
+                    android:textSize="@dimen/answer_button_text_size"
+                    tools:text="25 или 26, точно не знаю" />
+
+                <Button
+                    android:id="@+id/game_fr_answer_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/recycler_view_margin_start"
+                    android:layout_marginTop="@dimen/recycler_view_margin_top"
+                    android:layout_marginEnd="@dimen/recycler_view_margin_end"
+                    android:textSize="@dimen/answer_button_text_size"
+                    tools:text="блалалалалаблаллалалаблалалаблалалалал....30" />
+
+                <Button
+                    android:id="@+id/game_fr_answer_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/recycler_view_margin_start"
+                    android:layout_marginTop="@dimen/recycler_view_margin_top"
+                    android:layout_marginEnd="@dimen/recycler_view_margin_end"
+                    android:textSize="@dimen/answer_button_text_size"
+                    tools:text="ай донт ноу вот ту сэй" />
+
+                <Button
+                    android:id="@+id/game_fr_answer_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/recycler_view_margin_start"
+                    android:layout_marginTop="@dimen/recycler_view_margin_top"
+                    android:layout_marginEnd="@dimen/recycler_view_margin_end"
+                    android:textSize="@dimen/answer_button_text_size"
+                    tools:text="прупрупрупумпумпумпум \n asduhyf8osayugdfiiuagw08erfygasiodgf0oqew7r80gfuvbzikflghwe807rgyhsdf" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
         <TextView
-            android:id="@+id/game_fr_question"
+            android:id="@+id/game_fr_result_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/title_text_margin_start"
-            android:layout_marginTop="@dimen/title_text_margin_top"
-            android:layout_marginEnd="@dimen/title_text_margin_end"
+            android:layout_margin="@dimen/normal_spacing"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/game_fr_continue_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/game_fr_topic"
-            tools:text="Вопрос №1 из 12: какое количество коров находится на рисунке при условии, что одна явно нарушает правила ОТ и ПБ?" />
+            app:layout_constraintTop_toBottomOf="@id/game_fr_sv"
+            tools:text="Правильно" />
+
 
         <Button
-            android:id="@+id/game_fr_answer_1"
+            android:id="@+id/game_fr_continue_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/recycler_view_margin_start"
-            android:layout_marginTop="@dimen/recycler_view_margin_top"
-            android:layout_marginEnd="@dimen/recycler_view_margin_end"
+            android:layout_margin="@dimen/normal_spacing"
+            android:text="@string/continue_btn"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/game_fr_exit_game_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/game_fr_question"
-            tools:text="25 или 26, точно не знаю" />
+            app:layout_constraintTop_toBottomOf="@id/game_fr_result_tv" />
 
-        <Button
-            android:id="@+id/game_fr_answer_2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/recycler_view_margin_start"
-            android:layout_marginTop="@dimen/recycler_view_margin_top"
-            android:layout_marginEnd="@dimen/recycler_view_margin_end"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/game_fr_answer_1"
-            tools:text="блалалалалаблаллалалаблалалаблалалалал....30" />
-
-        <Button
-            android:id="@+id/game_fr_answer_3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/recycler_view_margin_start"
-            android:layout_marginTop="@dimen/recycler_view_margin_top"
-            android:layout_marginEnd="@dimen/recycler_view_margin_end"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/game_fr_answer_2"
-            tools:text="ай донт ноу вот ту сэй" />
-
-        <Button
-            android:id="@+id/game_fr_answer_4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/recycler_view_margin_start"
-            android:layout_marginTop="@dimen/recycler_view_margin_top"
-            android:layout_marginEnd="@dimen/recycler_view_margin_end"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/game_fr_answer_3"
-            tools:text="прупрупрупумпумпумпум \n asduhyf8osayugdfiiuagw08erfygasiodgf0oqew7r80gfuvbzikflghwe807rgyhsdf" />
 
         <Button
             android:id="@+id/game_fr_postpone_btn"
@@ -92,9 +128,9 @@
             android:layout_marginTop="@dimen/recycler_view_margin_top"
             android:layout_marginEnd="@dimen/recycler_view_margin_end"
             android:text="@string/postpone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/game_fr_exit_game_btn"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/game_fr_answer_4" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/game_fr_exit_game_btn"
@@ -104,9 +140,9 @@
             android:layout_marginTop="@dimen/recycler_view_margin_top"
             android:layout_marginEnd="@dimen/recycler_view_margin_end"
             android:text="@string/exit_game"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/game_fr_postpone_btn"
-            app:layout_constraintTop_toBottomOf="@id/game_fr_answer_4" />
+            app:layout_constraintStart_toEndOf="@id/game_fr_postpone_btn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
