@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/default_navigation"
-    app:startDestination="@id/homeFragment">
-
+    android:id="@+id/tab_navigation"
+    app:startDestination="@id/home">
+    <include app:graph="@navigation/home" />
+    <include app:graph="@navigation/quizlist" />
+    <include app:graph="@navigation/statistics" />
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.mityushovn.miningquiz.screens.main.homefragment.HomeFragment"
-        android:label="@string/home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/searchListFragment2"
+        android:name="com.mityushovn.miningquiz.screens.main.searchlistfragment.SearchListFragment"
+        android:label="SearchListFragment" >
+        <action
+            android:id="@+id/action_searchListFragment2_to_questionFragment"
+            app:destination="@id/questionFragment" />
+    </fragment><action android:id="@+id/action_global_searchListFragment2" app:destination="@id/searchListFragment2"/>
     <fragment
-        android:id="@+id/quizListFragment"
-        android:name="com.mityushovn.miningquiz.screens.main.quizlistfragment.QuizListFragment"
-        android:label="@string/new_quiz" />
-    <fragment
-        android:id="@+id/statisticsFragment"
-        android:name="com.mityushovn.miningquiz.screens.main.statisticsfragment.StatisticsFragment"
-        android:label="@string/statistics"
-        tools:layout="@layout/statistics_fragment" />
-
+        android:id="@+id/questionFragment"
+        android:name="com.mityushovn.miningquiz.screens.main.searchlistfragment.questionfragment.QuestionFragment"
+        android:label="QuestionFragment" >
+        <action
+            android:id="@+id/action_questionFragment_to_searchListFragment2"
+            app:destination="@id/searchListFragment2" />
+    </fragment>
 </navigation>

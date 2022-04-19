@@ -11,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiningQuiz">
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.quiz.QuizActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

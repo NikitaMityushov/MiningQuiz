@@ -1,22 +1,89 @@
 package com.mityushovn.miningquiz.screens.main.searchlistfragment
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import com.mityushovn.miningquiz.R
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.RecyclerView
+import com.mityushovn.miningquiz.DI.Navigators
+import com.mityushovn.miningquiz.activities.main.MainActivityVMFactory
+import com.mityushovn.miningquiz.activities.main.MainActivityViewModel
+import com.mityushovn.miningquiz.databinding.SearchListFragmentBinding
+import com.mityushovn.miningquiz.DI.Repositories
+import com.mityushovn.miningquiz.navigation.MainNavigator
+import com.mityushovn.miningquiz.screens.recyclerview.adapters.QuestionsSearchFrAdapter
+import com.mityushovn.miningquiz.utils.hideKeyboard
+import com.mityushovn.miningquiz.screens.main.mainfragment.MainFragment
 
+/**
+ * @author Nikita Mityushov
+ * @since 1.0
+ * @property navigator is instance of a MainNavigation interface responsible for navigation
+ * through screens(fragments) in the MainActivity.
+ * @see MainNavigator
+ * @property mainActivityViewModel is MainActivityViewModel class instance that shared among
+ * MainFragment and SearchListFragment.
+ * @see MainFragment
+ */
 class SearchListFragment : Fragment() {
-
-    private lateinit var viewModel: SearchListViewModel
+    /*
+        shared ViewModel with MainActivity and MainFragment
+     */
+    private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
+        MainActivityVMFactory(Repositories.questionsRepository)
+    }
+    private val navigator: MainNavigator = Navigators.mainNavigator
+    private lateinit var binding: SearchListFragmentBinding
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var listAdapter: QuestionsSearchFrAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.search_list_fragment, container, false)
+    ): View {
+        binding = SearchListFragmentBinding.inflate(inflater, container, false)
+        listAdapter = QuestionsSearchFrAdapter { questionId ->
+            //    destination of navigation
+            view?.let {
+                navigator.onQuestionSelected(it, questionId)
+            }
+        }
+        /*
+            init data binding
+         */
+        with(binding) {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = mainActivityViewModel
+            adapter = listAdapter
+        }
+        /*
+            setup RecyclerView
+         */
+        recyclerView = binding.searchListFrRecyclerView.also {
+            setupRecyclerView(it, listAdapter)
+        }
+
+        return binding.root
     }
 
+    /**
+     * Setups RecycleView.
+     * When RV is scrolling system hides a keyboard.
+     */
+    private fun setupRecyclerView(rv: RecyclerView, listAdapter: QuestionsSearchFrAdapter) {
+//        rv.adapter = listAdapter
+        rv.swapAdapter(listAdapter, true) // swapAdapter clears only cache, not a ViewPool!
+        // hides keyboard when scrolling RecyclerView
+        rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(
+                recyclerView: RecyclerView,
+                newState: Int
+            ) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                    recyclerView.hideKeyboard()
+                }
+            }
+        })
+    }
 }

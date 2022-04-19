@@ -5,12 +5,18 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.mityushovn.miningquiz.screens.main.quizList.topicslistfragment.TopicsListViewModel" />
+        <variable
+            name="adapter"
+            type="com.mityushovn.miningquiz.screens.recyclerview.adapters.TopicsListFrAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".screens.main.topicslistfragment.TopicsListFragment">
+        tools:context=".screens.main.quizList.topicslistfragment.TopicsListFragment">
 
         <TextView
             android:id="@+id/topics_list_fr_title_tv"
@@ -28,13 +34,19 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/topics_list_fr_recycler_view"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginStart="@dimen/recycler_view_margin_start"
             android:layout_marginTop="@dimen/recycler_view_margin_top"
             android:layout_marginEnd="@dimen/recycler_view_margin_end"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/topics_list_fr_title_tv" />
+            app:layout_constraintTop_toBottomOf="@id/topics_list_fr_title_tv"
+
+            app:listAdapter="@{adapter}"
+            app:topics="@{viewModel.topics}"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

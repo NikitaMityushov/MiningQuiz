@@ -26,4 +26,15 @@
     <string name="incorrect_answer">Incorrect!</string>
     <string name="hello_word">Hello!</string>
 
+    <!-- Searching questions -->
+    <string name="enter_the_question">Enter the question:</string>
+    <string name="search_input">search input</string>
+    <string name="there_are_no_questions">There are no questions!</string>
+    <string name="founded_the_following_questions">Founded the following questions:</string>
+    <string name="questions_found">questions found:</string>
+    <string name="exam">Exam:</string>
+    <string name="topic">Topic:</string>
+    <string name="question">Question:</string>
+    <string name="right_answer">Right answer:</string>
+
 </resources>

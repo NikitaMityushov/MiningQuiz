@@ -10,19 +10,6 @@ import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 
-private val STRING_ARRAY_OF_QUESTION_COLUMNS = arrayOf(
-    AppSQLiteContract.QuestionTable.COLUMN_QUESTION_ID,
-    AppSQLiteContract.QuestionTable.COLUMN_CONTENT,
-    AppSQLiteContract.QuestionTable.COLUMN_RIGHT_ANS,
-    AppSQLiteContract.QuestionTable.COLUMN_ANS_1,
-    AppSQLiteContract.QuestionTable.COLUMN_ANS_2,
-    AppSQLiteContract.QuestionTable.COLUMN_ANS_3,
-    AppSQLiteContract.TopicTable.COLUMN_TOPIC_ID,
-    AppSQLiteContract.TopicTable.COLUMN_NAME_TOPIC,
-    AppSQLiteContract.ExamTable.COLUMN_EXAM_ID,
-    AppSQLiteContract.ExamTable.COLUMN_NAME_EXAM
-)
-
 /**
  * @author Nikita Mityushov 8.04.22
  * @since 1.0
@@ -40,7 +27,7 @@ class QuestionsDao(
         // 1) db query
         val cursor = db.rawQuery(
             AppSQLiteContract.QuestionTable.SELECT_ALL_WRONG_ANSWERED_QUERY,
-            STRING_ARRAY_OF_QUESTION_COLUMNS
+            null
         )
         // 2) handle response(cursor)
         handleCursor(cursor, this)
@@ -49,11 +36,12 @@ class QuestionsDao(
     /**
      * @see QuestionsDaoAPI.getAllQuestionsFromTopic
      */
+    // TODO: 14.04.2022 испытать selection args, снести основной запрос в const val. Должно быть where topic_id =? , selection args = new String[] {topicID.toString()};
     override suspend fun getAllQuestionsFromTopic(topicId: Int): Flow<List<Question>> = flow {
         Timber.d("getAllQuestionsFromTopic() SQL query = SELECT * FROM \"question_view\" WHERE \"topic_id\" = $topicId;")
         val cursor = db.rawQuery(
-            "SELECT * FROM question_view WHERE topic_id = ${topicId};",
-            STRING_ARRAY_OF_QUESTION_COLUMNS
+            "SELECT * FROM question_view WHERE topic_id = $topicId",
+            null
         )
         handleCursor(cursor, this)
     }
@@ -65,7 +53,7 @@ class QuestionsDao(
         flow {
             Timber.d("SQL query = INSERT INTO wrong_answered(question_id, answered_at) VALUES (" + wrongAnswered.questionId + ", " + wrongAnswered.answeredAt + ");")
             db.execSQL(
-                "INSERT INTO wrong_answered(question_id, answered_at) VALUES (${wrongAnswered.questionId}, ${wrongAnswered.answeredAt});"
+                "INSERT INTO wrong_answered(question_id, answered_at) VALUES (${wrongAnswered.questionId}, ${wrongAnswered.answeredAt})"
             )
             emit(true)
         }
@@ -79,8 +67,8 @@ class QuestionsDao(
     ): Flow<List<Question>> = flow {
         // 1) db query
         val cursor = db.rawQuery(
-            "SELECT * FROM ${AppSQLiteContract.QuestionTable.QUESTIONS_VIEW_NAME} WHERE exam_id = $examId ORDER BY random() LIMIT $numberOfQuestions;",
-            STRING_ARRAY_OF_QUESTION_COLUMNS
+            "SELECT * FROM ${AppSQLiteContract.QuestionTable.QUESTIONS_VIEW_NAME} WHERE exam_id = $examId ORDER BY random() LIMIT $numberOfQuestions",
+            null
         )
         // 2) handle response(cursor)
         handleCursor(cursor, this)
@@ -93,13 +81,70 @@ class QuestionsDao(
         flow {
             // 1) db query
             val cursor = db.rawQuery(
-                "SELECT * FROM question_view WHERE content LIKE \"%${input}%\";",
-                STRING_ARRAY_OF_QUESTION_COLUMNS
+                "SELECT * FROM question_view WHERE content LIKE \"%${input}%\"",
+                null
             )
 
             // 2) handle response(cursor)
             handleCursor(cursor, this)
         }
+
+    /**
+     * @see QuestionsDaoAPI.getQuestionById
+     */
+    override suspend fun getQuestionById(questionId: Int): Flow<Question> = flow {
+        // 1) db query
+        val cursor = db.rawQuery(
+            "SELECT * FROM question_view WHERE question_id = $questionId",
+            null
+        )
+        // TODO: 19.04.2022 перепроверить
+        // 2) handle response(cursor)
+        cursor.use {
+            if (cursor.count == 0) {
+                Timber.e("Question with specified questionId = $questionId must exists, it's illegal state")
+                throw IllegalStateException("Question with specified questionId = $questionId must exists")
+            } else {
+                // 3 iterate through cursor and emit Question
+                while (cursor.moveToFirst()) {
+                    this.emit(
+                        Question(
+                            questionId = cursor.getInt(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.QuestionTable.COLUMN_QUESTION_ID)
+                            ),
+                            topicId = cursor.getInt(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.TopicTable.COLUMN_TOPIC_ID)
+                            ),
+                            nameTopic = cursor.getString(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.TopicTable.COLUMN_NAME_TOPIC)
+                            ),
+                            examId = cursor.getInt(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.ExamTable.COLUMN_EXAM_ID)
+                            ),
+                            nameExam = cursor.getString(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.ExamTable.COLUMN_NAME_EXAM)
+                            ),
+                            content = cursor.getString(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.QuestionTable.COLUMN_CONTENT)
+                            ),
+                            rightAns = cursor.getString(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.QuestionTable.COLUMN_RIGHT_ANS)
+                            ),
+                            ans1 = cursor.getString(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.QuestionTable.COLUMN_ANS_1)
+                            ),
+                            ans2 = cursor.getString(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.QuestionTable.COLUMN_ANS_2)
+                            ),
+                            ans3 = cursor.getString(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.QuestionTable.COLUMN_ANS_3)
+                            ),
+                        )
+                    )
+                }
+            }
+        }
+    }
 
     /*
         private methods

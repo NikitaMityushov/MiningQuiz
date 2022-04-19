@@ -23,7 +23,7 @@ object AppSQLiteContract {
         const val COLUMN_ANS_2 = "ans_2"
         const val COLUMN_ANS_3 = "ans_3"
         const val SELECT_ALL_WRONG_ANSWERED_QUERY =
-            "SELECT	* FROM	question_view INNER JOIN wrong_answered USING(question_id);"
+            "SELECT	* FROM	question_view INNER JOIN wrong_answered USING(question_id)"
     }
 
     object TopicTable {
@@ -31,7 +31,7 @@ object AppSQLiteContract {
         const val COLUMN_TOPIC_ID = "topic_id"
         const val COLUMN_NAME_TOPIC = "name_topic"
         const val SELECT_ALL_TOPICS_QUERY =
-            "SELECT topic_id, name_topic, name_exam FROM exam INNER JOIN topic USING(exam_id);"
+            "SELECT topic_id, name_topic, name_exam FROM exam INNER JOIN topic USING(exam_id)"
     }
 
     object ExamTable {
@@ -51,11 +51,11 @@ object AppSQLiteContract {
         const val COLUMN_ATT_TOPIC_ID = "att_topic_id"
 
         const val GET_NUMBER_OF_ALL_TOPICS_SOLVING_ATTEMPTS_QUERY =
-            "SELECT count(att_topic_id) AS number_of_attempts FROM attempt_topic;"
+            "SELECT count(att_topic_id) AS number_of_attempts FROM attempt_topic"
         const val GET_NUMBER_OF_SUCCESS_TOPIC_SOLVING_ATTEMPTS_QUERY =
-            "SELECT count(att_topic_id) AS number_of_attempts FROM attempt_topic WHERE success = 1;"
+            "SELECT count(att_topic_id) AS number_of_attempts FROM attempt_topic WHERE success = 1"
         const val GET_NUMBER_OF_FAILED_TOPIC_SOLVING_ATTEMPTS_QUERY =
-            "SELECT count(att_topic_id) AS number_of_attempts FROM attempt_topic WHERE success = 0;"
+            "SELECT count(att_topic_id) AS number_of_attempts FROM attempt_topic WHERE success = 0"
     }
 
     object AttemptExamTable {
@@ -64,10 +64,10 @@ object AppSQLiteContract {
 
 
         const val GET_NUMBER_OF_ALL_EXAM_SOLVING_ATTEMPTS_QUERY =
-            "SELECT count(att_exam_id) AS number_of_attempts FROM attempt_exam;"
+            "SELECT count(att_exam_id) AS number_of_attempts FROM attempt_exam"
         const val GET_NUMBER_OF_SUCCESS_EXAM_SOLVING_ATTEMPTS_QUERY =
-            "SELECT count(att_exam_id) AS number_of_attempts FROM attempt_exam WHERE success = 1;"
+            "SELECT count(att_exam_id) AS number_of_attempts FROM attempt_exam WHERE success = 1"
         const val GET_NUMBER_OF_FAILED_EXAM_SOLVING_ATTEMPTS_QUERY =
-            "SELECT count(att_exam_id) AS number_of_attempts FROM attempt_exam WHERE success = 0;"
+            "SELECT count(att_exam_id) AS number_of_attempts FROM attempt_exam WHERE success = 0"
     }
 }

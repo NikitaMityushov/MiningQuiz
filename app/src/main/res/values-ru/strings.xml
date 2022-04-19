@@ -25,4 +25,16 @@
     <string name="incorrect_answer">Неверно!</string>
     <string name="hello_word">Здравствуйте!</string>
 
+    <!-- Searching questions -->
+    <string name="enter_the_question">Поиск вопроса…</string>
+    <string name="search_input">Поле ввода вопроса для поиска</string>
+    <string name="there_are_no_questions">Вопросы не найдены</string>
+    <string name="founded_the_following_questions">Найдены следующие вопросы:</string>
+    <string name="questions_found">Вопросов найдено:</string>
+    <string name="exam">Экзамен:</string>
+    <string name="topic">Тема:</string>
+    <string name="question">Вопрос:</string>
+    <string name="right_answer">Ответ:</string>
+
+
 </resources>

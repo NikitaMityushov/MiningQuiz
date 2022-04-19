@@ -56,7 +56,14 @@ class QuestionsRepository(
      * @see QuestionsRepositoryAPI.getQuestionsMatchesSearchInput
      */
     override suspend fun getQuestionsMatchesSearchInput(input: String): Flow<List<Question>> {
-        return getQuestionsMatchesSearchInput(input).flowOn(coroutineDispatcher)
+        return questionsDao.getQuestionsMatchesSearchInput(input).flowOn(coroutineDispatcher)
+    }
+
+    /**
+     * @see QuestionsDaoAPI.getQuestionById
+     */
+    override suspend fun getQuestionById(questionId: Int): Flow<Question> {
+        return questionsDao.getQuestionById(questionId).flowOn(coroutineDispatcher)
     }
 
 }

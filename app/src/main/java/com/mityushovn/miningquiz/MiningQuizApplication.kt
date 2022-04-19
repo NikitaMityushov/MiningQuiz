@@ -1,7 +1,8 @@
 package com.mityushovn.miningquiz
 
 import android.app.Application
-import com.mityushovn.miningquiz.repository.Repositories
+import com.mityushovn.miningquiz.DI.Navigators
+import com.mityushovn.miningquiz.DI.Repositories
 import timber.log.Timber
 
 class MiningQuizApplication : Application() {
@@ -12,5 +13,7 @@ class MiningQuizApplication : Application() {
         Timber.plant(Timber.DebugTree())
         // 2) init repositories and database
         Repositories.init(applicationContext)
+        // 3) init Navigators
+        Navigators.init(applicationContext)
     }
 }

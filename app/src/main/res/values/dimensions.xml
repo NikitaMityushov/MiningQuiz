@@ -25,4 +25,7 @@
     <dimen name="question_text_size">16sp</dimen>
     <dimen name="answer_button_text_size">16sp</dimen>
 
+    <!-- progress bar size -->
+    <dimen name="progress_normal_size">18dp</dimen>
+
 </resources>

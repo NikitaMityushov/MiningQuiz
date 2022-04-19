@@ -9,10 +9,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 
-private val STRING_ARRAY_OF_COLUMNS = arrayOf(
-    AppSQLiteContract.Common.NUMBER_OF_ATTEMPTS
-)
-
 /**
  * @author Nikita Mityushov 8.04.22
  * @since 1.0
@@ -29,7 +25,7 @@ class AttemptExamDao(
     override suspend fun insertAttemptExam(attemptExam: AttemptExam): Flow<Boolean> = flow {
         try {
             db.execSQL(
-                "INSERT INTO attempt_exam(exam_id, passed_at, success) VALUES (${attemptExam.examId}, ${attemptExam.passedAt.time}, ${attemptExam.success.toIntForDB()});"
+                "INSERT INTO attempt_exam(exam_id, passed_at, success) VALUES (${attemptExam.examId}, ${attemptExam.passedAt.time}, ${attemptExam.success.toIntForDB()})"
             )
 
             emit(true)
@@ -46,7 +42,7 @@ class AttemptExamDao(
         // 1) db query
         val cursor = db.rawQuery(
             AppSQLiteContract.AttemptExamTable.GET_NUMBER_OF_ALL_EXAM_SOLVING_ATTEMPTS_QUERY,
-            STRING_ARRAY_OF_COLUMNS
+            null
         )
         // 2) handle response(cursor)
         return handleCursorInt(cursor)
@@ -59,7 +55,7 @@ class AttemptExamDao(
         // 1) db query
         val cursor = db.rawQuery(
             AppSQLiteContract.AttemptExamTable.GET_NUMBER_OF_SUCCESS_EXAM_SOLVING_ATTEMPTS_QUERY,
-            STRING_ARRAY_OF_COLUMNS
+            null
         )
         // 2) handle response(cursor)
         return handleCursorInt(cursor)
@@ -72,7 +68,7 @@ class AttemptExamDao(
         // 1) db query
         val cursor = db.rawQuery(
             AppSQLiteContract.AttemptExamTable.GET_NUMBER_OF_FAILED_EXAM_SOLVING_ATTEMPTS_QUERY,
-            STRING_ARRAY_OF_COLUMNS
+            null
         )
         // 2) handle response(cursor)
         return handleCursorInt(cursor)

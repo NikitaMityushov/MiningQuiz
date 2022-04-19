@@ -1,13 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".screens.main.searchlistfragment.SearchListFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+        <variable
+            name="viewModel"
+            type="com.mityushovn.miningquiz.activities.main.MainActivityViewModel" />
+        <variable
+            name="adapter"
+            type="com.mityushovn.miningquiz.screens.recyclerview.adapters.QuestionsSearchFrAdapter" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        tools:context=".screens.main.searchlistfragment.SearchListFragment">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/search_list_fr_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/title_text_margin_start"
+            android:layout_marginTop="@dimen/title_text_margin_top"
+            android:layout_marginEnd="@dimen/title_text_margin_end"
+            app:sizeOfListForTextView="@{viewModel.questions}"
+            android:textSize="@dimen/title_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_list_fr_recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/recycler_view_margin_top"
+            android:layout_marginStart="@dimen/recycler_view_margin_start"
+            android:layout_marginTop="@dimen/recycler_view_margin_top"
+            android:layout_marginEnd="@dimen/recycler_view_margin_end"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_list_fr_tv"
+
+            app:questions="@{viewModel.questions}"
+            app:listAdapter="@{adapter}"
+
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

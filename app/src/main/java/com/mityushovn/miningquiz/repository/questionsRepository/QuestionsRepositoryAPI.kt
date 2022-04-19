@@ -53,4 +53,11 @@ interface QuestionsRepositoryAPI {
      */
     suspend fun getQuestionsMatchesSearchInput(input: String): Flow<List<Question>>
 
+    /**
+     * @param questionId of the specified Question.
+     * @return Flow with a Question instance.
+     * @see Question
+     */
+    suspend fun getQuestionById(questionId: Int): Flow<Question>
+
 }

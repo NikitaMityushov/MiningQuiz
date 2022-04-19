@@ -21,11 +21,7 @@ class TopicDao(private val db: SQLiteDatabase) : TopicDaoAPI {
         // 1) db query
         val cursor = db.rawQuery(
             AppSQLiteContract.TopicTable.SELECT_ALL_TOPICS_QUERY,
-            arrayOf(
-                AppSQLiteContract.TopicTable.COLUMN_TOPIC_ID,
-                AppSQLiteContract.TopicTable.COLUMN_NAME_TOPIC,
-                AppSQLiteContract.ExamTable.COLUMN_NAME_EXAM
-            )
+            null
         )
         // 2) handle response(cursor)
         cursor.use {
