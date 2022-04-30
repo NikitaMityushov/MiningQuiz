@@ -19,6 +19,11 @@ interface AttemptTopicDaoAPI {
     suspend fun insertAttemptTopic(attemptTopic: AttemptTopic): Flow<Boolean>
 
     /**
+     * Deletes all topics attempts from database.
+     */
+    suspend fun deleteAllTopicAttempts(): Flow<Boolean>
+
+    /**
      * @return number of all solved topics.
      */
     suspend fun getNumberOfTopicSolvingAttempts(): Int
@@ -32,4 +37,5 @@ interface AttemptTopicDaoAPI {
      * @return number of failed topics.
      */
     suspend fun getNumberOfFailedTopicSolvingAttempts(): Int
+
 }

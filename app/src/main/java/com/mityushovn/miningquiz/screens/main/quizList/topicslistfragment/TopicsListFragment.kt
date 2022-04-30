@@ -1,5 +1,6 @@
 package com.mityushovn.miningquiz.screens.main.quizList.topicslistfragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.mityushovn.miningquiz.DI.Navigators
 import com.mityushovn.miningquiz.databinding.FragmentTopicsListBinding
 import com.mityushovn.miningquiz.DI.Repositories
 import com.mityushovn.miningquiz.R
+import com.mityushovn.miningquiz.activities.main.MainActivity
 import com.mityushovn.miningquiz.navigation.MainNavigator
 import com.mityushovn.miningquiz.screens.recyclerview.adapters.TopicsListFrAdapter
 
@@ -22,7 +24,6 @@ import com.mityushovn.miningquiz.screens.recyclerview.adapters.TopicsListFrAdapt
  * @see MainNavigator
  */
 class TopicsListFragment : Fragment() {
-
     private val topicsListViewModel: TopicsListViewModel by viewModels {
         TopicsListVMFactory(Repositories.topicsRepository)
     }
@@ -30,7 +31,7 @@ class TopicsListFragment : Fragment() {
     private lateinit var binding: FragmentTopicsListBinding
     private lateinit var recyclerView: RecyclerView
     private val listAdapter: TopicsListFrAdapter = TopicsListFrAdapter { topicId ->
-        navigator.onTopicSelected(topicId)
+        navigator.onTopicSelected(topicId, requireActivity() as MainActivity)
     }
 
     override fun onCreateView(
@@ -50,12 +51,13 @@ class TopicsListFragment : Fragment() {
         }
 
         recyclerView = binding.topicsListFrRecyclerView.also {
-//            it.adapter = listAdapter
             it.swapAdapter(listAdapter, true) // swapAdapter clears only cache, not a ViewPool!
-            it.recycledViewPool.setMaxRecycledViews(
-                R.layout.topic_item,
-                6
-            ) // max items in TopicListFragment RecycleView is six, default is 5
+//            it.setRecycledViewPool(viewPool) // set RecycledViewPool todo
+//            it.recycledViewPool.setMaxRecycledViews(
+//                R.layout.topic_item,
+//                6
+//            ) // max items in TopicListFragment RecycleView is six, default is 5
+            it.setHasFixedSize(true) // changes in the adapter cannot affect to size of RecycleView, it's constant.
         }
 
         return binding.root

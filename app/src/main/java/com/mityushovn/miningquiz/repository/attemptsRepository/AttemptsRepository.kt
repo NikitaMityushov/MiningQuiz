@@ -6,11 +6,11 @@ import com.mityushovn.miningquiz.models.*
 import com.mityushovn.miningquiz.models.statisticsEntities.AbstractStatistics
 import com.mityushovn.miningquiz.models.statisticsEntities.ExamsSolvingStatistics
 import com.mityushovn.miningquiz.models.statisticsEntities.TopicsSolvingStatistics
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.zip
 
 /**
  * @author Nikita Mityushov 11.04.22
@@ -23,6 +23,9 @@ class AttemptsRepository(
     private val attemptTopicDao: AttemptTopicDaoAPI,
     private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : AttemptsRepositoryAPI {
+
+    private val repositoryCoroutineScope =
+        CoroutineScope(SupervisorJob() + coroutineDispatcher) // private repository coroutine scope
 
     /**
      * @see AttemptsRepositoryAPI.insertAttemptTopic
@@ -57,10 +60,20 @@ class AttemptsRepository(
     override suspend fun getTopicsStatistics(): Flow<AbstractStatistics> = flow {
         emit(
             TopicsSolvingStatistics(
-                numberOfAttempts = attemptExamDao.getNumberOfExamSolvingAttempts(),
-                numberOfSuccessAttempts = attemptExamDao.getNumberOfSuccessfulExamSolvingAttempts(),
-                numberOfFailedAttempts = attemptExamDao.getNumberOfFailedExamSolvingAttempts()
+                numberOfAttempts = attemptTopicDao.getNumberOfTopicSolvingAttempts(),
+                numberOfSuccessAttempts = attemptTopicDao.getNumberOfSuccessfulTopicSolvingAttempts(),
+                numberOfFailedAttempts = attemptTopicDao.getNumberOfFailedTopicSolvingAttempts()
             )
         )
     }.flowOn(coroutineDispatcher)
+
+    /**
+     * @see AttemptsRepositoryAPI.deleteAllStatistics
+     */
+    override suspend fun deleteAllStatistics(): Flow<Boolean> {
+        return attemptExamDao.deleteAllExamsAttempts()
+            .zip(attemptTopicDao.deleteAllTopicAttempts()) { b1, b2 ->
+                b1 && b2
+            }.flowOn(coroutineDispatcher)
+    }
 }

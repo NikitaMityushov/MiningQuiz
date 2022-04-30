@@ -20,7 +20,7 @@ class QuizListFragment : Fragment() {
     private val tabTitles = arrayOf(
         R.string.quiz,
         R.string.topics,
-        R.string.mistakes
+//        R.string.mistakes todo Mistakes Mode
     )
 
 

@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.databinding.TopicItemBinding
+import com.mityushovn.miningquiz.models.Question
 import com.mityushovn.miningquiz.models.Topic
+import com.mityushovn.miningquiz.screens.recyclerview.diffutils.CommonItemCallback
 
 // TODO: 10.05.2022 Animations, ItemDecorations
 
@@ -17,7 +19,7 @@ import com.mityushovn.miningquiz.models.Topic
  * @property clickListener is a handler for list item click navigation.
  */
 class TopicsListFrAdapter(private val clickListener: (Int) -> Unit) :
-    ListAdapter<Topic, TopicViewHolder>(TopicViewHolder.getDiffUtil()) {
+    ListAdapter<Topic, TopicViewHolder>(TopicDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopicViewHolder {
         val itemView =
@@ -29,6 +31,19 @@ class TopicsListFrAdapter(private val clickListener: (Int) -> Unit) :
         holder.bind(getItem(position), clickListener)
     }
 
+    /**
+     * private class implements DiffUtil.ItemCallback for List<Topic>
+     */
+    private class TopicDiffCallback : DiffUtil.ItemCallback<Topic>() {
+        override fun areItemsTheSame(oldItem: Topic, newItem: Topic): Boolean {
+            return oldItem.topicId == newItem.topicId
+        }
+
+        override fun areContentsTheSame(oldItem: Topic, newItem: Topic): Boolean {
+            return oldItem == newItem
+        }
+
+    }
 }
 
 /**
@@ -40,6 +55,8 @@ class TopicViewHolder(val binding: TopicItemBinding) :
 
     fun bind(topic: Topic, clickListener: (Int) -> Unit) {
         with(binding) {
+            topicCountTv.text =
+                (this@TopicViewHolder.adapterPosition.inc()).toString() // TODO: 21.04.2022 подумать, возможно убрать инкремент
             topicItemTv.text = topic.nameTopic
             executePendingBindings() // !! essential for bindings, forcing the framework to update view right at the moment
         }
@@ -49,27 +66,6 @@ class TopicViewHolder(val binding: TopicItemBinding) :
     private fun onClickListener(topicId: Int, onClick: (Int) -> Unit) {
         itemView.setOnClickListener {
             onClick(topicId)
-        }
-    }
-
-    /*
-        static fields and methods
-     */
-    companion object {
-        fun getDiffUtil() = diffUtil
-
-        /**
-         * static instance of DiffUtil.ItemCallback<Topic> class
-         */
-        private val diffUtil = object : DiffUtil.ItemCallback<Topic>() {
-            override fun areItemsTheSame(oldItem: Topic, newItem: Topic): Boolean {
-                return oldItem.topicId == newItem.topicId
-            }
-
-            override fun areContentsTheSame(oldItem: Topic, newItem: Topic): Boolean {
-                return oldItem == newItem
-            }
-
         }
     }
 }

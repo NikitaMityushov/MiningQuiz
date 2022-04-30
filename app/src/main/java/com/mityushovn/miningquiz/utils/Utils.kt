@@ -1,6 +1,8 @@
 package com.mityushovn.miningquiz.utils
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -100,4 +102,9 @@ fun View.toGone() {
  */
 fun View.toVisible() {
     visibility = View.VISIBLE
+}
+
+
+fun View.disable() {
+    isClickable = false
 }

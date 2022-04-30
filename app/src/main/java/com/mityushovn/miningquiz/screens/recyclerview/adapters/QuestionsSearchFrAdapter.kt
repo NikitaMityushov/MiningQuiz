@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.databinding.QuestionItemBinding
 import com.mityushovn.miningquiz.models.Question
+import com.mityushovn.miningquiz.screens.recyclerview.diffutils.CommonItemCallback
 
 // TODO: 10.05.2022 Animations, ItemDecorations
 
@@ -17,7 +18,7 @@ import com.mityushovn.miningquiz.models.Question
  * @property clickListener is a handler for list item click navigation.
  */
 class QuestionsSearchFrAdapter(private val clickListener: (Int) -> Unit) :
-    ListAdapter<Question, QuestionViewHolder>(QuestionViewHolder.getDiffUtil()) {
+    ListAdapter<Question, QuestionViewHolder>(QuestionDiffCallback()) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {
@@ -30,6 +31,19 @@ class QuestionsSearchFrAdapter(private val clickListener: (Int) -> Unit) :
         holder.bind(getItem(position), clickListener)
     }
 
+    /**
+     * private class implements DiffUtil.ItemCallback for List<Question>
+     */
+    private class QuestionDiffCallback : DiffUtil.ItemCallback<Question>() {
+        override fun areItemsTheSame(oldItem: Question, newItem: Question): Boolean {
+            return oldItem.questionId == newItem.questionId
+        }
+
+        override fun areContentsTheSame(oldItem: Question, newItem: Question): Boolean {
+            return oldItem == newItem
+        }
+    }
+
 }
 
 /**
@@ -38,7 +52,7 @@ class QuestionsSearchFrAdapter(private val clickListener: (Int) -> Unit) :
  */
 class QuestionViewHolder(
     val binding: QuestionItemBinding
-) : RecyclerView.ViewHolder(binding.root)/*, View.OnClickListener */ {
+) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(question: Question, clickListener: (Int) -> Unit) {
 
@@ -53,27 +67,6 @@ class QuestionViewHolder(
     private fun onClickListener(questionId: Int, onClick: (Int) -> Unit) {
         itemView.setOnClickListener {
             onClick(questionId)
-        }
-    }
-
-    /*
-        static fields and methods
-     */
-    companion object {
-        fun getDiffUtil() = diffUtil
-
-        /**
-         * static instance of DiffUtil.ItemCallback<Question> class
-         */
-        private val diffUtil = object : DiffUtil.ItemCallback<Question>() {
-            override fun areItemsTheSame(oldItem: Question, newItem: Question): Boolean {
-                return oldItem.questionId == newItem.questionId
-            }
-
-            override fun areContentsTheSame(oldItem: Question, newItem: Question): Boolean {
-                return oldItem == newItem
-            }
-
         }
     }
 }

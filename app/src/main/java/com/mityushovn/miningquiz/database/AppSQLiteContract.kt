@@ -56,6 +56,7 @@ object AppSQLiteContract {
             "SELECT count(att_topic_id) AS number_of_attempts FROM attempt_topic WHERE success = 1"
         const val GET_NUMBER_OF_FAILED_TOPIC_SOLVING_ATTEMPTS_QUERY =
             "SELECT count(att_topic_id) AS number_of_attempts FROM attempt_topic WHERE success = 0"
+        const val DELETE_ALL_TOPIC_ATTEMPTS = "DELETE FROM attempt_topic"
     }
 
     object AttemptExamTable {
@@ -69,5 +70,6 @@ object AppSQLiteContract {
             "SELECT count(att_exam_id) AS number_of_attempts FROM attempt_exam WHERE success = 1"
         const val GET_NUMBER_OF_FAILED_EXAM_SOLVING_ATTEMPTS_QUERY =
             "SELECT count(att_exam_id) AS number_of_attempts FROM attempt_exam WHERE success = 0"
+        const val DELETE_ALL_EXAM_ATTEMPTS = "DELETE FROM attempt_exam"
     }
 }

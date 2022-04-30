@@ -11,6 +11,16 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+
+        <item name="android:buttonStyle">@style/Widget.MiningQuiz.AnswerButtonsStyle</item>
         <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Widget.MiningQuiz.AnswerButtonsStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:layout_marginTop">@dimen/normal_spacing</item>
+        <item name="android:layout_marginStart">@dimen/normal_spacing</item>
+        <item name="android:layout_marginEnd">@dimen/normal_spacing</item>
+        <item name="android:textSize">@dimen/answer_button_text_size</item>
     </style>
 </resources>

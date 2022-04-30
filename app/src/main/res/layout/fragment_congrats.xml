@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.mityushovn.miningquiz.activities.quiz.GameEngine" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -29,6 +32,7 @@
             android:layout_marginStart="@dimen/title_text_margin_start"
             android:layout_marginTop="@dimen/title_text_margin_top"
             android:layout_marginEnd="@dimen/title_text_margin_end"
+            android:text="@{viewModel.stringForCongratsFrTV}"
             android:textSize="@dimen/normal_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

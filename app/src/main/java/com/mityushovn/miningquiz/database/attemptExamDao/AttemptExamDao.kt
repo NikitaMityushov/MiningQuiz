@@ -23,14 +23,29 @@ class AttemptExamDao(
      * @see AttemptExamDaoAPI.insertAttemptExam
      */
     override suspend fun insertAttemptExam(attemptExam: AttemptExam): Flow<Boolean> = flow {
+        Timber.d("insertAttemptExam, attemptExam is $attemptExam")
+        Timber.d(Thread.currentThread().name)
         try {
             db.execSQL(
                 "INSERT INTO attempt_exam(exam_id, passed_at, success) VALUES (${attemptExam.examId}, ${attemptExam.passedAt.time}, ${attemptExam.success.toIntForDB()})"
             )
-
             emit(true)
         } catch (e: Exception) {
             Timber.e(e)
+            emit(false)
+        }
+    }
+
+    /**
+     * @see AttemptExamDaoAPI.deleteAllExamsAttempts
+     */
+    override suspend fun deleteAllExamsAttempts(): Flow<Boolean> = flow {
+        try {
+            db.execSQL(AppSQLiteContract.AttemptExamTable.DELETE_ALL_EXAM_ATTEMPTS)
+            emit(true)
+        } catch (e: Exception) {
+            Timber.e(e)
+            e.printStackTrace()
             emit(false)
         }
     }

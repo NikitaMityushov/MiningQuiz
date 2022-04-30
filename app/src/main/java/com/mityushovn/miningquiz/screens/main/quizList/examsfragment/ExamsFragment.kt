@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mityushovn.miningquiz.DI.Navigators
 import com.mityushovn.miningquiz.databinding.ExamsFragmentBinding
 import com.mityushovn.miningquiz.DI.Repositories
+import com.mityushovn.miningquiz.activities.main.MainActivity
 import com.mityushovn.miningquiz.navigation.MainNavigator
 import com.mityushovn.miningquiz.screens.recyclerview.adapters.ExamsFrListAdapter
 
@@ -21,7 +22,6 @@ import com.mityushovn.miningquiz.screens.recyclerview.adapters.ExamsFrListAdapte
  * @see MainNavigator
  */
 class ExamsFragment : Fragment() {
-
     private val examsViewModel: ExamsViewModel by viewModels {
         ExamsVMFactory(Repositories.examsRepository)
     }
@@ -30,7 +30,7 @@ class ExamsFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private val listAdapter: ExamsFrListAdapter by lazy {
         ExamsFrListAdapter { examId ->
-            navigator.onExamSelected(examId)
+            navigator.onExamSelected(examId, requireActivity() as MainActivity)
         }
     }
 
@@ -50,8 +50,9 @@ class ExamsFragment : Fragment() {
         }
 
         recyclerView = binding.examFrRecyclerView.also {
-//            it.adapter = listAdapter
             it.swapAdapter(listAdapter, true) // swapAdapter clears only cache, not a ViewPool!
+//            it.setRecycledViewPool(viewPool) // set RecycledViewPool
+            it.setHasFixedSize(true) // changes in the adapter cannot affect to size of RecycleView, it's constant.
         }
 
         return binding.root

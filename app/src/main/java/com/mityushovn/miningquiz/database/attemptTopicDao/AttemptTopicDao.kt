@@ -35,6 +35,22 @@ class AttemptTopicDao(
     }
 
     /**
+     * @see AttemptTopicDaoAPI.deleteAllTopicAttempts
+     */
+    override suspend fun deleteAllTopicAttempts(): Flow<Boolean> = flow {
+        Timber.d("deleteAllExams")
+        Timber.d(Thread.currentThread().name)
+        try {
+            db.execSQL(AppSQLiteContract.AttemptTopicTable.DELETE_ALL_TOPIC_ATTEMPTS)
+            emit(true)
+        } catch (e: Exception) {
+            Timber.e(e)
+            e.printStackTrace()
+            emit(false)
+        }
+    }
+
+    /**
      * @see AttemptTopicDaoAPI.getNumberOfTopicSolvingAttempts
      */
     override suspend fun getNumberOfTopicSolvingAttempts(): Int {

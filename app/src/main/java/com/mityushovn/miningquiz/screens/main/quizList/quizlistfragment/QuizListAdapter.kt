@@ -14,14 +14,15 @@ class QuizListAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle)
 
     override fun getItemCount(): Int {
         // 3 items for TabLayout: Exams, Topics, Mistakes
-        return 3
+        // TODO: 29.04.2022 mistakes mode
+        return 2
     }
 
     override fun createFragment(position: Int): Fragment {
         return when(position) {
             0 -> ExamsFragment()
             1 -> TopicsListFragment()
-            2 -> MistakesFragment()
+//            2 -> MistakesFragment() TODO: 29.04.2022 mistakes mode
             else -> throw AssertionError("Must be 3 items")
         }
     }

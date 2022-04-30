@@ -19,6 +19,11 @@ interface AttemptExamDaoAPI {
     suspend fun insertAttemptExam(attemptExam: AttemptExam): Flow<Boolean>
 
     /**
+     * Deletes all exams attempts from database.
+     */
+    suspend fun deleteAllExamsAttempts(): Flow<Boolean>
+
+    /**
      * @return number of all solved exams.
      */
     suspend fun getNumberOfExamSolvingAttempts(): Int

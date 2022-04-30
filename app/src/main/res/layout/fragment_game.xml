@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.mityushovn.miningquiz.activities.quiz.GameEngine" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,6 +22,7 @@
             android:layout_marginStart="@dimen/title_text_margin_start"
             android:layout_marginTop="@dimen/title_text_margin_top"
             android:layout_marginEnd="@dimen/title_text_margin_end"
+            android:text="@{viewModel.stringForGameFrQuestionTopic}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -47,47 +51,36 @@
                     android:layout_marginStart="@dimen/title_text_margin_start"
                     android:layout_marginTop="@dimen/title_text_margin_top"
                     android:layout_marginEnd="@dimen/title_text_margin_end"
+                    android:text="@{viewModel.stringForGameFrQuestionContent}"
                     android:textSize="@dimen/question_text_size"
                     tools:text="Вопрос №1 из 12: какое количество коров находится на рисунке при условии, что одна явно нарушает правила ОТ и ПБ?" />
 
                 <Button
                     android:id="@+id/game_fr_answer_1"
+                    style="@style/Widget.MiningQuiz.AnswerButtonsStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/recycler_view_margin_start"
-                    android:layout_marginTop="@dimen/recycler_view_margin_top"
-                    android:layout_marginEnd="@dimen/recycler_view_margin_end"
-                    android:textSize="@dimen/answer_button_text_size"
                     tools:text="25 или 26, точно не знаю" />
 
                 <Button
                     android:id="@+id/game_fr_answer_2"
+                    style="@style/Widget.MiningQuiz.AnswerButtonsStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/recycler_view_margin_start"
-                    android:layout_marginTop="@dimen/recycler_view_margin_top"
-                    android:layout_marginEnd="@dimen/recycler_view_margin_end"
-                    android:textSize="@dimen/answer_button_text_size"
                     tools:text="блалалалалаблаллалалаблалалаблалалалал....30" />
 
                 <Button
                     android:id="@+id/game_fr_answer_3"
+                    style="@style/Widget.MiningQuiz.AnswerButtonsStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/recycler_view_margin_start"
-                    android:layout_marginTop="@dimen/recycler_view_margin_top"
-                    android:layout_marginEnd="@dimen/recycler_view_margin_end"
-                    android:textSize="@dimen/answer_button_text_size"
                     tools:text="ай донт ноу вот ту сэй" />
 
                 <Button
                     android:id="@+id/game_fr_answer_4"
+                    style="@style/Widget.MiningQuiz.AnswerButtonsStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/recycler_view_margin_start"
-                    android:layout_marginTop="@dimen/recycler_view_margin_top"
-                    android:layout_marginEnd="@dimen/recycler_view_margin_end"
-                    android:textSize="@dimen/answer_button_text_size"
                     tools:text="прупрупрупумпумпумпум \n asduhyf8osayugdfiiuagw08erfygasiodgf0oqew7r80gfuvbzikflghwe807rgyhsdf" />
 
             </LinearLayout>

@@ -33,13 +33,18 @@ interface AttemptsRepositoryAPI {
      * throughout the entire period of using Application.
      * @see AbstractStatistics
      */
-    suspend fun getExamsStatistics() : Flow<AbstractStatistics>
+    suspend fun getExamsStatistics(): Flow<AbstractStatistics>
 
     /**
      * @return Flow with an AbstractStatistics instance with info about solving topics
      * throughout the entire period of using Application.
      * @see AbstractStatistics
      */
-    suspend fun getTopicsStatistics() : Flow<AbstractStatistics>
+    suspend fun getTopicsStatistics(): Flow<AbstractStatistics>
+
+    /**
+     * Deletes all attempts of topic solving and exam solving.
+     */
+    suspend fun deleteAllStatistics(): Flow<Boolean>
 
 }

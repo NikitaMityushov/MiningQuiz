@@ -17,7 +17,7 @@ import com.mityushovn.miningquiz.models.Exam
  * @property clickListener is a handler for list item click navigation.
  */
 class ExamsFrListAdapter(private val clickListener: (Int) -> Unit) :
-    ListAdapter<Exam, ExamViewHolder>(ExamViewHolder.getDiffUtil()) {
+    ListAdapter<Exam, ExamViewHolder>(ExamsDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExamViewHolder {
         val itemView =
@@ -29,6 +29,19 @@ class ExamsFrListAdapter(private val clickListener: (Int) -> Unit) :
         holder.bind(getItem(position), clickListener)
     }
 
+    /**
+     * private class implements DiffUtil.ItemCallback for List<Exam>
+     */
+    private class ExamsDiffCallback : DiffUtil.ItemCallback<Exam>() {
+        override fun areItemsTheSame(oldItem: Exam, newItem: Exam): Boolean {
+            return oldItem.examId == newItem.examId
+        }
+
+        override fun areContentsTheSame(oldItem: Exam, newItem: Exam): Boolean {
+            return oldItem == newItem
+        }
+
+    }
 }
 
 /**
@@ -40,6 +53,7 @@ class ExamViewHolder(val binding: ExamItemBinding) :
 
     fun bind(exam: Exam, clickListener: (Int) -> Unit) {
         with(binding) {
+            examCountTv.text = (this@ExamViewHolder.adapterPosition.inc()).toString()
             examItemTv.text = exam.nameExam
             executePendingBindings() // !! essential for bindings, forcing the framework to update view right at the moment
         }
@@ -50,27 +64,6 @@ class ExamViewHolder(val binding: ExamItemBinding) :
     private fun onClickListener(examId: Int, onClick: (Int) -> Unit) {
         itemView.setOnClickListener {
             onClick(examId)
-        }
-    }
-
-    /*
-        static fields and methods
-     */
-    companion object {
-        fun getDiffUtil() = diffUtil
-
-        /**
-         * static instance of DiffUtil.ItemCallback<Exam> class
-         */
-        private val diffUtil = object : DiffUtil.ItemCallback<Exam>() {
-            override fun areItemsTheSame(oldItem: Exam, newItem: Exam): Boolean {
-                return oldItem.examId == newItem.examId
-            }
-
-            override fun areContentsTheSame(oldItem: Exam, newItem: Exam): Boolean {
-                return oldItem == newItem
-            }
-
         }
     }
 }

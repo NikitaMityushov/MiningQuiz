@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.mityushovn.miningquiz.activities.quiz.GameEngine" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -29,6 +32,7 @@
             android:layout_marginStart="@dimen/title_text_margin_start"
             android:layout_marginTop="@dimen/title_text_margin_top"
             android:layout_marginEnd="@dimen/title_text_margin_end"
+            android:text="@{viewModel.stringForFailedFrTV}"
             android:textSize="@dimen/normal_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,20 +40,20 @@
             tools:text="Увы, Вы не сдали экзамен. Ваш результат 3 из 12" />
 
         <Button
-            android:id="@+id/congrats_fr_continue_btn"
+            android:id="@+id/failed_fr_continue_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/title_text_margin_start"
             android:layout_marginTop="@dimen/title_text_margin_top"
             android:layout_marginEnd="@dimen/title_text_margin_end"
             android:text="@string/continue_btn"
-            app:layout_constraintEnd_toStartOf="@id/congrats_fr_repeat_btn"
+            app:layout_constraintEnd_toStartOf="@id/failed_fr_repeat_btn"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/failed_fr_tv" />
 
         <Button
-            android:id="@+id/congrats_fr_repeat_btn"
+            android:id="@+id/failed_fr_repeat_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/title_text_margin_start"
@@ -58,7 +62,7 @@
             android:text="@string/repeat_btn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@id/congrats_fr_continue_btn"
+            app:layout_constraintStart_toEndOf="@id/failed_fr_continue_btn"
             app:layout_constraintTop_toBottomOf="@id/failed_fr_tv" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
