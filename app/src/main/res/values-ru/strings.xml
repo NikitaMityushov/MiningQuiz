@@ -14,10 +14,11 @@
     <string name="solve_by_topic">Решать по теме</string>
     <string name="choose_exam">Выберите экзамен:</string>
     <string name="choose_topic">Выберите тему:</string>
-    <string name="postpone">Пропустить</string>
-    <string name="exit_game">Завершить тест</string>
+    <string name="postpone">Пропустить вопрос</string>
+    <string name="exit_game">Завершить экзамен</string>
     <string name="please_choose_the_exam">Выберите экзамен:</string>
     <string name="there_are_no_the_right_answers_in_this_questions">На данные вопросы были даны неправильные ответы:</string>
+    <string name="complete_btn">Завершить</string>
     <string name="continue_btn">Продолжить</string>
     <string name="repeat_btn">Начать заново</string>
     <string name="let_s_start_btn">Начать экзамен</string>
@@ -47,7 +48,7 @@
 
     <!-- Quit GameFragment alert dialog -->
     <string name="are_you_sure_want_to_quit">Вы точно хотите покинуть экзамен?</string>
-    <string name="are_you_sure_alert_content">В таком случае данные об игре не сохраняются!</string>
+    <string name="are_you_sure_alert_content">В таком случае данные о сдаче экзамена не сохраняются!</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
 
@@ -65,5 +66,7 @@
     <string name="are_you_sure_want_delete_stat">Вы точно хотите удалить статистику?</string>
     <string name="stat_deleted_successfuly">Статистика успешно удалена</string>
     <string name="stat_deleted_failed">Статистика не была удалена</string>
+    <string name="home_fr_content">Данное приложение поможет Вам подготовиться к экзаменам по вопросам Охраны труда и Промышленной безопасности.\nЕсть два режима:\n1) Решение экзамена(10 вопросов).\n2) Решение каждой темы отдельно.\nПросто перейдите на вкладку Экзамены и выберите нужный вам режим.\nВ приложении также есть возможность поиска вопроса(см.панель вверху) и просмотра статистики на вкладке Статистика.\nУдачи!</string>
+    <string name="home_screen">Стартовый экран</string>
 
 </resources>

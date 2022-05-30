@@ -19,6 +19,7 @@
     <string name="exit_game">Quit the test</string>
     <string name="please_choose_the_exam">Please choose the Exam:</string>
     <string name="there_are_no_the_right_answers_in_this_questions">There are no the right answers in this questions:</string>
+    <string name="complete_btn">Continue</string>
     <string name="continue_btn">Continue</string>
     <string name="repeat_btn">Repeat</string>
     <string name="let_s_start_btn">Let\'s start!</string>
@@ -66,5 +67,7 @@
     <string name="are_you_sure_want_delete_stat">Are you sure?</string>
     <string name="stat_deleted_successfuly">Statistics deleted successfully</string>
     <string name="stat_deleted_failed">Statistics is not deleted</string>
+    <string name="home_fr_content">Данное приложение помогает подготовиться к экзаменам по вопросам Охраны труда и Промышленной безопасности.\nЕсть два режима игры:\n1) Решение экзамена(10 вопросов)\n2) Решение каждой темы отдельно\nПросто перейдите на вкладку Экзамены и выбеите нужный вам режим\nВ приложении также есть возможность поиска вопроса(см.панель вверху) и просмотра статистики а вкладке Статистика.\nУдачи!</string>
+    <string name="home_screen">Home screen</string>
 
 </resources>

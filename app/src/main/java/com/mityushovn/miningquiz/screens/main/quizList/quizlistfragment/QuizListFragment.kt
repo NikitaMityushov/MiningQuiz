@@ -10,6 +10,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.databinding.FragmentQuizListBinding
+import com.mityushovn.miningquiz.utils.hideKeyboard
 
 class QuizListFragment : Fragment() {
     private lateinit var binding: FragmentQuizListBinding
@@ -38,6 +39,15 @@ class QuizListFragment : Fragment() {
         }.attach()
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // hide keyboard when scrolls
+        view.setOnScrollChangeListener { v, _, _, _, _ ->
+            v.hideKeyboard()
+        }
     }
 }
 

@@ -2,21 +2,28 @@ package com.mityushovn.miningquiz.activities.quiz
 
 import android.app.Application
 import android.widget.Toast
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.mityushovn.miningquiz.MiningQuizApplication
 import com.mityushovn.miningquiz.R
+import com.mityushovn.miningquiz.activities.quiz.GameEngine.GameMode
+import com.mityushovn.miningquiz.activities.quiz.GameEngine.GameMode.NONE
 import com.mityushovn.miningquiz.models.AttemptExam
 import com.mityushovn.miningquiz.models.AttemptTopic
-import com.mityushovn.miningquiz.models.Question
+import com.mityushovn.miningquiz.models.ui.QuestionUIModel
+import com.mityushovn.miningquiz.models.ui.toQuestionUIModel
 import com.mityushovn.miningquiz.repository.attemptsRepository.AttemptsRepositoryAPI
 import com.mityushovn.miningquiz.repository.questionsRepository.QuestionsRepositoryAPI
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.lang.IllegalStateException
+import java.util.*
 
-private const val ILLEGAL_GAME_STATE = "Game mode must be chosen! Smth with logic."
+private const val ILLEGAL_GAME_STATE = "Game mode must be chosen! Something with logic."
 
 /**
  * @author Nikita Mityushov 25.04.22
@@ -48,7 +55,7 @@ class GameEngine(
      * @property cacheId this 2 properties cache game mode and exam or topic ids for the following repeating the game.
      */
     private var cacheId: Int = 0
-    private var cacheGameMode: GameMode = GameMode.NONE
+    private var cacheGameMode: GameMode = NONE
 
     /**
      * @property _rightAns is a private counter of given right answers of the game.
@@ -61,14 +68,9 @@ class GameEngine(
         }
 
     /**
-     * @property _currentQuestion is a private pointer(counter) of current question of the game.
+     * @property _currentQuestion is a private current question of the game.
      */
-    private var _currentQuestion: Int = 0
-        set(value) {
-            synchronized(this) {
-                field = value
-            }
-        }
+    private var _currentQuestion: QuestionUIModel? = null
 
     /**
      * @property _numberOfQuestions is a questions number of the game.
@@ -84,8 +86,8 @@ class GameEngine(
     /**
      * @property nextQuestion is an observable property to get next question for drawing in the UI.
      */
-    private val _nextQuestion = MutableLiveData<Question>()
-    val nextQuestion: LiveData<Question>
+    private val _nextQuestion = MutableLiveData<QuestionUIModel>()
+    val nextQuestion: LiveData<QuestionUIModel>
         get() = _nextQuestion
 
     // prepared strings:
@@ -113,15 +115,19 @@ class GameEngine(
     val stringForFailedFrTV: LiveData<String>
         get() = _stringForFailedFrTV
 
-    // An iterator through list of questions
-    private var _questions: ListIterator<Question> = emptyList<Question>().listIterator()
+    // A deque of questions
+    private var _questions: Deque<QuestionUIModel> = LinkedList()
 
+    /**
+     *
+     */
     private fun sendSearchRequestExam(examId: Int) {
         Timber.d("Id of exam or topic is: $examId")
         viewModelScope.launch(Dispatchers.Default) {
             questionsRepository
                 .getRandomQuestionsFromExamIdAndNumberOfQuestions(examId)
                 .onEach {
+                    Timber.d("Current thread onEach ${Thread.currentThread().name}")
                     clearGameInternalCounters() // clear all counters, set 0 to start new game
                     _numberOfQuestions = it.size
                     _stringForPreviewGameTextView.postValue(
@@ -131,22 +137,20 @@ class GameEngine(
                             ), it.size, it.size * 80 / 100
                         )
                     ) // "This exam contains %d questions. You need to answer at least %d questions to pass exam. Good luck!
-                    // debug
-                    it.forEach { q ->
-                        Timber.d(q.content)
-                    }
-                    // end debug
-                }
-                .map {
-                    it.listIterator()
                 }
 //                .flowOn(Dispatchers.Default) // computation threads
                 .collect {
-                    _questions = it
+                    Timber.d("Current thread in collect ${Thread.currentThread().name}")
+                    _questions = it.mapIndexed { index, question ->
+                        question.toQuestionUIModel(index + 1)
+                    }.toCollection(LinkedList())
                 }
         }
     }
 
+    /**
+     *
+     */
     private fun sendSearchRequestTopic(topicId: Int) {
         Timber.d("Topic game mode is chosen!")
         viewModelScope.launch(Dispatchers.Default) {
@@ -162,22 +166,19 @@ class GameEngine(
                             ), it.size, it.size * 80 / 100
                         )
                     ) // "This exam contains %d questions. You need to answer at least %d questions to pass exam. Good luck!
-                    // debug
-                    it.forEach { q ->
-                        Timber.d(q.content)
-                    }
-                    // end debug
-                }
-                .map {
-                    it.listIterator()
                 }
 //                .flowOn(Dispatchers.Default) // computation threads
                 .collect {
-                    _questions = it
+                    _questions = it.mapIndexed { index, question ->
+                        question.toQuestionUIModel(index + 1)
+                    }.toCollection(LinkedList())
                 }
         }
     }
 
+    /**
+     *
+     */
     private fun startOrRepeatGameFromCache() {
         when (cacheGameMode) {
             GameMode.EXAM -> sendSearchRequestExam(cacheId)
@@ -191,6 +192,9 @@ class GameEngine(
     }
 
     // public API for quiz
+    /**
+     *
+     */
     fun startGame(id: Int, mode: GameMode) {
         // caching ids for repeating the game
         cacheId = id
@@ -198,42 +202,45 @@ class GameEngine(
         startOrRepeatGameFromCache()
     }
 
+    /**
+     *
+     */
     fun repeatGame() {
         startOrRepeatGameFromCache()
     }
 
+    /**
+     *
+     */
     fun nextQuestion(): Boolean {
-        if (!_questions.hasNext()) {
+        if (_questions.isNullOrEmpty()) {
             return false
         }
         viewModelScope.launch(Dispatchers.Default) {
             // 1) get the question
-            val question = _questions.next()
-            ++_currentQuestion // 2) increment counter of current question
-
-            // 3) format strings
-            _stringForGameFrQuestionContent.postValue(
-                String.format(
-                    getApplication<MiningQuizApplication>().resources.getString(
-                        R.string.question_from_content
-                    ), _currentQuestion, _numberOfQuestions, question.content
-                )
-            ) //Question %d from %d:\n%s
-
-            _stringForGameFrQuestionTopic.postValue(
-                String.format(
-                    getApplication<MiningQuizApplication>().resources.getString(
-                        R.string.topic_content
-                    ), question.nameTopic
-                )
-            ) // Topic:\n%s
-
-            // 4) emit question
+            val question = _questions.poll()
+            _currentQuestion = question
+            // 2) format GameFragment strings
+            prepareGameFragmentStrings(question)
+            // 3) emit question
             _nextQuestion.postValue(question)
         }
         return true
     }
 
+    /**
+     * Recycles the current question in the deque and calls nextQuestion().
+     * @see nextQuestion
+     */
+    fun postponeQuestion() {
+        _questions.offer(_currentQuestion)
+        nextQuestion()
+
+    }
+
+    /**
+     *
+     */
     fun endGame(): Boolean {
         Timber.d("End game, statistics: right answers: $_rightAns, total questions: $_numberOfQuestions")
         val result = (_rightAns.toFloat() / _numberOfQuestions.toFloat()) >= 0.799
@@ -275,6 +282,31 @@ class GameEngine(
         return result
     }
 
+    /**
+     *
+     */
+    private fun prepareGameFragmentStrings(question: QuestionUIModel) {
+        // 3) format strings
+        _stringForGameFrQuestionContent.postValue(
+            String.format(
+                getApplication<MiningQuizApplication>().resources.getString(
+                    R.string.question_from_content
+                ), question.index, _numberOfQuestions, question.content
+            )
+        ) //Question %d from %d:\n%s
+
+        _stringForGameFrQuestionTopic.postValue(
+            String.format(
+                getApplication<MiningQuizApplication>().resources.getString(
+                    R.string.topic_content
+                ), question.nameTopic
+            )
+        ) // Topic:\n%s
+    }
+
+    /**
+     *
+     */
     fun rightAnswerGiven() {
         viewModelScope.launch(Dispatchers.Default) {
             ++_rightAns
@@ -286,7 +318,6 @@ class GameEngine(
     }
 
     private fun clearGameInternalCounters() {
-        _currentQuestion = 0
         _rightAns = 0
     }
 

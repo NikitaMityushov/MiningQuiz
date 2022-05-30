@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.databinding.TopicItemBinding
-import com.mityushovn.miningquiz.models.Question
 import com.mityushovn.miningquiz.models.Topic
-import com.mityushovn.miningquiz.screens.recyclerview.diffutils.CommonItemCallback
 
 // TODO: 10.05.2022 Animations, ItemDecorations
 

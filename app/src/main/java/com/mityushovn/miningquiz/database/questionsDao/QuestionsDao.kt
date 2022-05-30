@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
+import java.util.*
 
 /**
  * @author Nikita Mityushov 8.04.22
@@ -23,27 +24,27 @@ class QuestionsDao(
     /**
      * @see QuestionsDaoAPI.getAllQuestionsWithWrongAnswers
      */
-    override suspend fun getAllQuestionsWithWrongAnswers(): Flow<List<Question>> = flow {
+    override suspend fun getAllQuestionsWithWrongAnswers(): Flow<Deque<Question>> = flow {
         // 1) db query
         val cursor = db.rawQuery(
             AppSQLiteContract.QuestionTable.SELECT_ALL_WRONG_ANSWERED_QUERY,
             null
         )
         // 2) handle response(cursor)
-        handleCursor(cursor, this)
+        handleCursorForDeque(cursor, this)
     }
 
     /**
      * @see QuestionsDaoAPI.getAllQuestionsFromTopic
      */
     // TODO: 14.04.2022 испытать selection args, снести основной запрос в const val. Должно быть where topic_id =? , selection args = new String[] {topicID.toString()};
-    override suspend fun getAllQuestionsFromTopic(topicId: Int): Flow<List<Question>> = flow {
+    override suspend fun getAllQuestionsFromTopic(topicId: Int): Flow<Deque<Question>> = flow {
         Timber.d("getAllQuestionsFromTopic() SQL query = SELECT * FROM \"question_view\" WHERE \"topic_id\" = $topicId;")
         val cursor = db.rawQuery(
             "SELECT * FROM question_view WHERE topic_id = $topicId",
             null
         )
-        handleCursor(cursor, this)
+        handleCursorForDeque(cursor, this)
     }
 
     /**
@@ -64,14 +65,14 @@ class QuestionsDao(
     override suspend fun getRandomQuestionsFromExamIdAndNumberOfQuestions(
         examId: Int,
         numberOfQuestions: Int
-    ): Flow<List<Question>> = flow {
+    ): Flow<Deque<Question>> = flow {
         // 1) db query
         val cursor = db.rawQuery(
             "SELECT * FROM ${AppSQLiteContract.QuestionTable.QUESTIONS_VIEW_NAME} WHERE exam_id = $examId ORDER BY random() LIMIT $numberOfQuestions",
             null
         )
         // 2) handle response(cursor)
-        handleCursor(cursor, this)
+        handleCursorForDeque(cursor, this)
     }
 
     /**
@@ -163,6 +164,62 @@ class QuestionsDao(
                 collector.emit(emptyList())
             } else {
                 val list = mutableListOf<Question>()
+                // 3 iterate through cursor
+                while (cursor.moveToNext()) {
+                    list.add(
+                        Question(
+                            questionId = cursor.getInt(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.QuestionTable.COLUMN_QUESTION_ID)
+                            ),
+                            topicId = cursor.getInt(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.TopicTable.COLUMN_TOPIC_ID)
+                            ),
+                            nameTopic = cursor.getString(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.TopicTable.COLUMN_NAME_TOPIC)
+                            ),
+                            examId = cursor.getInt(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.ExamTable.COLUMN_EXAM_ID)
+                            ),
+                            nameExam = cursor.getString(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.ExamTable.COLUMN_NAME_EXAM)
+                            ),
+                            content = cursor.getString(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.QuestionTable.COLUMN_CONTENT)
+                            ),
+                            rightAns = cursor.getString(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.QuestionTable.COLUMN_RIGHT_ANS)
+                            ),
+                            ans1 = cursor.getString(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.QuestionTable.COLUMN_ANS_1)
+                            ),
+                            ans2 = cursor.getString(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.QuestionTable.COLUMN_ANS_2)
+                            ),
+                            ans3 = cursor.getString(
+                                cursor.getColumnIndexOrThrow(AppSQLiteContract.QuestionTable.COLUMN_ANS_3)
+                            ),
+                        )
+                    )
+                }
+                // 3) emit result List<Exam>
+                collector.emit(list)
+            }
+        }
+    }
+
+    /**
+     * Method executes common routine: reads data from Cursor instance, write to Deque with
+     * Question init, and close the Cursor resource.
+     */
+    private suspend inline fun handleCursorForDeque(
+        cursor: Cursor,
+        collector: FlowCollector<Deque<Question>>
+    ) {
+        cursor.use {
+            if (cursor.count == 0) {
+                collector.emit(LinkedList())
+            } else {
+                val list = LinkedList<Question>()
                 // 3 iterate through cursor
                 while (cursor.moveToNext()) {
                     list.add(

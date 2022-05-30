@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.databinding.QuestionItemBinding
 import com.mityushovn.miningquiz.models.Question
-import com.mityushovn.miningquiz.screens.recyclerview.diffutils.CommonItemCallback
 
 // TODO: 10.05.2022 Animations, ItemDecorations
 
@@ -57,6 +56,7 @@ class QuestionViewHolder(
     fun bind(question: Question, clickListener: (Int) -> Unit) {
 
         with(binding) {
+            questionCountTv.text = (this@QuestionViewHolder.adapterPosition.inc()).toString()
             questionItemTv.text = question.content
             executePendingBindings() // !! essential for bindings, forcing the framework to update view right at the moment
         }

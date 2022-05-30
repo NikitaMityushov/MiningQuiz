@@ -26,6 +26,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
             tools:text="Тема: влияние некоторых музыкальных инструментов на личную жизнь крупного рогатого скота." />
 
         <ScrollView
@@ -60,6 +61,7 @@
                     style="@style/Widget.MiningQuiz.AnswerButtonsStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/question_text_size"
                     tools:text="25 или 26, точно не знаю" />
 
                 <Button
@@ -67,6 +69,7 @@
                     style="@style/Widget.MiningQuiz.AnswerButtonsStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/question_text_size"
                     tools:text="блалалалалаблаллалалаблалалаблалалалал....30" />
 
                 <Button
@@ -74,6 +77,7 @@
                     style="@style/Widget.MiningQuiz.AnswerButtonsStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/question_text_size"
                     tools:text="ай донт ноу вот ту сэй" />
 
                 <Button
@@ -81,6 +85,7 @@
                     style="@style/Widget.MiningQuiz.AnswerButtonsStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/question_text_size"
                     tools:text="прупрупрупумпумпумпум \n asduhyf8osayugdfiiuagw08erfygasiodgf0oqew7r80gfuvbzikflghwe807rgyhsdf" />
 
             </LinearLayout>

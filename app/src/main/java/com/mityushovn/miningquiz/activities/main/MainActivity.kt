@@ -2,6 +2,7 @@ package com.mityushovn.miningquiz.activities.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.viewModels
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.DI.Repositories
@@ -15,5 +16,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
+
+    override fun onBackPressed() {
+        // disable
     }
 }

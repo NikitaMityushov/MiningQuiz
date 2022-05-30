@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import com.mityushovn.miningquiz.DI.Repositories
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.databinding.StatisticsFragmentBinding
+import com.mityushovn.miningquiz.utils.hideKeyboard
 import timber.log.Timber
 
 /**
@@ -44,6 +45,11 @@ class StatisticsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // hide keyboard when scrolls
+        view.setOnScrollChangeListener { v, _, _, _, _ ->
+            v.hideKeyboard()
+        }
 
         binding.statFrResetStatisticsBtn.setOnClickListener {
             Timber.d("statFrResetStatisticsBtn onClickListener")

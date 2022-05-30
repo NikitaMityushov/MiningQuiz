@@ -10,6 +10,7 @@
         android:id="@+id/home_fr_iv"
         android:layout_width="match_parent"
         android:layout_height="@dimen/congrats_failure_image_view_height_size"
+        android:contentDescription="@string/home_screen"
         android:scaleType="centerCrop"
         android:src="@mipmap/ic_home_fr_image_underground_foreground" />
 
@@ -17,18 +18,29 @@
         android:id="@+id/home_fr_title_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/normal_spacing"
-        android:textAlignment="center"
-        android:textSize="@dimen/title_text_size"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        android:textStyle="bold"
         android:text="@string/hello_word"
-        />
+        android:textAlignment="center"
+        android:textSize="@dimen/title_text_size" />
 
-    <TextView
-        android:id="@+id/home_fr_tv"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/normal_spacing"
-        android:textSize="@dimen/normal_text_size"
-        tools:text="sdhgfisedf" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/home_fr_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:paddingBottom="10dp"
+            android:text="@string/home_fr_content"
+            android:textAlignment="gravity"
+            android:textSize="@dimen/normal_text_size" />
+
+    </ScrollView>
 
 </LinearLayout>
