@@ -23,9 +23,10 @@
             android:src="@mipmap/ic_failed_fr_failure1_foreground"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/failed" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/failed_fr_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

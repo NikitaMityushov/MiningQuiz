@@ -16,14 +16,16 @@ buildscript {
         core_version = "1.7.0"
         constaintlayout_version = "2.1.3"
         legacy_version = "1.0.0"
+        gradle_plugin_version = "1.6.10"
+        gradle_build_tools_version = "7.0.4"
     }
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.4'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10'
+        classpath "com.android.tools.build:gradle:$gradle_build_tools_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$gradle_plugin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 

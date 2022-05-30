@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         tools:context=".screens.quiz.gamefragment.GameFragment">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/game_fr_topic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/game_fr_question"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
 
         </ScrollView>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/game_fr_result_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

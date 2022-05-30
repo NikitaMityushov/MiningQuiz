@@ -2,6 +2,7 @@ package com.mityushovn.miningquiz.screens.recyclerview.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.text.PrecomputedTextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -57,7 +58,14 @@ class QuestionViewHolder(
 
         with(binding) {
             questionCountTv.text = (this@QuestionViewHolder.adapterPosition.inc()).toString()
-            questionItemTv.text = question.content
+            // prefetch strings with PrecomputedText
+            questionItemTv.setTextFuture(
+                PrecomputedTextCompat.getTextFuture(
+                    question.content,
+                    questionItemTv.textMetricsParamsCompat,
+                    null
+                )
+            )
             executePendingBindings() // !! essential for bindings, forcing the framework to update view right at the moment
         }
 

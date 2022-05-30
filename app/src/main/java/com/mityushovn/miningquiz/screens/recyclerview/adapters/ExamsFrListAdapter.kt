@@ -2,6 +2,7 @@ package com.mityushovn.miningquiz.screens.recyclerview.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.text.PrecomputedTextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -54,7 +55,14 @@ class ExamViewHolder(val binding: ExamItemBinding) :
     fun bind(exam: Exam, clickListener: (Int) -> Unit) {
         with(binding) {
             examCountTv.text = (this@ExamViewHolder.adapterPosition.inc()).toString()
-            examItemTv.text = exam.nameExam
+//            examItemTv.text = exam.nameExam
+            examItemTv.setTextFuture(
+                PrecomputedTextCompat.getTextFuture(
+                    exam.nameExam,
+                    examItemTv.textMetricsParamsCompat,
+                    null
+                )
+            )
             executePendingBindings() // !! essential for bindings, forcing the framework to update view right at the moment
         }
 

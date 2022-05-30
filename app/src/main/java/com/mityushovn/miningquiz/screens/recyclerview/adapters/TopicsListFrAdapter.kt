@@ -2,6 +2,7 @@ package com.mityushovn.miningquiz.screens.recyclerview.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.text.PrecomputedTextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -55,7 +56,14 @@ class TopicViewHolder(val binding: TopicItemBinding) :
         with(binding) {
             topicCountTv.text =
                 (this@TopicViewHolder.adapterPosition.inc()).toString() // TODO: 21.04.2022 подумать, возможно убрать инкремент
-            topicItemTv.text = topic.nameTopic
+//            topicItemTv.text = topic.nameTopic
+            topicItemTv.setTextFuture(
+                PrecomputedTextCompat.getTextFuture(
+                    topic.nameTopic,
+                    topicItemTv.textMetricsParamsCompat,
+                    null
+                )
+            )
             executePendingBindings() // !! essential for bindings, forcing the framework to update view right at the moment
         }
         onClickListener(topic.topicId, clickListener)

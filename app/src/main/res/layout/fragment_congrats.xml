@@ -23,9 +23,10 @@
             android:src="@mipmap/ic_congrats_fr_success1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/success_image" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/congrats_fr_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

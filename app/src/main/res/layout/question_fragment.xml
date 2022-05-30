@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             tools:context=".screens.main.searchlistfragment.questionfragment.QuestionFragment">
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/question_fr_exam_tv"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/question_fr_exam_content_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="ОТиПБ" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/question_fr_topic_tv"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/question_fr_exam_content_tv" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/question_fr_topic_content_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                 app:layout_constraintTop_toBottomOf="@id/question_fr_exam_content_tv"
                 tools:text="Оказание первой помощи" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/question_fr_content_tv"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/question_fr_topic_content_tv" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/question_fr_content_content_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                 app:layout_constraintTop_toBottomOf="@id/question_fr_topic_content_tv"
                 tools:text="Сколько вдохов требуется производить при искуственном дыхании?" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/question_fr_right_ans_tv"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
@@ -96,7 +96,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/question_fr_content_content_tv" />
 
-            <TextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/question_fr_right_ans_content_tv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

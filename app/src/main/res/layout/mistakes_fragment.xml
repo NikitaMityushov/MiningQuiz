@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         tools:context=".screens.main.quizList.mistakesfragment.MistakesFragment">
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/mistakes_fr_title_tv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
