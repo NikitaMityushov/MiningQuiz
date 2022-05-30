@@ -17,7 +17,9 @@
             android:id="@+id/quiz_list_fr_tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/normal_spacing">
+            android:layout_marginStart="@dimen/normal_spacing"
+            android:layout_marginTop="@dimen/normal_spacing"
+            android:layout_marginEnd="@dimen/normal_spacing">
 
         </com.google.android.material.tabs.TabLayout>
 

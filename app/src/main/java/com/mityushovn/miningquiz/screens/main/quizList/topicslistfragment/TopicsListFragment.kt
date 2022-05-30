@@ -1,6 +1,5 @@
 package com.mityushovn.miningquiz.screens.main.quizList.topicslistfragment
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mityushovn.miningquiz.DI.Navigators
 import com.mityushovn.miningquiz.databinding.FragmentTopicsListBinding
 import com.mityushovn.miningquiz.DI.Repositories
-import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.activities.main.MainActivity
 import com.mityushovn.miningquiz.navigation.MainNavigator
 import com.mityushovn.miningquiz.screens.recyclerview.adapters.TopicsListFrAdapter
+import com.mityushovn.miningquiz.utils.hideKeyboard
 
 /**
  * @author Nikita Mityushov
@@ -61,6 +60,15 @@ class TopicsListFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // hide keyboard when scrolls
+        view.setOnScrollChangeListener { v, _, _, _, _ ->
+            v.hideKeyboard()
+        }
     }
 
 }

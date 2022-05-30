@@ -4,6 +4,7 @@ import com.mityushovn.miningquiz.models.Question
 import com.mityushovn.miningquiz.models.WrongAnswered
 import com.mityushovn.miningquiz.models.Topic
 import kotlinx.coroutines.flow.Flow
+import java.util.*
 
 /**
  * @author Nikita Mityushov 8.04.22
@@ -17,7 +18,7 @@ interface QuestionsDaoAPI {
      * @return Flow with List of all Question class instances, which were wrong answered.
      * @see Question
      */
-    suspend fun getAllQuestionsWithWrongAnswers(): Flow<List<Question>>
+    suspend fun getAllQuestionsWithWrongAnswers(): Flow<Deque<Question>>
 
     /**
      * @param topicId from Topic class instance.
@@ -25,7 +26,7 @@ interface QuestionsDaoAPI {
      * @see Question
      * @see Topic
      */
-    suspend fun getAllQuestionsFromTopic(topicId: Int): Flow<List<Question>>
+    suspend fun getAllQuestionsFromTopic(topicId: Int): Flow<Deque<Question>>
 
     /**
      * Inserts the specified instance of WrongAnswered class to the storage.
@@ -44,7 +45,7 @@ interface QuestionsDaoAPI {
     suspend fun getRandomQuestionsFromExamIdAndNumberOfQuestions(
         examId: Int,
         numberOfQuestions: Int = 10
-    ): Flow<List<Question>>
+    ): Flow<Deque<Question>>
 
 
     /**

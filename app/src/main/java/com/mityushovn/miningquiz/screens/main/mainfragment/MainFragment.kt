@@ -19,6 +19,8 @@ import com.mityushovn.miningquiz.DI.Repositories
 import com.mityushovn.miningquiz.navigation.MainNavigator
 import com.mityushovn.miningquiz.utils.onQueryTextChange
 import com.mityushovn.miningquiz.screens.main.searchlistfragment.SearchListFragment
+import com.mityushovn.miningquiz.utils.toGone
+import com.mityushovn.miningquiz.utils.toVisible
 import timber.log.Timber
 
 /**
@@ -114,9 +116,13 @@ class MainFragment : Fragment() {
         searchView.setOnQueryTextFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 Timber.d("is Focused == true")
+                binding.bottomNavView.toGone() // скрыть BottomNavBar когда в фокусе SearchView
                 navigator.onSearchViewIsFocused(this)
             } else {
                 Timber.d("is Focused == false")
+                binding.toolbar.collapseActionView()
+                binding.bottomNavView.toVisible() // вернуть BottomNavBar когда SearchView не в фокусе
+                childFragmentManager.fragments[0]?.findNavController()?.popBackStack()
             }
         }
 
@@ -127,11 +133,13 @@ class MainFragment : Fragment() {
             }
         }
 
-        // 4) on close menu return to previous fragment and collapse the search menu item
-        searchView.setOnCloseListener {
-            childFragmentManager.fragments[0]?.findNavController()?.popBackStack()
-            searchView.onActionViewCollapsed()
-            true
-        }
+//        // 4) on close menu return to previous fragment and collapse the search menu item
+//        // TODO: 29.05.2022 убрать, не понятно, работает ли вообще это
+//        searchView.setOnCloseListener {
+//            Timber.d("SearchView, onCloseListener")
+//            childFragmentManager.fragments[0]?.findNavController()?.popBackStack()
+////            searchView.onActionViewCollapsed()
+//            true
+//        }
     }
 }

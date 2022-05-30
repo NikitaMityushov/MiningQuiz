@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.mityushovn.miningquiz.databinding.QuestionFragmentBinding
 import com.mityushovn.miningquiz.DI.Repositories
+import com.mityushovn.miningquiz.utils.hideKeyboard
 import timber.log.Timber
 
 /**
@@ -46,6 +47,16 @@ class QuestionFragment : Fragment() {
             lifecycleOwner = this@QuestionFragment.viewLifecycleOwner
         }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // hide keyboard when scrolls
+        view.setOnScrollChangeListener { v, _, _, _, _ ->
+            v.hideKeyboard()
+        }
+
     }
 
 }

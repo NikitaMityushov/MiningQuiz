@@ -46,7 +46,7 @@
             android:layout_marginStart="@dimen/title_text_margin_start"
             android:layout_marginTop="@dimen/title_text_margin_top"
             android:layout_marginEnd="@dimen/title_text_margin_end"
-            android:text="@string/continue_btn"
+            android:text="@string/complete_btn"
             app:layout_constraintEnd_toStartOf="@id/congrats_fr_repeat_btn"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"

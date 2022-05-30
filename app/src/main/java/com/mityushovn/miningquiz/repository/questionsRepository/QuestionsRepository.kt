@@ -6,6 +6,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
+import java.util.*
 
 /**
  * @author Nikita Mityushov 11.04.22
@@ -21,14 +22,14 @@ class QuestionsRepository(
     /**
      * @see QuestionsRepositoryAPI.getAllQuestionsWithWrongAnswers
      */
-    override suspend fun getAllQuestionsWithWrongAnswers(): Flow<List<Question>> {
+    override suspend fun getAllQuestionsWithWrongAnswers(): Flow<Deque<Question>> {
         return questionsDao.getAllQuestionsWithWrongAnswers().flowOn(coroutineDispatcher)
     }
 
     /**
      * @see QuestionsRepositoryAPI.getAllQuestionsFromTopic
      */
-    override suspend fun getAllQuestionsFromTopic(topicId: Int): Flow<List<Question>> {
+    override suspend fun getAllQuestionsFromTopic(topicId: Int): Flow<Deque<Question>> {
         return questionsDao.getAllQuestionsFromTopic(topicId).flowOn(coroutineDispatcher)
     }
 
@@ -45,7 +46,7 @@ class QuestionsRepository(
     override suspend fun getRandomQuestionsFromExamIdAndNumberOfQuestions(
         examId: Int,
         numberOfQuestions: Int
-    ): Flow<List<Question>> {
+    ): Flow<Deque<Question>> {
         return questionsDao.getRandomQuestionsFromExamIdAndNumberOfQuestions(
             examId,
             numberOfQuestions
