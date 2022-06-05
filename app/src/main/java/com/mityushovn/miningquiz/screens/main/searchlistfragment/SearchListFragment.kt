@@ -1,5 +1,6 @@
 package com.mityushovn.miningquiz.screens.main.searchlistfragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import com.mityushovn.miningquiz.activities.main.MainActivityVMFactory
 import com.mityushovn.miningquiz.activities.main.MainActivityViewModel
 import com.mityushovn.miningquiz.databinding.SearchListFragmentBinding
 import com.mityushovn.miningquiz.DI.Repositories
+import com.mityushovn.miningquiz.activities.main.MainActivity
 import com.mityushovn.miningquiz.navigation.MainNavigator
 import com.mityushovn.miningquiz.screens.recyclerview.adapters.QuestionsSearchFrAdapter
 import com.mityushovn.miningquiz.utils.hideKeyboard

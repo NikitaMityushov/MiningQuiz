@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/normal_spacing"
-            android:layout_marginTop="@dimen/normal_spacing"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="@dimen/normal_spacing">
 
         </com.google.android.material.tabs.TabLayout>
@@ -28,7 +28,7 @@
             android:id="@+id/quiz_list_fr_viewpager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/normal_spacing"
+            android:layout_margin="4dp"
             android:layout_weight="1" />
 
     </LinearLayout>

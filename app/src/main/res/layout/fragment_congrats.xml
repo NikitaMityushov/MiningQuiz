@@ -10,61 +10,69 @@
             type="com.mityushovn.miningquiz.activities.quiz.GameEngine" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".screens.quiz.congratsfragment.CongratsFragment">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/congrats_fr_iv"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/congrats_failure_image_view_height_size"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/ic_congrats_fr_success1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/success_image" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/congrats_fr_tv"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/title_text_margin_start"
-            android:layout_marginTop="@dimen/title_text_margin_top"
-            android:layout_marginEnd="@dimen/title_text_margin_end"
-            android:text="@{viewModel.stringForCongratsFrTV}"
-            android:textSize="@dimen/normal_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/congrats_fr_iv"
-            tools:text="Поздравляю, вы сдали экзамен с результатом 12 из 12." />
+            tools:context=".screens.quiz.congratsfragment.CongratsFragment">
 
-        <Button
-            android:id="@+id/congrats_fr_continue_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/title_text_margin_start"
-            android:layout_marginTop="@dimen/title_text_margin_top"
-            android:layout_marginEnd="@dimen/title_text_margin_end"
-            android:text="@string/complete_btn"
-            app:layout_constraintEnd_toStartOf="@id/congrats_fr_repeat_btn"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/congrats_fr_tv" />
+            <ImageView
+                android:id="@+id/congrats_fr_iv"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/congrats_failure_image_view_height_size"
+                android:contentDescription="@string/success_image"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_congrats_fr_success1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/congrats_fr_repeat_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/title_text_margin_start"
-            android:layout_marginTop="@dimen/title_text_margin_top"
-            android:layout_marginEnd="@dimen/title_text_margin_end"
-            android:text="@string/repeat_btn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@id/congrats_fr_continue_btn"
-            app:layout_constraintTop_toBottomOf="@id/congrats_fr_tv" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/congrats_fr_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/title_text_margin_start"
+                android:layout_marginTop="@dimen/title_text_margin_top"
+                android:layout_marginEnd="@dimen/title_text_margin_end"
+                android:text="@{viewModel.stringForCongratsFrTV}"
+                android:textSize="@dimen/normal_text_size"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/congrats_fr_iv"
+                tools:text="Поздравляю, вы сдали экзамен с результатом 12 из 12." />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/congrats_fr_continue_btn"
+                style="@style/Widget.MiningQuiz.OtherButtonsStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/title_text_margin_start"
+                android:layout_marginTop="@dimen/title_text_margin_top"
+                android:layout_marginEnd="@dimen/title_text_margin_end"
+                android:text="@string/complete_btn"
+                app:layout_constraintEnd_toStartOf="@id/congrats_fr_repeat_btn"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/congrats_fr_tv" />
+
+            <Button
+                android:id="@+id/congrats_fr_repeat_btn"
+                style="@style/Widget.MiningQuiz.OtherButtonsStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/title_text_margin_start"
+                android:layout_marginTop="@dimen/title_text_margin_top"
+                android:layout_marginEnd="@dimen/title_text_margin_end"
+                android:text="@string/repeat_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toEndOf="@id/congrats_fr_continue_btn"
+                app:layout_constraintTop_toBottomOf="@id/congrats_fr_tv" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>

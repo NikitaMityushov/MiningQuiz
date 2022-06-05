@@ -18,7 +18,7 @@
     <dimen name="normal_spacing">12dp</dimen>
 
     <!-- 4) Congrats and Failure Fragments ImageView dimensions   -->
-    <dimen name="congrats_failure_image_view_height_size">245dp</dimen>
+    <dimen name="congrats_failure_image_view_height_size">240dp</dimen>
 
     <!-- normal text size   -->
     <dimen name="normal_text_size">18sp</dimen>
