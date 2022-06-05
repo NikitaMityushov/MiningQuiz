@@ -2,7 +2,6 @@ package com.mityushovn.miningquiz.activities.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.activity.viewModels
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.DI.Repositories

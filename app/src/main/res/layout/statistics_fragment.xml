@@ -11,46 +11,54 @@
 
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".screens.main.statisticsfragment.StatisticsFragment">
+        android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/statistics_title_tv"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/normal_spacing"
-            android:text="@string/st_fr_statistics"
-            android:textAlignment="center"
-            android:textSize="@dimen/title_text_size" />
+            android:orientation="vertical"
+            tools:context=".screens.main.statisticsfragment.StatisticsFragment">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/stat_fr_attempts_exam_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/normal_spacing"
-            android:text="@{viewModel.stringAttemptsExam}"
-            android:textSize="@dimen/normal_text_size"
-            tools:text="Exams:\nTotal attempts: %d\nSuccessful: %d\nFailed: %d" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/statistics_title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/normal_spacing"
+                android:text="@string/st_fr_statistics"
+                android:textAlignment="center"
+                android:textSize="@dimen/title_text_size" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/stat_fr_attempts_topic_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/normal_spacing"
-            android:text="@{viewModel.stringAttemptsTopic}"
-            android:textSize="@dimen/normal_text_size"
-            tools:text="Topics:\nTotal attempts: %d\nSuccessful: %d\nFailed: %d" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/stat_fr_attempts_exam_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/normal_spacing"
+                android:text="@{viewModel.stringAttemptsExam}"
+                android:textSize="@dimen/normal_text_size"
+                tools:text="Exams:\nTotal attempts: %d\nSuccessful: %d\nFailed: %d" />
 
-        <Button
-            android:id="@+id/stat_fr_reset_statistics_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/normal_spacing"
-            android:text="@string/reset_statistics"
-            android:textSize="@dimen/normal_text_size" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/stat_fr_attempts_topic_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/normal_spacing"
+                android:text="@{viewModel.stringAttemptsTopic}"
+                android:textSize="@dimen/normal_text_size"
+                tools:text="Topics:\nTotal attempts: %d\nSuccessful: %d\nFailed: %d" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/stat_fr_reset_statistics_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MiningQuiz.OtherButtonsStyle"
+                android:layout_margin="@dimen/normal_spacing"
+                android:text="@string/reset_statistics"
+                android:textSize="@dimen/normal_text_size" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
 </layout>

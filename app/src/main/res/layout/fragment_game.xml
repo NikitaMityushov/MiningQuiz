@@ -23,10 +23,10 @@
             android:layout_marginTop="@dimen/title_text_margin_top"
             android:layout_marginEnd="@dimen/title_text_margin_end"
             android:text="@{viewModel.stringForGameFrQuestionTopic}"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone"
             tools:text="Тема: влияние некоторых музыкальных инструментов на личную жизнь крупного рогатого скота." />
 
         <ScrollView
@@ -45,16 +45,22 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/game_fr_question"
+                <androidx.cardview.widget.CardView
+                    style="@style/CardViewStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/title_text_margin_start"
-                    android:layout_marginTop="@dimen/title_text_margin_top"
-                    android:layout_marginEnd="@dimen/title_text_margin_end"
-                    android:text="@{viewModel.stringForGameFrQuestionContent}"
-                    android:textSize="@dimen/question_text_size"
-                    tools:text="Вопрос №1 из 12: какое количество коров находится на рисунке при условии, что одна явно нарушает правила ОТ и ПБ?" />
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/game_fr_question"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/normal_spacing"
+                        android:text="@{viewModel.stringForGameFrQuestionContent}"
+                        android:textSize="@dimen/question_text_size"
+                        tools:text="Вопрос №1 из 12: какое количество коров находится на рисунке при условии, что одна явно нарушает правила ОТ и ПБ?" />
+
+                </androidx.cardview.widget.CardView>
+
 
                 <Button
                     android:id="@+id/game_fr_answer_1"
@@ -107,6 +113,7 @@
 
         <Button
             android:id="@+id/game_fr_continue_btn"
+            style="@style/Widget.MiningQuiz.OtherButtonsStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_spacing"
@@ -120,6 +127,7 @@
 
         <Button
             android:id="@+id/game_fr_postpone_btn"
+            style="@style/Widget.MiningQuiz.OtherButtonsStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/recycler_view_margin_start"
@@ -132,6 +140,7 @@
 
         <Button
             android:id="@+id/game_fr_exit_game_btn"
+            style="@style/Widget.MiningQuiz.OtherButtonsStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/recycler_view_margin_start"

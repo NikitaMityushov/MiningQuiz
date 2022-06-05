@@ -122,7 +122,8 @@ class MainFragment : Fragment() {
                 Timber.d("is Focused == false")
                 binding.toolbar.collapseActionView()
                 binding.bottomNavView.toVisible() // вернуть BottomNavBar когда SearchView не в фокусе
-                childFragmentManager.fragments[0]?.findNavController()?.popBackStack()
+
+                childFragmentManager.fragments[0]?.findNavController()?.popBackStack() // TODO: 01.06.2022 доработать
             }
         }
 
@@ -130,16 +131,9 @@ class MainFragment : Fragment() {
         searchView.onQueryTextChange {
             it?.let {
                 mainActivityViewModel.handleInput(it)
+
+                navigator.onSearchViewIsFocused(this) // TODO: 01.06.2022 доработать
             }
         }
-
-//        // 4) on close menu return to previous fragment and collapse the search menu item
-//        // TODO: 29.05.2022 убрать, не понятно, работает ли вообще это
-//        searchView.setOnCloseListener {
-//            Timber.d("SearchView, onCloseListener")
-//            childFragmentManager.fragments[0]?.findNavController()?.popBackStack()
-////            searchView.onActionViewCollapsed()
-//            true
-//        }
     }
 }
