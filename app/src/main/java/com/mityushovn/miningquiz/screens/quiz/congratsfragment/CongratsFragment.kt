@@ -6,23 +6,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import com.mityushovn.miningquiz.DI.Navigators
-import com.mityushovn.miningquiz.DI.Repositories
+import com.mityushovn.miningquiz.MiningQuizApplication
+import com.mityushovn.miningquiz.di.Navigators
 import com.mityushovn.miningquiz.activities.quiz.GameEngineFactory
 import com.mityushovn.miningquiz.activities.quiz.GameEngine
 import com.mityushovn.miningquiz.databinding.FragmentCongratsBinding
 import com.mityushovn.miningquiz.navigation.QuizNavigator
+import javax.inject.Inject
 
 class CongratsFragment : Fragment() {
 
     private lateinit var binding: FragmentCongratsBinding
+
+    @Inject
+    lateinit var vmFactory: GameEngineFactory
     private val quizActivityViewModel by activityViewModels<GameEngine> {
-        GameEngineFactory(
-            Repositories.questionsRepository,
-            Repositories.attemptsRepository,
-            requireActivity().application
-        )
+        vmFactory
     }
+
     private val navigator: QuizNavigator = Navigators.quizNavigator
 
 
@@ -30,6 +31,11 @@ class CongratsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // configure DI
+        (requireActivity().application as MiningQuizApplication).appComponent.injectInCongratsFragment(
+            this
+        )
+
         binding = FragmentCongratsBinding.inflate(inflater, container, false)
         // init data binding
         with(binding) {

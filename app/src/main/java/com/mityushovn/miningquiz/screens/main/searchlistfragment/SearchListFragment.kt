@@ -1,21 +1,20 @@
 package com.mityushovn.miningquiz.screens.main.searchlistfragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.mityushovn.miningquiz.DI.Navigators
+import com.mityushovn.miningquiz.MiningQuizApplication
+import com.mityushovn.miningquiz.di.Navigators
 import com.mityushovn.miningquiz.activities.main.MainActivityVMFactory
 import com.mityushovn.miningquiz.activities.main.MainActivityViewModel
 import com.mityushovn.miningquiz.databinding.SearchListFragmentBinding
-import com.mityushovn.miningquiz.DI.Repositories
-import com.mityushovn.miningquiz.activities.main.MainActivity
 import com.mityushovn.miningquiz.navigation.MainNavigator
 import com.mityushovn.miningquiz.screens.recyclerview.adapters.QuestionsSearchFrAdapter
 import com.mityushovn.miningquiz.utils.hideKeyboard
 import com.mityushovn.miningquiz.screens.main.mainfragment.MainFragment
+import javax.inject.Inject
 
 /**
  * @author Nikita Mityushov
@@ -31,9 +30,12 @@ class SearchListFragment : Fragment() {
     /*
         shared ViewModel with MainActivity and MainFragment
      */
+    @Inject
+    lateinit var vmFactory: MainActivityVMFactory
     private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
-        MainActivityVMFactory(Repositories.questionsRepository)
+        vmFactory
     }
+
     private val navigator: MainNavigator = Navigators.mainNavigator
     private lateinit var binding: SearchListFragmentBinding
     private lateinit var recyclerView: RecyclerView
@@ -43,6 +45,8 @@ class SearchListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // configure DI
+        (requireActivity().application as MiningQuizApplication).appComponent.injectInSearchListFragment(this)
         binding = SearchListFragmentBinding.inflate(inflater, container, false)
         listAdapter = QuestionsSearchFrAdapter { questionId ->
             //    destination of navigation

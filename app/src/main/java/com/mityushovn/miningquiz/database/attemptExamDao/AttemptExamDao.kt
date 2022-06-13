@@ -8,6 +8,7 @@ import com.mityushovn.miningquiz.utils.toIntForDB
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * @author Nikita Mityushov 8.04.22
@@ -15,7 +16,7 @@ import timber.log.Timber
  * Implementation of AttemptExamDaoAPI interface.
  * @see AttemptExamDaoAPI
  */
-class AttemptExamDao(
+class AttemptExamDao @Inject constructor(
     private val db: SQLiteDatabase
 ) : AttemptExamDaoAPI {
 

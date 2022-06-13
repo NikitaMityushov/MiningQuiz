@@ -11,8 +11,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.mityushovn.miningquiz.DI.Navigators
-import com.mityushovn.miningquiz.DI.Repositories
+import com.mityushovn.miningquiz.MiningQuizApplication
+import com.mityushovn.miningquiz.di.Navigators
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.activities.quiz.GameEngine
 import com.mityushovn.miningquiz.activities.quiz.GameEngineFactory
@@ -23,6 +23,7 @@ import com.mityushovn.miningquiz.utils.disable
 import com.mityushovn.miningquiz.utils.toGone
 import com.mityushovn.miningquiz.utils.toVisible
 import timber.log.Timber
+import javax.inject.Inject
 
 private const val ILLEGAL_ITERATOR_STATE = "ListIterator<Question> is empty, smth wrong with logic"
 private const val GAME_STARTED = "game_started"
@@ -35,18 +36,19 @@ class GameFragment : Fragment() {
     private lateinit var binding: FragmentGameBinding
     private val navigator: QuizNavigator = Navigators.quizNavigator
 
+    @Inject
+    lateinit var vmFactory: GameEngineFactory
     private val gameEngine by activityViewModels<GameEngine> {
-        GameEngineFactory(
-            Repositories.questionsRepository,
-            Repositories.attemptsRepository,
-            requireActivity().application
-        )
+        vmFactory
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (requireActivity().application as MiningQuizApplication).appComponent.injectInGameFragment(
+            this
+        )
         binding = FragmentGameBinding.inflate(inflater, container, false)
         // init data binding
         with(binding) {

@@ -5,6 +5,7 @@ import com.mityushovn.miningquiz.database.AppSQLiteContract
 import com.mityushovn.miningquiz.models.Topic
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
 /**
  * @author Nikita Mityushov 8.04.22
@@ -12,7 +13,7 @@ import kotlinx.coroutines.flow.flow
  * Implementation of TopicDaoAPI interface.
  * @see TopicDaoAPI
  */
-class TopicDao(private val db: SQLiteDatabase) : TopicDaoAPI {
+class TopicDao @Inject constructor(val db: SQLiteDatabase) : TopicDaoAPI {
 
     /**
      * @see TopicDaoAPI.getAllTopics

@@ -1,4 +1,4 @@
-package com.mityushovn.miningquiz.DI
+package com.mityushovn.miningquiz.di
 
 import android.content.Context
 import android.content.Intent

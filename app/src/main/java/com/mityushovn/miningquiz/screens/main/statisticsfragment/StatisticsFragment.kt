@@ -9,11 +9,12 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.mityushovn.miningquiz.DI.Repositories
+import com.mityushovn.miningquiz.MiningQuizApplication
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.databinding.StatisticsFragmentBinding
 import com.mityushovn.miningquiz.utils.hideKeyboard
 import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * @author Nikita Mityushov
@@ -21,17 +22,21 @@ import timber.log.Timber
  */
 class StatisticsFragment : Fragment() {
     private lateinit var binding: StatisticsFragmentBinding
+
+    @Inject
+    lateinit var vmFactory: StatisticsVMFactory
     private val statisticsViewModel: StatisticsViewModel by viewModels {
-        StatisticsVMFactory(
-            Repositories.attemptsRepository,
-            requireActivity().application
-        )
+        vmFactory
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // configure DI
+        (requireActivity().application as MiningQuizApplication).appComponent.injectInStatisticsFragment(
+            this
+        )
         binding = StatisticsFragmentBinding.inflate(inflater, container, false)
 
         // init data binding

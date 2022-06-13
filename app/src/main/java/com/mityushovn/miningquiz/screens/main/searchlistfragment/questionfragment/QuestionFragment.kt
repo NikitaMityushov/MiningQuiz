@@ -6,10 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.mityushovn.miningquiz.MiningQuizApplication
 import com.mityushovn.miningquiz.databinding.QuestionFragmentBinding
-import com.mityushovn.miningquiz.DI.Repositories
 import com.mityushovn.miningquiz.utils.hideKeyboard
 import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * @author Nikita Mityushov 19.04.22
@@ -23,8 +24,11 @@ class QuestionFragment : Fragment() {
 
     private lateinit var binding: QuestionFragmentBinding
     private var questionId: Int = 0
+
+    @Inject
+    lateinit var vmFactory: QuestionVMFactoryAssistedFactory
     private val questionViewModel: QuestionViewModel by viewModels {
-        QuestionVMFactory(questionId, Repositories.questionsRepository)
+        vmFactory.create(questionId)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +41,7 @@ class QuestionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (requireActivity().application as MiningQuizApplication).appComponent.injectInQuestionFragment(this)
         binding = QuestionFragmentBinding.inflate(inflater, container, false)
 
         /*

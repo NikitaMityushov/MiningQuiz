@@ -10,18 +10,19 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.mityushovn.miningquiz.DI.Navigators
+import com.mityushovn.miningquiz.MiningQuizApplication
+import com.mityushovn.miningquiz.di.Navigators
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.activities.main.MainActivityVMFactory
 import com.mityushovn.miningquiz.activities.main.MainActivityViewModel
 import com.mityushovn.miningquiz.databinding.MainFragmentBinding
-import com.mityushovn.miningquiz.DI.Repositories
 import com.mityushovn.miningquiz.navigation.MainNavigator
 import com.mityushovn.miningquiz.utils.onQueryTextChange
 import com.mityushovn.miningquiz.screens.main.searchlistfragment.SearchListFragment
 import com.mityushovn.miningquiz.utils.toGone
 import com.mityushovn.miningquiz.utils.toVisible
 import timber.log.Timber
+import javax.inject.Inject
 
 /**
  * @author Nikita Mityushov
@@ -45,14 +46,20 @@ class MainFragment : Fragment() {
     /*
         shared ViewModel with MainActivity and SearchListFragment
      */
+    @Inject
+    lateinit var vmFactory: MainActivityVMFactory
     private val mainActivityViewModel: MainActivityViewModel by activityViewModels {
-        MainActivityVMFactory(Repositories.questionsRepository)
+        vmFactory
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // configure DI
+        (requireActivity().application as MiningQuizApplication).appComponent.injectInMainFragment(
+            this
+        )
         binding = MainFragmentBinding.inflate(inflater, container, false)
         /*
             1) init menu
@@ -123,7 +130,8 @@ class MainFragment : Fragment() {
                 binding.toolbar.collapseActionView()
                 binding.bottomNavView.toVisible() // вернуть BottomNavBar когда SearchView не в фокусе
 
-                childFragmentManager.fragments[0]?.findNavController()?.popBackStack() // TODO: 01.06.2022 доработать
+                childFragmentManager.fragments[0]?.findNavController()
+                    ?.popBackStack() // TODO: 01.06.2022 доработать
             }
         }
 

@@ -2,6 +2,7 @@ package com.mityushovn.miningquiz.repository.attemptsRepository
 
 import com.mityushovn.miningquiz.database.attemptExamDao.AttemptExamDaoAPI
 import com.mityushovn.miningquiz.database.attemptTopicDao.AttemptTopicDaoAPI
+import com.mityushovn.miningquiz.di.qualifiers.RepositoryCoroutineDispatcher
 import com.mityushovn.miningquiz.models.*
 import com.mityushovn.miningquiz.models.statisticsEntities.AbstractStatistics
 import com.mityushovn.miningquiz.models.statisticsEntities.ExamsSolvingStatistics
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.zip
+import javax.inject.Inject
 
 /**
  * @author Nikita Mityushov 11.04.22
@@ -18,14 +20,12 @@ import kotlinx.coroutines.flow.zip
  * AttemptsRepositoryAPI implementation.
  * @see AttemptsRepositoryAPI
  */
-class AttemptsRepository(
-    private val attemptExamDao: AttemptExamDaoAPI,
-    private val attemptTopicDao: AttemptTopicDaoAPI,
-    private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
+class AttemptsRepository @Inject constructor(
+    val attemptExamDao: AttemptExamDaoAPI,
+    val attemptTopicDao: AttemptTopicDaoAPI,
+    @RepositoryCoroutineDispatcher
+    val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : AttemptsRepositoryAPI {
-
-    private val repositoryCoroutineScope =
-        CoroutineScope(SupervisorJob() + coroutineDispatcher) // private repository coroutine scope
 
     /**
      * @see AttemptsRepositoryAPI.insertAttemptTopic

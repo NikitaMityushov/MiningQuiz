@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 import java.util.*
+import javax.inject.Inject
 
 /**
  * @author Nikita Mityushov 8.04.22
@@ -17,8 +18,8 @@ import java.util.*
  * Implementation of QuestionsDaoAPI interface.
  * @see QuestionsDaoAPI
  */
-class QuestionsDao(
-    private val db: SQLiteDatabase
+class QuestionsDao @Inject constructor (
+    val db: SQLiteDatabase
 ) : QuestionsDaoAPI {
 
     /**

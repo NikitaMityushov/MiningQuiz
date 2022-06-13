@@ -7,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.mityushovn.miningquiz.DI.Navigators
+import com.mityushovn.miningquiz.MiningQuizApplication
+import com.mityushovn.miningquiz.di.Navigators
 import com.mityushovn.miningquiz.databinding.ExamsFragmentBinding
-import com.mityushovn.miningquiz.DI.Repositories
 import com.mityushovn.miningquiz.activities.main.MainActivity
 import com.mityushovn.miningquiz.navigation.MainNavigator
 import com.mityushovn.miningquiz.screens.recyclerview.adapters.ExamsFrListAdapter
+import javax.inject.Inject
 
 /**
  * @author Nikita Mityushov
@@ -22,9 +23,12 @@ import com.mityushovn.miningquiz.screens.recyclerview.adapters.ExamsFrListAdapte
  * @see MainNavigator
  */
 class ExamsFragment : Fragment() {
+    @Inject
+    lateinit var vmFactory: ExamsVMFactory
     private val examsViewModel: ExamsViewModel by viewModels {
-        ExamsVMFactory(Repositories.examsRepository)
+        vmFactory
     }
+
     private val navigator: MainNavigator = Navigators.mainNavigator
     private lateinit var binding: ExamsFragmentBinding
     private lateinit var recyclerView: RecyclerView
@@ -38,7 +42,10 @@ class ExamsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // configure DI
+        (requireActivity().application as MiningQuizApplication).appComponent.injectInExamsFragment(this)
         binding = ExamsFragmentBinding.inflate(inflater, container, false)
+
         /*
          * If you use Data Binding, you must initialize all variables assigned in the XML file
          * in the fragment
