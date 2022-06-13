@@ -1,9 +1,8 @@
 package com.mityushovn.miningquiz
 
 import android.app.Application
-import com.mityushovn.miningquiz.di.AppComponent
-import com.mityushovn.miningquiz.di.DaggerAppComponent
-import com.mityushovn.miningquiz.di.Navigators
+import com.mityushovn.miningquiz.di.components.AppComponent
+import com.mityushovn.miningquiz.di.components.DaggerAppComponent
 import timber.log.Timber
 
 class MiningQuizApplication : Application() {
@@ -17,7 +16,5 @@ class MiningQuizApplication : Application() {
         Timber.plant(Timber.DebugTree())
         // 2) init repositories and database
         appComponent = DaggerAppComponent.factory().create(applicationContext, this)
-        // 3) init Navigators
-        Navigators.init(applicationContext)
     }
 }

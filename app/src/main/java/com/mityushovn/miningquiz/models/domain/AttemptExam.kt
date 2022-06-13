@@ -1,4 +1,4 @@
-package com.mityushovn.miningquiz.models
+package com.mityushovn.miningquiz.models.domain
 
 import com.mityushovn.miningquiz.utils.now
 import java.util.Date

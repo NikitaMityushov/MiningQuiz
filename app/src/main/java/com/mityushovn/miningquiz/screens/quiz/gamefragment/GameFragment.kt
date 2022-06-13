@@ -1,5 +1,6 @@
 package com.mityushovn.miningquiz.screens.quiz.gamefragment
 
+import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
@@ -12,7 +13,6 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.mityushovn.miningquiz.MiningQuizApplication
-import com.mityushovn.miningquiz.di.Navigators
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.activities.quiz.GameEngine
 import com.mityushovn.miningquiz.activities.quiz.GameEngineFactory
@@ -34,7 +34,6 @@ private const val GAME_STARTED = "game_started"
 class GameFragment : Fragment() {
 
     private lateinit var binding: FragmentGameBinding
-    private val navigator: QuizNavigator = Navigators.quizNavigator
 
     @Inject
     lateinit var vmFactory: GameEngineFactory
@@ -42,13 +41,20 @@ class GameFragment : Fragment() {
         vmFactory
     }
 
+    @Inject
+    lateinit var navigator: QuizNavigator
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MiningQuizApplication).appComponent.injectInGameFragment(
+            this
+        )
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (requireActivity().application as MiningQuizApplication).appComponent.injectInGameFragment(
-            this
-        )
         binding = FragmentGameBinding.inflate(inflater, container, false)
         // init data binding
         with(binding) {

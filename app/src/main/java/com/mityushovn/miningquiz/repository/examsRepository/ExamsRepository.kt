@@ -2,7 +2,8 @@ package com.mityushovn.miningquiz.repository.examsRepository
 
 import com.mityushovn.miningquiz.database.examDao.ExamDaoAPI
 import com.mityushovn.miningquiz.di.qualifiers.RepositoryCoroutineDispatcher
-import com.mityushovn.miningquiz.models.Exam
+import com.mityushovn.miningquiz.di.scopes.AppScope
+import com.mityushovn.miningquiz.models.domain.Exam
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
@@ -14,6 +15,7 @@ import javax.inject.Inject
  * ExamsRepositoryAPI implementation.
  * @see ExamsRepositoryAPI
  */
+@AppScope
 class ExamsRepository @Inject constructor(
     val examDao: ExamDaoAPI,
     @RepositoryCoroutineDispatcher

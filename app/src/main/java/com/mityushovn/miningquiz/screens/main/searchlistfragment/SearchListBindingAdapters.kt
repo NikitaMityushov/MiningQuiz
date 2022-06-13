@@ -4,7 +4,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mityushovn.miningquiz.R
-import com.mityushovn.miningquiz.models.Question
+import com.mityushovn.miningquiz.models.domain.Question
 import com.mityushovn.miningquiz.screens.recyclerview.adapters.QuestionsSearchFrAdapter
 import timber.log.Timber
 

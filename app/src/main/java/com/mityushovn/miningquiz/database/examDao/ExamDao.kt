@@ -2,7 +2,7 @@ package com.mityushovn.miningquiz.database.examDao
 
 import android.database.sqlite.SQLiteDatabase
 import com.mityushovn.miningquiz.database.AppSQLiteContract
-import com.mityushovn.miningquiz.models.Exam
+import com.mityushovn.miningquiz.models.domain.Exam
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

@@ -1,6 +1,6 @@
 package com.mityushovn.miningquiz.database.attemptTopicDao
 
-import com.mityushovn.miningquiz.models.AttemptTopic
+import com.mityushovn.miningquiz.models.domain.AttemptTopic
 import kotlinx.coroutines.flow.Flow
 
 /**

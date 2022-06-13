@@ -2,7 +2,9 @@ package com.mityushovn.miningquiz.repository.questionsRepository
 
 import com.mityushovn.miningquiz.database.questionsDao.QuestionsDaoAPI
 import com.mityushovn.miningquiz.di.qualifiers.RepositoryCoroutineDispatcher
-import com.mityushovn.miningquiz.models.*
+import com.mityushovn.miningquiz.di.scopes.AppScope
+import com.mityushovn.miningquiz.models.domain.Question
+import com.mityushovn.miningquiz.models.domain.WrongAnswered
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -16,6 +18,7 @@ import javax.inject.Inject
  * QuestionsRepositoryAPI implementation.
  * @see QuestionsRepositoryAPI
  */
+@AppScope
 class QuestionsRepository @Inject constructor (
     val questionsDao: QuestionsDaoAPI,
     @RepositoryCoroutineDispatcher

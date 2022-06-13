@@ -1,6 +1,8 @@
 package com.mityushovn.miningquiz.repository.attemptsRepository
 
 import com.mityushovn.miningquiz.models.*
+import com.mityushovn.miningquiz.models.domain.AttemptExam
+import com.mityushovn.miningquiz.models.domain.AttemptTopic
 import com.mityushovn.miningquiz.models.statisticsEntities.AbstractStatistics
 import kotlinx.coroutines.flow.Flow
 

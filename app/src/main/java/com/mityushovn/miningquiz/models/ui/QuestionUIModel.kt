@@ -1,6 +1,6 @@
 package com.mityushovn.miningquiz.models.ui
 
-import com.mityushovn.miningquiz.models.Question
+import com.mityushovn.miningquiz.models.domain.Question
 import kotlin.random.Random
 import com.mityushovn.miningquiz.screens.quiz.gamefragment.GameFragment
 

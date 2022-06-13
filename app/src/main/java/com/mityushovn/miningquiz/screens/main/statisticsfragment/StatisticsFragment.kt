@@ -1,5 +1,6 @@
 package com.mityushovn.miningquiz.screens.main.statisticsfragment
 
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -29,14 +30,18 @@ class StatisticsFragment : Fragment() {
         vmFactory
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
         // configure DI
         (requireActivity().application as MiningQuizApplication).appComponent.injectInStatisticsFragment(
             this
         )
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = StatisticsFragmentBinding.inflate(inflater, container, false)
 
         // init data binding

@@ -3,7 +3,7 @@ package com.mityushovn.miningquiz.database.attemptTopicDao
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.mityushovn.miningquiz.database.AppSQLiteContract
-import com.mityushovn.miningquiz.models.AttemptTopic
+import com.mityushovn.miningquiz.models.domain.AttemptTopic
 import com.mityushovn.miningquiz.utils.toIntForDB
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

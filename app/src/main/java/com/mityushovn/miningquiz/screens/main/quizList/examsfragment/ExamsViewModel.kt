@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mityushovn.miningquiz.models.Exam
+import com.mityushovn.miningquiz.models.domain.Exam
 import com.mityushovn.miningquiz.repository.examsRepository.ExamsRepositoryAPI
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

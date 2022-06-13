@@ -3,7 +3,9 @@ package com.mityushovn.miningquiz.repository.attemptsRepository
 import com.mityushovn.miningquiz.database.attemptExamDao.AttemptExamDaoAPI
 import com.mityushovn.miningquiz.database.attemptTopicDao.AttemptTopicDaoAPI
 import com.mityushovn.miningquiz.di.qualifiers.RepositoryCoroutineDispatcher
-import com.mityushovn.miningquiz.models.*
+import com.mityushovn.miningquiz.di.scopes.AppScope
+import com.mityushovn.miningquiz.models.domain.AttemptExam
+import com.mityushovn.miningquiz.models.domain.AttemptTopic
 import com.mityushovn.miningquiz.models.statisticsEntities.AbstractStatistics
 import com.mityushovn.miningquiz.models.statisticsEntities.ExamsSolvingStatistics
 import com.mityushovn.miningquiz.models.statisticsEntities.TopicsSolvingStatistics
@@ -20,6 +22,7 @@ import javax.inject.Inject
  * AttemptsRepositoryAPI implementation.
  * @see AttemptsRepositoryAPI
  */
+@AppScope
 class AttemptsRepository @Inject constructor(
     val attemptExamDao: AttemptExamDaoAPI,
     val attemptTopicDao: AttemptTopicDaoAPI,

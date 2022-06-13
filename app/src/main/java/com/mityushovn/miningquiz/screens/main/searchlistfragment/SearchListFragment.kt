@@ -1,12 +1,12 @@
 package com.mityushovn.miningquiz.screens.main.searchlistfragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.mityushovn.miningquiz.MiningQuizApplication
-import com.mityushovn.miningquiz.di.Navigators
 import com.mityushovn.miningquiz.activities.main.MainActivityVMFactory
 import com.mityushovn.miningquiz.activities.main.MainActivityViewModel
 import com.mityushovn.miningquiz.databinding.SearchListFragmentBinding
@@ -36,17 +36,25 @@ class SearchListFragment : Fragment() {
         vmFactory
     }
 
-    private val navigator: MainNavigator = Navigators.mainNavigator
+    @Inject
+    lateinit var navigator: MainNavigator
+
     private lateinit var binding: SearchListFragmentBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var listAdapter: QuestionsSearchFrAdapter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        // configure DI
+        (requireActivity().application as MiningQuizApplication).appComponent.injectInSearchListFragment(
+            this
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // configure DI
-        (requireActivity().application as MiningQuizApplication).appComponent.injectInSearchListFragment(this)
         binding = SearchListFragmentBinding.inflate(inflater, container, false)
         listAdapter = QuestionsSearchFrAdapter { questionId ->
             //    destination of navigation

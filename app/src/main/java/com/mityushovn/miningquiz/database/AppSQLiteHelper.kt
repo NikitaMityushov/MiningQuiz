@@ -34,7 +34,6 @@ class AppSQLiteHelper(private val applicationContext: Context) : SQLiteOpenHelpe
     }
 
     private fun installDatabaseFromAssets() {
-//        val inputStream = applicationContext.assets.open("$ASSETS_PATH/$DATABASE_NAME.sqlite3")
         val inputStream = applicationContext.assets.open("$DATABASE_NAME.sqlite3")
 
         try {

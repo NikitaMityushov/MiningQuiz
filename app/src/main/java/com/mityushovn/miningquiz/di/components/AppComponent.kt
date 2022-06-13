@@ -1,10 +1,11 @@
-package com.mityushovn.miningquiz.di
+package com.mityushovn.miningquiz.di.components
 
 import android.app.Application
 import android.content.Context
 import com.mityushovn.miningquiz.activities.main.MainActivity
 import com.mityushovn.miningquiz.activities.quiz.QuizActivity
 import com.mityushovn.miningquiz.di.modules.*
+import com.mityushovn.miningquiz.di.scopes.AppScope
 import com.mityushovn.miningquiz.screens.main.mainfragment.MainFragment
 import com.mityushovn.miningquiz.screens.main.quizList.examsfragment.ExamsFragment
 import com.mityushovn.miningquiz.screens.main.quizList.topicslistfragment.TopicsListFragment
@@ -18,6 +19,9 @@ import com.mityushovn.miningquiz.screens.quiz.previewgamefragment.PreviewGameFra
 import dagger.BindsInstance
 import dagger.Component
 
+/**
+ * Represents DI graph for MiningQuiz Application.
+ */
 @Component(
     modules = [DatabaseModule::class,
         NavigationModule::class,
@@ -25,6 +29,7 @@ import dagger.Component
         DaoModule::class,
         CoroutinesDispatchersModule::class]
 )
+@AppScope
 interface AppComponent {
     @Component.Factory
     interface Factory {

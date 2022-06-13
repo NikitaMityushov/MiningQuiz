@@ -1,5 +1,6 @@
 package com.mityushovn.miningquiz.screens.quiz.congratsfragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.mityushovn.miningquiz.MiningQuizApplication
-import com.mityushovn.miningquiz.di.Navigators
 import com.mityushovn.miningquiz.activities.quiz.GameEngineFactory
 import com.mityushovn.miningquiz.activities.quiz.GameEngine
 import com.mityushovn.miningquiz.databinding.FragmentCongratsBinding
@@ -24,17 +24,21 @@ class CongratsFragment : Fragment() {
         vmFactory
     }
 
-    private val navigator: QuizNavigator = Navigators.quizNavigator
+    @Inject
+    lateinit var navigator: QuizNavigator
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        // configure DI
+        (requireActivity().application as MiningQuizApplication).appComponent.injectInCongratsFragment(
+            this
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // configure DI
-        (requireActivity().application as MiningQuizApplication).appComponent.injectInCongratsFragment(
-            this
-        )
 
         binding = FragmentCongratsBinding.inflate(inflater, container, false)
         // init data binding

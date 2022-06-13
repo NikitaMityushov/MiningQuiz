@@ -1,5 +1,6 @@
 package com.mityushovn.miningquiz.screens.main.mainfragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +12,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.mityushovn.miningquiz.MiningQuizApplication
-import com.mityushovn.miningquiz.di.Navigators
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.activities.main.MainActivityVMFactory
 import com.mityushovn.miningquiz.activities.main.MainActivityViewModel
@@ -41,7 +41,6 @@ import javax.inject.Inject
 class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
     private lateinit var controller: NavController
-    private val navigator: MainNavigator = Navigators.mainNavigator
 
     /*
         shared ViewModel with MainActivity and SearchListFragment
@@ -52,14 +51,21 @@ class MainFragment : Fragment() {
         vmFactory
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    @Inject
+    lateinit var navigator: MainNavigator
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
         // configure DI
         (requireActivity().application as MiningQuizApplication).appComponent.injectInMainFragment(
             this
         )
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         binding = MainFragmentBinding.inflate(inflater, container, false)
         /*
             1) init menu

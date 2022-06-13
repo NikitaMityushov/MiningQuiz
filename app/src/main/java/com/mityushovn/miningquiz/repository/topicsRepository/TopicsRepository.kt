@@ -2,9 +2,9 @@ package com.mityushovn.miningquiz.repository.topicsRepository
 
 import com.mityushovn.miningquiz.database.topicDao.TopicDaoAPI
 import com.mityushovn.miningquiz.di.qualifiers.RepositoryCoroutineDispatcher
-import com.mityushovn.miningquiz.models.Topic
+import com.mityushovn.miningquiz.di.scopes.AppScope
+import com.mityushovn.miningquiz.models.domain.Topic
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
@@ -15,6 +15,7 @@ import javax.inject.Inject
  * TopicsRepositoryAPI implementation.
  * @see TopicsRepositoryAPI
  */
+@AppScope
 class TopicsRepository @Inject constructor(
     private val topicDao: TopicDaoAPI,
     @RepositoryCoroutineDispatcher
