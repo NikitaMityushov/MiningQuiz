@@ -1,8 +1,8 @@
 package com.mityushovn.miningquiz.database.questionsDao
 
-import com.mityushovn.miningquiz.models.Question
-import com.mityushovn.miningquiz.models.WrongAnswered
-import com.mityushovn.miningquiz.models.Topic
+import com.mityushovn.miningquiz.models.domain.Question
+import com.mityushovn.miningquiz.models.domain.WrongAnswered
+import com.mityushovn.miningquiz.models.domain.Topic
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 

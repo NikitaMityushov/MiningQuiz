@@ -1,4 +1,4 @@
-package com.mityushovn.miningquiz.models
+package com.mityushovn.miningquiz.models.domain
 
 /**
  * Representation of exam entity.

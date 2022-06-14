@@ -10,8 +10,8 @@ import com.mityushovn.miningquiz.MiningQuizApplication
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.activities.quiz.GameEngine.GameMode
 import com.mityushovn.miningquiz.activities.quiz.GameEngine.GameMode.NONE
-import com.mityushovn.miningquiz.models.AttemptExam
-import com.mityushovn.miningquiz.models.AttemptTopic
+import com.mityushovn.miningquiz.models.domain.AttemptExam
+import com.mityushovn.miningquiz.models.domain.AttemptTopic
 import com.mityushovn.miningquiz.models.ui.QuestionUIModel
 import com.mityushovn.miningquiz.models.ui.toQuestionUIModel
 import com.mityushovn.miningquiz.repository.attemptsRepository.AttemptsRepositoryAPI

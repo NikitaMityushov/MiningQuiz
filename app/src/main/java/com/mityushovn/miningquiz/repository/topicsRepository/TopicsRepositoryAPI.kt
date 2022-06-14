@@ -1,6 +1,6 @@
 package com.mityushovn.miningquiz.repository.topicsRepository
 
-import com.mityushovn.miningquiz.models.Topic
+import com.mityushovn.miningquiz.models.domain.Topic
 import kotlinx.coroutines.flow.Flow
 
 /**

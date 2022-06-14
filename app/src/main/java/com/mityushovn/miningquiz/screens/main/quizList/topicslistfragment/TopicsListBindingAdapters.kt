@@ -2,7 +2,7 @@ package com.mityushovn.miningquiz.screens.main.quizList.topicslistfragment
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.mityushovn.miningquiz.models.Topic
+import com.mityushovn.miningquiz.models.domain.Topic
 import com.mityushovn.miningquiz.screens.recyclerview.adapters.TopicsListFrAdapter
 
 

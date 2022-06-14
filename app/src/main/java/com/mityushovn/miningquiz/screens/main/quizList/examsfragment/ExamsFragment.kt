@@ -1,5 +1,6 @@
 package com.mityushovn.miningquiz.screens.main.quizList.examsfragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,12 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.mityushovn.miningquiz.DI.Navigators
+import com.mityushovn.miningquiz.MiningQuizApplication
 import com.mityushovn.miningquiz.databinding.ExamsFragmentBinding
-import com.mityushovn.miningquiz.DI.Repositories
 import com.mityushovn.miningquiz.activities.main.MainActivity
 import com.mityushovn.miningquiz.navigation.MainNavigator
 import com.mityushovn.miningquiz.screens.recyclerview.adapters.ExamsFrListAdapter
+import javax.inject.Inject
 
 /**
  * @author Nikita Mityushov
@@ -22,10 +23,15 @@ import com.mityushovn.miningquiz.screens.recyclerview.adapters.ExamsFrListAdapte
  * @see MainNavigator
  */
 class ExamsFragment : Fragment() {
+    @Inject
+    lateinit var vmFactory: ExamsVMFactory
     private val examsViewModel: ExamsViewModel by viewModels {
-        ExamsVMFactory(Repositories.examsRepository)
+        vmFactory
     }
-    private val navigator: MainNavigator = Navigators.mainNavigator
+
+    @Inject
+    lateinit var navigator: MainNavigator
+
     private lateinit var binding: ExamsFragmentBinding
     private lateinit var recyclerView: RecyclerView
     private val listAdapter: ExamsFrListAdapter by lazy {
@@ -34,11 +40,20 @@ class ExamsFragment : Fragment() {
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        // configure DI
+        (requireActivity().application as MiningQuizApplication).appComponent.mainComponent().injectInExamsFragment(
+            this
+        )
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = ExamsFragmentBinding.inflate(inflater, container, false)
+
         /*
          * If you use Data Binding, you must initialize all variables assigned in the XML file
          * in the fragment

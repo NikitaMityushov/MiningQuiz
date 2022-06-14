@@ -1,5 +1,6 @@
 package com.mityushovn.miningquiz.screens.main.quizList.topicslistfragment
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,13 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.mityushovn.miningquiz.DI.Navigators
+import com.mityushovn.miningquiz.MiningQuizApplication
 import com.mityushovn.miningquiz.databinding.FragmentTopicsListBinding
-import com.mityushovn.miningquiz.DI.Repositories
 import com.mityushovn.miningquiz.activities.main.MainActivity
 import com.mityushovn.miningquiz.navigation.MainNavigator
 import com.mityushovn.miningquiz.screens.recyclerview.adapters.TopicsListFrAdapter
 import com.mityushovn.miningquiz.utils.hideKeyboard
+import javax.inject.Inject
 
 /**
  * @author Nikita Mityushov
@@ -23,14 +24,27 @@ import com.mityushovn.miningquiz.utils.hideKeyboard
  * @see MainNavigator
  */
 class TopicsListFragment : Fragment() {
+    @Inject
+    lateinit var vmFactory: TopicsListVMFactory
     private val topicsListViewModel: TopicsListViewModel by viewModels {
-        TopicsListVMFactory(Repositories.topicsRepository)
+        vmFactory
     }
-    private val navigator: MainNavigator = Navigators.mainNavigator
+
+    @Inject
+    lateinit var navigator: MainNavigator
+
     private lateinit var binding: FragmentTopicsListBinding
     private lateinit var recyclerView: RecyclerView
     private val listAdapter: TopicsListFrAdapter = TopicsListFrAdapter { topicId ->
         navigator.onTopicSelected(topicId, requireActivity() as MainActivity)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (requireActivity().application as MiningQuizApplication).appComponent.mainComponent()
+            .injectInTopicsFragment(
+                this
+            )
     }
 
     override fun onCreateView(

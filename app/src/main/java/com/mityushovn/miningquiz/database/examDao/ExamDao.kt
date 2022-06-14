@@ -2,9 +2,11 @@ package com.mityushovn.miningquiz.database.examDao
 
 import android.database.sqlite.SQLiteDatabase
 import com.mityushovn.miningquiz.database.AppSQLiteContract
-import com.mityushovn.miningquiz.models.Exam
+import com.mityushovn.miningquiz.di.scopes.MainActivityScope
+import com.mityushovn.miningquiz.models.domain.Exam
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
 /**
  * @author Nikita Mityushov 8.04.22
@@ -12,7 +14,8 @@ import kotlinx.coroutines.flow.flow
  * Implementation of ExamDaoAPI interface.
  * @see ExamDaoAPI
  */
-class ExamDao(
+@MainActivityScope
+class ExamDao @Inject constructor(
     private val db: SQLiteDatabase
 ) : ExamDaoAPI {
 

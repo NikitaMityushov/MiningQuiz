@@ -1,6 +1,5 @@
-package com.mityushovn.miningquiz.DI
+package com.mityushovn.miningquiz.di.modules
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -15,20 +14,18 @@ import com.mityushovn.miningquiz.navigation.MainNavigator
 import com.mityushovn.miningquiz.navigation.QuizNavigator
 import com.mityushovn.miningquiz.screens.main.mainfragment.MainFragment
 import com.mityushovn.miningquiz.screens.main.searchlistfragment.questionfragment.QuestionFragment
+import dagger.Module
+import dagger.Provides
 import timber.log.Timber
 
 private const val EXAM_OR_TOPIC_ID = "exam_or_topic_id"
 private const val GAME_MODE = "game_mode"
 
-/**
- * DI for all Navigation
- * @see MainNavigator
- * @see QuizNavigator
- */
-object Navigators {
-    private lateinit var applicationContext: Context
+@Module
+class NavigationModule {
 
-    val mainNavigator: MainNavigator by lazy {
+    @Provides
+    fun provideMainNavigator(): MainNavigator =
         object : MainNavigator {
             override fun onSearchViewIsFocused(fragment: MainFragment) {
                 fragment.childFragmentManager.fragments[0]?.findNavController()
@@ -62,11 +59,10 @@ object Navigators {
                 }
                 activity.startActivity(intent)
             }
-
         }
-    }
 
-    val quizNavigator: QuizNavigator by lazy {
+    @Provides
+    fun provideQuizNavigator(): QuizNavigator =
         object : QuizNavigator {
             override fun toGameFragment(fragment: Fragment, bundle: Bundle?) {
                 fragment.findNavController()
@@ -97,13 +93,5 @@ object Navigators {
             override fun popStack(fragment: Fragment) {
                 fragment.findNavController().popBackStack()
             }
-
         }
-    }
-
-    // This method should be called in onCreate() of Application, or on Activity, or Service
-    // for initialization database and repositories
-    fun init(context: Context) {
-        applicationContext = context
-    }
 }

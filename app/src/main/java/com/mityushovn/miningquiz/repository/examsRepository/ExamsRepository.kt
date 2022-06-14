@@ -1,11 +1,14 @@
 package com.mityushovn.miningquiz.repository.examsRepository
 
 import com.mityushovn.miningquiz.database.examDao.ExamDaoAPI
-import com.mityushovn.miningquiz.models.Exam
+import com.mityushovn.miningquiz.di.qualifiers.RepositoryCoroutineDispatcher
+import com.mityushovn.miningquiz.di.scopes.AppScope
+import com.mityushovn.miningquiz.di.scopes.MainActivityScope
+import com.mityushovn.miningquiz.models.domain.Exam
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
+import javax.inject.Inject
 
 /**
  * @author Nikita Mityushov 12.04.22
@@ -13,9 +16,11 @@ import kotlinx.coroutines.flow.flowOn
  * ExamsRepositoryAPI implementation.
  * @see ExamsRepositoryAPI
  */
-class ExamsRepository(
-    private val examDao: ExamDaoAPI,
-    private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
+@MainActivityScope
+class ExamsRepository @Inject constructor(
+    val examDao: ExamDaoAPI,
+    @RepositoryCoroutineDispatcher
+    val coroutineDispatcher: CoroutineDispatcher
 ) : ExamsRepositoryAPI {
 
     /**

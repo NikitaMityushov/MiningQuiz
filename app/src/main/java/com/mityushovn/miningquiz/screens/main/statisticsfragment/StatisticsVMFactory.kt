@@ -7,15 +7,16 @@ import com.mityushovn.miningquiz.MiningQuizApplication
 import com.mityushovn.miningquiz.repository.attemptsRepository.AttemptsRepositoryAPI
 import com.mityushovn.miningquiz.repository.examsRepository.ExamsRepositoryAPI
 import com.mityushovn.miningquiz.screens.main.quizList.examsfragment.ExamsViewModel
+import javax.inject.Inject
 
 /**
  * Factory for ExamsViewModel.
  * @see ExamsViewModel
  * @see ExamsRepositoryAPI
  */
-class StatisticsVMFactory(
-    private val attemptsRepository: AttemptsRepositoryAPI,
-    private val application: Application
+class StatisticsVMFactory @Inject constructor (
+    val attemptsRepository: AttemptsRepositoryAPI,
+    val application: Application
 ) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

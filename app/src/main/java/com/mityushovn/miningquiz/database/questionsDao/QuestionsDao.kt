@@ -3,13 +3,14 @@ package com.mityushovn.miningquiz.database.questionsDao
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.mityushovn.miningquiz.database.AppSQLiteContract
-import com.mityushovn.miningquiz.models.Question
-import com.mityushovn.miningquiz.models.WrongAnswered
+import com.mityushovn.miningquiz.models.domain.Question
+import com.mityushovn.miningquiz.models.domain.WrongAnswered
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 import java.util.*
+import javax.inject.Inject
 
 /**
  * @author Nikita Mityushov 8.04.22
@@ -17,8 +18,8 @@ import java.util.*
  * Implementation of QuestionsDaoAPI interface.
  * @see QuestionsDaoAPI
  */
-class QuestionsDao(
-    private val db: SQLiteDatabase
+class QuestionsDao @Inject constructor (
+    val db: SQLiteDatabase
 ) : QuestionsDaoAPI {
 
     /**
@@ -99,7 +100,6 @@ class QuestionsDao(
             "SELECT * FROM question_view WHERE question_id = $questionId",
             null
         )
-        // TODO: 19.04.2022 перепроверить
         // 2) handle response(cursor)
         cursor.use {
             if (cursor.count == 0) {

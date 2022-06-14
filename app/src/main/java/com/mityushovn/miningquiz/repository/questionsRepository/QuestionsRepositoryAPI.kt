@@ -1,6 +1,8 @@
 package com.mityushovn.miningquiz.repository.questionsRepository
 
 import com.mityushovn.miningquiz.models.*
+import com.mityushovn.miningquiz.models.domain.Question
+import com.mityushovn.miningquiz.models.domain.WrongAnswered
 import kotlinx.coroutines.flow.Flow
 import java.util.*
 

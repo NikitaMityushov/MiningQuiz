@@ -19,6 +19,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // TODO: 13.06.2022 add spannable text
 
         // hide keyboard when scrolls
         view.setOnScrollChangeListener { v, _, _, _, _ ->
