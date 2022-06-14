@@ -11,18 +11,23 @@ import com.mityushovn.miningquiz.repository.topicsRepository.TopicsRepositoryAPI
 import dagger.Binds
 import dagger.Module
 
+
 @Module
-interface RepositoryModule {
+interface AppRepositoryModule {
 
     @Binds
     fun bindQuestionRepository(questionsRepository: QuestionsRepository): QuestionsRepositoryAPI
 
     @Binds
+    fun bindAttemptsRepository(attemptsRepository: AttemptsRepository): AttemptsRepositoryAPI
+}
+
+
+@Module
+interface MainActRepositoryModule {
+    @Binds
     fun bindExamsRepository(examsRepository: ExamsRepository): ExamsRepositoryAPI
 
     @Binds
     fun bindTopicsRepository(topicsRepository: TopicsRepository): TopicsRepositoryAPI
-
-    @Binds
-    fun bindAttemptsRepository(attemptsRepository: AttemptsRepository): AttemptsRepositoryAPI
 }

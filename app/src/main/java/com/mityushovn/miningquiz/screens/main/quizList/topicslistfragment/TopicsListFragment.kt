@@ -41,9 +41,10 @@ class TopicsListFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as MiningQuizApplication).appComponent.injectInTopicsFragment(
-            this
-        )
+        (requireActivity().application as MiningQuizApplication).appComponent.mainComponent()
+            .injectInTopicsFragment(
+                this
+            )
     }
 
     override fun onCreateView(

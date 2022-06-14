@@ -43,7 +43,7 @@ class ExamsFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         // configure DI
-        (requireActivity().application as MiningQuizApplication).appComponent.injectInExamsFragment(
+        (requireActivity().application as MiningQuizApplication).appComponent.mainComponent().injectInExamsFragment(
             this
         )
     }

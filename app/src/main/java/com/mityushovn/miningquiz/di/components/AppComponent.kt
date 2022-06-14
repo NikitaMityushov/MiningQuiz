@@ -7,8 +7,6 @@ import com.mityushovn.miningquiz.activities.quiz.QuizActivity
 import com.mityushovn.miningquiz.di.modules.*
 import com.mityushovn.miningquiz.di.scopes.AppScope
 import com.mityushovn.miningquiz.screens.main.mainfragment.MainFragment
-import com.mityushovn.miningquiz.screens.main.quizList.examsfragment.ExamsFragment
-import com.mityushovn.miningquiz.screens.main.quizList.topicslistfragment.TopicsListFragment
 import com.mityushovn.miningquiz.screens.main.searchlistfragment.SearchListFragment
 import com.mityushovn.miningquiz.screens.main.searchlistfragment.questionfragment.QuestionFragment
 import com.mityushovn.miningquiz.screens.main.statisticsfragment.StatisticsFragment
@@ -25,12 +23,15 @@ import dagger.Component
 @Component(
     modules = [DatabaseModule::class,
         NavigationModule::class,
-        RepositoryModule::class,
-        DaoModule::class,
+        AppRepositoryModule::class,
+        AppDaoModule::class,
         CoroutinesDispatchersModule::class]
 )
 @AppScope
 interface AppComponent {
+
+    fun mainComponent(): MainComponent
+
     @Component.Factory
     interface Factory {
         fun create(
@@ -39,9 +40,9 @@ interface AppComponent {
         ): AppComponent
     }
 
-    fun injectInExamsFragment(examsFragment: ExamsFragment)
-
-    fun injectInTopicsFragment(topicsListFragment: TopicsListFragment)
+//    fun injectInExamsFragment(examsFragment: ExamsFragment)
+//
+//    fun injectInTopicsFragment(topicsListFragment: TopicsListFragment)
 
     fun injectInStatisticsFragment(statisticsFragment: StatisticsFragment)
 

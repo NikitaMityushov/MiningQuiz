@@ -8,7 +8,7 @@ import com.mityushovn.miningquiz.R
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
-    // essential to init because view model is shared with MainFragment and SearchListFragment
+
     @Inject
     lateinit var vmFactory: MainActivityVMFactory
     private val mainActivityViewModel: MainActivityViewModel by viewModels {

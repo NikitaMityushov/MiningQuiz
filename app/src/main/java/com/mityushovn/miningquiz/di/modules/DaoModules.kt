@@ -14,13 +14,7 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-interface DaoModule {
-
-    @Binds
-    fun bindExamDaoAPI(examDao: ExamDao): ExamDaoAPI
-
-    @Binds
-    fun bindTopicDaoAPI(topicDao: TopicDao): TopicDaoAPI
+interface AppDaoModule {
 
     @Binds
     fun bindAttemptExamDao(attemptExamDao: AttemptExamDao): AttemptExamDaoAPI
@@ -31,3 +25,13 @@ interface DaoModule {
     @Binds
     fun bindQuestionsDao(questionsDao: QuestionsDao): QuestionsDaoAPI
 }
+
+@Module
+interface MainActDaoModule {
+    @Binds
+    fun bindExamDaoAPI(examDao: ExamDao): ExamDaoAPI
+
+    @Binds
+    fun bindTopicDaoAPI(topicDao: TopicDao): TopicDaoAPI
+}
+

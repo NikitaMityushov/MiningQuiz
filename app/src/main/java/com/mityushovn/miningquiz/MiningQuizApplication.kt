@@ -14,7 +14,10 @@ class MiningQuizApplication : Application() {
         super.onCreate()
         // 1) init Timber logging
         Timber.plant(Timber.DebugTree())
-        // 2) init repositories and database
+        // 2) init Dagger AppComponent
+        /**
+         * @see AppComponent
+         */
         appComponent = DaggerAppComponent.factory().create(applicationContext, this)
     }
 }
