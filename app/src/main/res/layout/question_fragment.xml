@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.mityushovn.miningquiz.screens.main.searchlistfragment.questionfragment.QuestionViewModel" />
+            type="com.mityushovn.miningquiz.main.presentation.searchlistfragment.questionfragment.QuestionViewModel" />
 
     </data>
 
@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:context=".screens.main.searchlistfragment.questionfragment.QuestionFragment">
+            tools:context=".main.presentation.searchlistfragment.questionfragment.QuestionFragment">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/question_fr_exam_tv"

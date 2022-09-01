@@ -3,7 +3,7 @@
     package="com.mityushovn.miningquiz">
 
     <application
-        android:name=".MiningQuizApplication"
+        android:name=".common.MiningQuizApplication"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
@@ -11,10 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiningQuiz">
         <activity
-            android:name=".activities.quiz.QuizActivity"
+            android:name="com.mityushovn.miningquiz.quiz.presentation.quiz.QuizActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.main.MainActivity"
+            android:name="com.mityushovn.miningquiz.main.presentation.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

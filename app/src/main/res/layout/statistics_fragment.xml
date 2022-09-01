@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.mityushovn.miningquiz.screens.main.statisticsfragment.StatisticsViewModel" />
+            type="com.mityushovn.miningquiz.main.presentation.statisticsfragment.StatisticsViewModel" />
 
     </data>
 
@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            tools:context=".screens.main.statisticsfragment.StatisticsFragment">
+            tools:context=".main.presentation.statisticsfragment.StatisticsFragment">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/statistics_title_tv"

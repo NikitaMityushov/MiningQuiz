@@ -22,6 +22,7 @@
         <entry key="app/src/main/res/drawable/other_button_pressed.xml" value="0.27890625" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_quiz.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/common_item.xml" value="0.266796875" />
         <entry key="app/src/main/res/layout/exam_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/exam_topic_item.xml" value="0.35572916666666665" />
         <entry key="app/src/main/res/layout/exams_fragment.xml" value="0.13623188405797101" />

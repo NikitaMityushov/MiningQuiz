@@ -9,4 +9,4 @@
     android:layout_height="match_parent"
     app:defaultNavHost="false"
     app:navGraph="@navigation/quiz_navigation"
-    tools:context=".activities.quiz.QuizActivity" />
+    tools:context=".quiz.presentation.quiz.QuizActivity" />

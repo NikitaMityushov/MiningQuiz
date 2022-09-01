@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/statisticsFragment"
-        android:name="com.mityushovn.miningquiz.screens.main.statisticsfragment.StatisticsFragment"
+        android:name="com.mityushovn.miningquiz.main.presentation.statisticsfragment.StatisticsFragment"
         android:label="StatisticsFragment" />
 </navigation>

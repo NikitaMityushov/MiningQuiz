@@ -7,17 +7,17 @@
 
         <variable
             name="viewModel"
-            type="com.mityushovn.miningquiz.screens.main.quizList.examsfragment.ExamsViewModel" />
+            type="com.mityushovn.miningquiz.main.presentation.quizList.examsfragment.ExamsViewModel" />
 
         <variable
             name="adapter"
-            type="com.mityushovn.miningquiz.screens.recyclerview.adapters.ExamsFrListAdapter" />
+            type="com.mityushovn.miningquiz.presentation.screens.recyclerview.adapters.ExamsFrListAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".screens.main.quizList.examsfragment.ExamsFragment">
+        tools:context=".main.presentation.quizList.examsfragment.ExamsFragment">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/exam_fr_choose_ex_tv"
@@ -40,15 +40,14 @@
             android:layout_marginStart="@dimen/recycler_view_margin_start"
             android:layout_marginTop="@dimen/recycler_view_margin_top"
             android:layout_marginEnd="@dimen/recycler_view_margin_end"
+            app:exams="@{viewModel.exams}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/exam_fr_choose_ex_tv"
 
-            app:exams="@{viewModel.exams}"
-            app:listAdapter="@{adapter}"
-            />
+            app:layout_constraintTop_toBottomOf="@id/exam_fr_choose_ex_tv"
+            app:listAdapter="@{adapter}" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

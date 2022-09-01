@@ -4,18 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
-            type="com.mityushovn.miningquiz.activities.main.MainActivityViewModel" />
+            type="com.mityushovn.miningquiz.main.presentation.activity.MainActivityViewModel" />
+
         <variable
             name="adapter"
-            type="com.mityushovn.miningquiz.screens.recyclerview.adapters.QuestionsSearchFrAdapter" />
+            type="com.mityushovn.miningquiz.presentation.screens.recyclerview.adapters.QuestionsSearchFrAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".screens.main.searchlistfragment.SearchListFragment">
+        tools:context=".main.presentation.searchlistfragment.SearchListFragment">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/search_list_fr_tv"
@@ -24,11 +26,11 @@
             android:layout_marginStart="@dimen/title_text_margin_start"
             android:layout_marginTop="@dimen/title_text_margin_top"
             android:layout_marginEnd="@dimen/title_text_margin_end"
-            app:sizeOfListForTextView="@{viewModel.questions}"
             android:textSize="@dimen/title_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:sizeOfListForTextView="@{viewModel.questions}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_list_fr_recycler_view"
@@ -44,8 +46,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_list_fr_tv"
 
-            app:questions="@{viewModel.questions}"
             app:listAdapter="@{adapter}"
+            app:questions="@{viewModel.questions}"
 
             />
 

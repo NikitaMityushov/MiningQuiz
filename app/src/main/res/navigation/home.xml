@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.mityushovn.miningquiz.screens.main.homefragment.HomeFragment"
+        android:name="com.mityushovn.miningquiz.main.presentation.homefragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 </navigation>
