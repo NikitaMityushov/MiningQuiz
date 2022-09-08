@@ -1,68 +1,55 @@
 package com.mityushovn.miningquiz.main.presentation.activity
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mityushovn.miningquiz.common.domain.models.Question
 import com.mityushovn.miningquiz.common.domain.repositories.QuestionsRepositoryAPI
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import com.mityushovn.miningquiz.main.presentation.mainfragment.MainFragment
 import com.mityushovn.miningquiz.main.presentation.searchlistfragment.SearchListFragment
-import com.mityushovn.miningquiz.presentation.activities.main.Loading
-import com.mityushovn.miningquiz.presentation.activities.main.Ready
-import com.mityushovn.miningquiz.presentation.activities.main.SearchState
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
 
-private const val TEXT_ENTERED_DEBOUNCE_MILLIS = 1500L
+private const val TEXT_ENTERED_DEBOUNCE_MILLIS = 600L
+private const val RETRIES_NUMBER = 1L
 
 /**
  * @author Nikita Mityushov
  * @since 1.0
  * ViewModel class for MainActivity, MainFragment and SearchListFragment to store state.
- * @property questions is observable LiveData<List<Question>> source for storing List of
+ * @property questions is observable StateFlow<List<Question>> source for storing List of
  * Question instances.
  * @see Question
  * @see MainActivity
  * @see MainFragment
  * @see SearchListFragment
  */
+@OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class MainActivityViewModel(
     private val questionsRepository: QuestionsRepositoryAPI
 ) : ViewModel() {
 
     private val _questions =
-        MutableLiveData<List<Question>>(emptyList()) // init with empty list is essential for data binding
-    val questions: LiveData<List<Question>>
+        MutableStateFlow<List<Question>>(emptyList()) // init with empty list is essential for data binding
+    val questions: StateFlow<List<Question>>
         get() = _questions
 
     /*
         state of loading
      */
-    private val _searchState = MutableLiveData<SearchState>(Ready)
-    val searchState: LiveData<SearchState>
+    private val _searchState = MutableStateFlow<SearchState>(Ready)
+    val searchState: StateFlow<SearchState>
         get() = _searchState
 
     /*
         for searching
      */
-    private val queryFlow = MutableStateFlow("")
-
+    var queryFlow = MutableStateFlow("")
+        private set
 
     init {
-        Timber.d("Init block")
-        viewModelScope.launch {
-            queryFlow
-                .sample(TEXT_ENTERED_DEBOUNCE_MILLIS)
-                .onEach {
-                    _searchState.value = Loading
-                }
-                .mapLatest(::sendSearchRequest)
-                .collect {
-                    _searchState.value = Ready
-                }
-        }
+        collectQueryFlow()
     }
 
     fun handleInput(input: String) {
@@ -72,19 +59,29 @@ class MainActivityViewModel(
     /*
         private methods
      */
-    private suspend fun sendSearchRequest(input: String) {
-        Timber.d("Search input is: $input")
-        if (input.isNotEmpty()) {
-            questionsRepository.getQuestionsMatchesSearchInput(input).collect {
-                // debug
-                it.forEach { q ->
-                    Timber.d(q.content)
+    private suspend fun sendSearchRequest(input: String): Flow<List<Question>> =
+        questionsRepository.getQuestionsMatchesSearchInput(input)
+
+    private fun collectQueryFlow() {
+        viewModelScope.launch {
+            queryFlow
+                .debounce(TEXT_ENTERED_DEBOUNCE_MILLIS)
+                .filter { it.isNotBlank() }
+                .distinctUntilChanged()
+                .onEach { _searchState.value = Loading }
+                .flatMapLatest(::sendSearchRequest)
+                .retry(RETRIES_NUMBER)
+                .catch {
+                    _searchState.value = Error(it)
+                    _questions.value = emptyList()
+                    queryFlow = MutableStateFlow("")
+                    collectQueryFlow()
                 }
-                // end debug
-                _questions.value = it
-            }
+                .collect {
+                    _questions.value = it
+                    _searchState.value = Ready
+                }
         }
-        Timber.d("Input is empty")
     }
 
 }

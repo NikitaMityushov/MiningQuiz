@@ -1,14 +1,17 @@
 package com.mityushovn.miningquiz.main.presentation.quizList.topicslistfragment
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mityushovn.miningquiz.common.domain.models.Topic
 import com.mityushovn.miningquiz.common.domain.repositories.TopicsRepositoryAPI
-import kotlinx.coroutines.flow.collect
+import com.mityushovn.miningquiz.common.utils.*
+import com.mityushovn.miningquiz.main.presentation.activity.Loading
+import com.mityushovn.miningquiz.main.presentation.activity.Ready
+import com.mityushovn.miningquiz.main.presentation.activity.SearchState
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
+
+private const val RETRIES_NUMBER = 1L
 
 /**
  * @author Nikita Mityushov
@@ -22,12 +25,25 @@ class TopicsListViewModel(
     private val topicsRepository: TopicsRepositoryAPI
 ) : ViewModel() {
 
-    private val _topics = MutableLiveData<List<Topic>>(emptyList())
-    val topics: LiveData<List<Topic>>
+    private val _topics = MutableStateFlow<List<Topic>>(emptyList())
+    val topics: StateFlow<List<Topic>>
         get() = _topics
 
+    /*
+        state of loading
+    */
+    private val _loadingState = MutableStateFlow<SearchState>(Ready)
+    val loadingState: StateFlow<SearchState>
+        get() = _loadingState
+
+    /*
+        error event
+     */
+    private val _showLoadingTopicsErrorMessage: MutableLiveEvent<String> =
+        MutableStateFlow(Event(""))
+    val showLoadingTopicsErrorMessage: LiveEvent<String> = _showLoadingTopicsErrorMessage.share()
+
     init {
-        Timber.d("Init block")
         updateTopicsList()
     }
 
@@ -36,10 +52,19 @@ class TopicsListViewModel(
      * and after emitting response updates exam LiveData property.
      * @see TopicsRepositoryAPI
      */
-    private fun updateTopicsList() {
+    fun updateTopicsList() {
         viewModelScope.launch {
-            topicsRepository.getAllTopics().collect {
+            customRetryFlow(RETRIES_NUMBER) {
+                topicsRepository.getAllTopics()
+            }.catch {
+                _showLoadingTopicsErrorMessage.value = Event(it.message ?: "")
+                _loadingState.value = Ready
+                _topics.value = emptyList()
+            }.onStart {
+                _loadingState.value = Loading
+            }.collect {
                 _topics.value = it
+                _loadingState.value = Ready
             }
         }
     }

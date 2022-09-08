@@ -1,14 +1,20 @@
 package com.mityushovn.miningquiz.main.presentation.quizList.examsfragment
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mityushovn.miningquiz.common.domain.models.Exam
 import com.mityushovn.miningquiz.common.domain.repositories.ExamsRepositoryAPI
-import kotlinx.coroutines.flow.collect
+import com.mityushovn.miningquiz.common.utils.*
+import com.mityushovn.miningquiz.main.presentation.activity.Loading
+import com.mityushovn.miningquiz.main.presentation.activity.Ready
+import com.mityushovn.miningquiz.main.presentation.activity.SearchState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
-import timber.log.Timber
+
+private const val RETRIES_NUMBER = 1L
 
 /**
  * @author Nikita Mityushov
@@ -22,12 +28,25 @@ class ExamsViewModel(
     private val examsRepository: ExamsRepositoryAPI
 ) : ViewModel() {
 
-    private val _exams = MutableLiveData<List<Exam>>(emptyList())
-    val exams: LiveData<List<Exam>>
+    private val _exams = MutableStateFlow(emptyList<Exam>())
+    val exams: StateFlow<List<Exam>>
         get() = _exams
 
+    /*
+    state of loading
+    */
+    private val _loadingState = MutableStateFlow<SearchState>(Ready)
+    val loadingState: StateFlow<SearchState>
+        get() = _loadingState
+
+    /*
+        error event
+     */
+    private val _showLoadingExamsErrorMessage: MutableLiveEvent<String> =
+        MutableStateFlow(Event(""))
+    val showLoadingExamsErrorMessage: LiveEvent<String> = _showLoadingExamsErrorMessage.share()
+
     init {
-        Timber.d("Init block")
         updateExamsList()
     }
 
@@ -36,11 +55,22 @@ class ExamsViewModel(
      * and after emitting response updates exam LiveData property.
      * @see ExamsRepositoryAPI
      */
-    private fun updateExamsList() {
+    fun updateExamsList() {
         viewModelScope.launch {
-            examsRepository.getAllExams().collect {
-                _exams.value = it
-            }
+            customRetryFlow(RETRIES_NUMBER) { examsRepository.getAllExams() }
+                .catch {
+                    _showLoadingExamsErrorMessage.value = Event(it.message ?: "")
+                    _loadingState.value = Ready
+                    _exams.value = emptyList()
+                }
+                .onStart {
+                    _loadingState.value = Loading
+                }
+                .collect {
+                    _exams.value = it
+                    _loadingState.value = Ready
+                }
         }
     }
+
 }

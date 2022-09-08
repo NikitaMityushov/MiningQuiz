@@ -14,7 +14,6 @@ import com.mityushovn.miningquiz.common.utils.hideKeyboard
 
 class QuizListFragment : Fragment() {
     private lateinit var binding: FragmentQuizListBinding
-    private lateinit var viewModel: QuizListViewModel
     private lateinit var pager: ViewPager2
     private lateinit var tabLayout: TabLayout
 

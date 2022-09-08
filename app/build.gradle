@@ -49,17 +49,21 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:$legacy_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
 
     // 2) Logging
     implementation "com.jakewharton.timber:timber:$timber_version"
 
     // 3) Test
     testImplementation "junit:junit:$junit_version"
+    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_version"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
     androidTestImplementation "androidx.test.ext:junit:$junit_ext_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 
     // 4) Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version"
 
     // 5) Navigation
     // Kotlin

@@ -37,7 +37,7 @@ class QuestionViewModel(
      * and after emitting response updates question LiveData property.
      * @see QuestionsRepositoryAPI
      */
-    private fun updateQuestion() {
+    fun updateQuestion() {
         viewModelScope.launch {
             questionsRepository.getQuestionById(questionId)
                 .collect {

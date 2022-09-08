@@ -6,12 +6,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.mityushovn.miningquiz.common.MiningQuizApplication
 import com.mityushovn.miningquiz.R
+import com.mityushovn.miningquiz.common.utils.collectEventOnLifecycle
 import com.mityushovn.miningquiz.databinding.StatisticsFragmentBinding
 import com.mityushovn.miningquiz.common.utils.hideKeyboard
 import timber.log.Timber
@@ -65,6 +67,10 @@ class StatisticsFragment : Fragment() {
             Timber.d("statFrResetStatisticsBtn onClickListener")
             showDeleteStatDialog()
         }
+
+        statisticsViewModel.eventDeletedStats.collectEventOnLifecycle(viewLifecycleOwner) {
+            showIfDeletedStatToast(it)
+        }
     }
 
     /**
@@ -94,6 +100,23 @@ class StatisticsFragment : Fragment() {
             .create()
 
         dialog.show()
+    }
+
+    private fun showIfDeletedStatToast(it: Boolean) {
+        if (it) {
+            Toast.makeText(
+                requireActivity().application,
+                requireActivity().application.resources.getString(R.string.stat_deleted_successfuly),
+                Toast.LENGTH_SHORT
+            ).show()
+            statisticsViewModel.updateStats() // if deleted successfully, you need to refresh prepared strings
+        } else {
+            Toast.makeText(
+                requireActivity().application,
+                requireActivity().application.resources.getString(R.string.stat_deleted_failed),
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 
 }

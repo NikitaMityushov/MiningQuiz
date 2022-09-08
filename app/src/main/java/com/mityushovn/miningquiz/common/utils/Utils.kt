@@ -7,6 +7,10 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.widget.SearchView
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.retry
 import java.util.Date
 import java.util.concurrent.TimeUnit
 
@@ -106,3 +110,12 @@ fun View.toVisible() {
 fun View.disable() {
     isClickable = false
 }
+
+/**
+ * Retries to start the given [block] up to [numberOfRetries] times.
+ * @param numberOfRetries number of retries
+ * @throws IllegalArgumentException if [numberOfRetries] is negative
+ */
+fun <T> customRetryFlow(numberOfRetries: Long, block: suspend () -> Flow<T>): Flow<T> = flow {
+    emitAll(block())
+}.retry(numberOfRetries)
