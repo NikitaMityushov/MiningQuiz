@@ -20,6 +20,8 @@ buildscript {
         gradle_plugin_version = "1.6.10"
         gradle_build_tools_version = "7.0.4"
         dagger_version = "2.42"
+        fragment_version = "1.4.0"
+        androidx_test_version = "1.4.0"
     }
     repositories {
         google()

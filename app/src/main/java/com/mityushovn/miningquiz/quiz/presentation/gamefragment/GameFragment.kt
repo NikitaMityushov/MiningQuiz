@@ -18,9 +18,7 @@ import com.mityushovn.miningquiz.quiz.presentation.quiz.GameEngine
 import com.mityushovn.miningquiz.quiz.presentation.quiz.GameEngineFactory
 import com.mityushovn.miningquiz.databinding.FragmentGameBinding
 import com.mityushovn.miningquiz.common.navigation.QuizNavigator
-import com.mityushovn.miningquiz.common.utils.disable
-import com.mityushovn.miningquiz.common.utils.toGone
-import com.mityushovn.miningquiz.common.utils.toVisible
+import com.mityushovn.miningquiz.common.utils.*
 import com.mityushovn.miningquiz.quiz.domain.models.QuestionUIModel
 import timber.log.Timber
 import javax.inject.Inject
@@ -69,12 +67,13 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // if the game is not started
 
-        gameEngine.loading.observe(viewLifecycleOwner) { loadingStatus ->
+        gameEngine.loading.collectStateFlowOnLifecycle(viewLifecycleOwner) { loadingStatus ->
             if (loadingStatus) {
                 Timber.d("Loading the questions")
             } else {
                 Timber.d("Ready to start")
                 if (savedInstanceState == null) {
+
                     if (!gameEngine.nextQuestion()) {
                         /*
                             Итератор должен быть с вопросами. Если их нет, значит список пуст, а такой вариант не предусмотрен.
@@ -117,7 +116,6 @@ class GameFragment : Fragment() {
                         gameEngine.postponeQuestion()
                     }
                 } // end of observing
-
             }
         }
     }

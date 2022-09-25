@@ -8,8 +8,7 @@ import com.mityushovn.miningquiz.common.data.local.database.AppSQLiteContract.DA
 import java.io.File
 import java.io.FileOutputStream
 
-private const val DATABASE_VERSION = 1
-private const val ASSETS_PATH = "/home/mityushovn/AndroidStudioProjects/MiningQuiz/app/src/main/assets"
+private const val DATABASE_VERSION = 2
 
 class AppSQLiteHelper(private val applicationContext: Context) : SQLiteOpenHelper(
     applicationContext,

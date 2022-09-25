@@ -7,10 +7,12 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.widget.SearchView
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.retry
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import java.util.Date
 import java.util.concurrent.TimeUnit
 
@@ -119,3 +121,19 @@ fun View.disable() {
 fun <T> customRetryFlow(numberOfRetries: Long, block: suspend () -> Flow<T>): Flow<T> = flow {
     emitAll(block())
 }.retry(numberOfRetries)
+
+
+fun <T : Any> StateFlow<T>.collectStateFlowOnLifecycle(
+    lifecycleOwner: LifecycleOwner,
+    collector: EventCollector<T>
+) {
+    with(lifecycleOwner) {
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                collect { data ->
+                    collector(data)
+                }
+            }
+        }
+    }
+}

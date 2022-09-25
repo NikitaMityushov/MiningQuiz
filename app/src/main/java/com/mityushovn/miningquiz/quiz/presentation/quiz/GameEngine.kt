@@ -1,7 +1,6 @@
 package com.mityushovn.miningquiz.quiz.presentation.quiz
 
 import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,14 +13,23 @@ import com.mityushovn.miningquiz.common.domain.models.AttemptExam
 import com.mityushovn.miningquiz.common.domain.models.AttemptTopic
 import com.mityushovn.miningquiz.common.domain.repositories.AttemptsRepositoryAPI
 import com.mityushovn.miningquiz.common.domain.repositories.QuestionsRepositoryAPI
+import com.mityushovn.miningquiz.common.utils.Event
+import com.mityushovn.miningquiz.common.utils.LiveEvent
+import com.mityushovn.miningquiz.common.utils.postEvent
+import com.mityushovn.miningquiz.common.utils.share
 import com.mityushovn.miningquiz.quiz.domain.models.QuestionUIModel
 import com.mityushovn.miningquiz.quiz.domain.models.toQuestionUIModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import java.util.*
+import java.util.concurrent.ConcurrentLinkedDeque
 
 private const val ILLEGAL_GAME_STATE = "Game mode must be chosen! Something with logic."
 
@@ -37,6 +45,7 @@ private const val ILLEGAL_GAME_STATE = "Game mode must be chosen! Something with
 class GameEngine(
     private val questionsRepository: QuestionsRepositoryAPI,
     private val attemptsRepository: AttemptsRepositoryAPI,
+    private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
     app: Application
 ) : AndroidViewModel(app) {
     /**
@@ -86,8 +95,8 @@ class GameEngine(
      * @property loading is an observable property of loading questions from database.
      * Since loading of questions happens before onViewCreated, initial value of [_loading] is true.
      */
-    private val _loading = MutableLiveData<Boolean>(true)
-    val loading: LiveData<Boolean>
+    private val _loading = MutableStateFlow<Boolean>(true)
+    val loading: StateFlow<Boolean>
         get() = _loading
 
     // observable next question
@@ -100,61 +109,59 @@ class GameEngine(
 
     // prepared strings:
     // for PreviewFragment
-    private val _stringForPreviewGameTextView = MutableLiveData("")
-    val stringForPreviewGameTextView: LiveData<String>
+    private val _stringForPreviewGameTextView = MutableStateFlow("")
+    val stringForPreviewGameTextView: StateFlow<String>
         get() = _stringForPreviewGameTextView
 
     // for GameFragment
-    private val _stringForGameFrQuestionContent = MutableLiveData("")
-    val stringForGameFrQuestionContent: LiveData<String>
+    private val _stringForGameFrQuestionContent = MutableStateFlow("")
+    val stringForGameFrQuestionContent: StateFlow<String>
         get() = _stringForGameFrQuestionContent
 
-    private val _stringForGameFrQuestionTopic = MutableLiveData("")
-    val stringForGameFrQuestionTopic: LiveData<String>
+    private val _stringForGameFrQuestionTopic = MutableStateFlow("")
+    val stringForGameFrQuestionTopic: StateFlow<String>
         get() = _stringForGameFrQuestionTopic
 
     // for CongratsFragment
-    private val _stringForCongratsFrTV = MutableLiveData("")
-    val stringForCongratsFrTV: LiveData<String>
+    private val _stringForCongratsFrTV = MutableStateFlow("")
+    val stringForCongratsFrTV: StateFlow<String>
         get() = _stringForCongratsFrTV
 
     // for FailedFragment
-    private val _stringForFailedFrTV = MutableLiveData("")
-    val stringForFailedFrTV: LiveData<String>
+    private val _stringForFailedFrTV = MutableStateFlow("")
+    val stringForFailedFrTV: StateFlow<String>
         get() = _stringForFailedFrTV
 
     // A deque of questions
-    private var _questions: Deque<QuestionUIModel> = LinkedList()
+    private var _questions: Deque<QuestionUIModel> = ConcurrentLinkedDeque()
+
+    private val _showIsAttemptAddedToast = MutableStateFlow<Event<Boolean>>(Event())
+    val showIsAttemptAddedToast: LiveEvent<Boolean> = _showIsAttemptAddedToast.share()
 
     /**
      *
      */
     private fun sendSearchRequestExam(examId: Int) {
-        Timber.d("Id of exam or topic is: $examId")
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(backgroundDispatcher) {
             questionsRepository
                 .getRandomQuestionsFromExamIdAndNumberOfQuestions(examId)
                 .onEach {
-                    _loading.postValue(true)
-                    Timber.d("Current thread onEach ${Thread.currentThread().name}")
                     clearGameInternalCounters() // clear all counters, set 0 to start new game
                     _numberOfQuestions = it.size
-                    _stringForPreviewGameTextView.postValue(
+                    _stringForPreviewGameTextView.value =
                         String.format(
                             getApplication<MiningQuizApplication>().resources.getString(
                                 R.string.question_contains_n_questions
                             ), it.size, it.size * 80 / 100
-                        )
-                    ) // "This exam contains %d questions. You need to answer at least %d questions to pass exam. Good luck!
+                        ) // "This exam contains %d questions. You need to answer at least %d questions to pass exam. Good luck!
+                }.onStart {
+                    _loading.value = true
                 }
-//                .flowOn(Dispatchers.Default) // computation threads
                 .collect {
-                    Timber.d("Current thread in collect ${Thread.currentThread().name}")
-
                     _questions = it.mapIndexed { index, question ->
                         question.toQuestionUIModel(index + 1)
-                    }.toCollection(LinkedList())
-                    _loading.postValue(false)
+                    }.toCollection(ConcurrentLinkedDeque())
+                    _loading.value = false
                 }
         }
     }
@@ -163,31 +170,27 @@ class GameEngine(
      *
      */
     private fun sendSearchRequestTopic(topicId: Int) {
-        Timber.d("Topic game mode is chosen!")
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(backgroundDispatcher) {
             questionsRepository
                 .getAllQuestionsFromTopic(topicId)
                 .onEach {
-
-                    _loading.postValue(true)
-
                     clearGameInternalCounters() // clear all counters, set 0 to start new game
                     _numberOfQuestions = it.size
-                    _stringForPreviewGameTextView.postValue(
+                    _stringForPreviewGameTextView.value =
                         String.format(
                             getApplication<MiningQuizApplication>().resources.getString(
                                 R.string.question_contains_n_questions
                             ), it.size, it.size * 80 / 100
-                        )
-                    ) // "This exam contains %d questions. You need to answer at least %d questions to pass exam. Good luck!
+                        ) // "This exam contains %d questions. You need to answer at least %d questions to pass exam. Good luck!
+                }.onStart {
+                    _loading.value = true
                 }
-//                .flowOn(Dispatchers.Default) // computation threads
                 .collect {
                     _questions = it.mapIndexed { index, question ->
                         question.toQuestionUIModel(index + 1)
-                    }.toCollection(LinkedList())
+                    }.toCollection(ConcurrentLinkedDeque())
 
-                    _loading.postValue(false)
+                    _loading.value = false
 
                 }
         }
@@ -229,20 +232,21 @@ class GameEngine(
     /**
      *
      */
-    fun nextQuestion(): Boolean {
+    fun nextQuestion(): Boolean = runBlocking {
         if (_questions.isNullOrEmpty()) {
-            return false
+            return@runBlocking false
         }
-        viewModelScope.launch(Dispatchers.Default) {
+
+        viewModelScope.launch(backgroundDispatcher) {
             // 1) get the question
             val question = _questions.poll()
             _currentQuestion = question
-            // 2) format GameFragment strings
-            prepareGameFragmentStrings(question)
+            // 2) format GameFragment strings {
+            prepareGameFragmentStrings(question!!)
             // 3) emit question
             _nextQuestion.postValue(question)
-        }
-        return true
+        }.join()
+        return@runBlocking true
     }
 
     /**
@@ -259,19 +263,17 @@ class GameEngine(
      *
      */
     fun endGame(): Boolean {
-        Timber.d("End game, statistics: right answers: $_rightAns, total questions: $_numberOfQuestions")
         val result = (_rightAns.toFloat() / _numberOfQuestions.toFloat()) >= 0.799
 
         if (result) {
             with(viewModelScope) {
-                launch(Dispatchers.Default) {
-                    _stringForCongratsFrTV.postValue(
+                launch(backgroundDispatcher) {
+                    _stringForCongratsFrTV.value =
                         String.format(
                             getApplication<MiningQuizApplication>().resources.getString(R.string.congrats_fr_tv_text),
                             _rightAns,
                             _numberOfQuestions
-                        )
-                    ) // Congratulations, you passed the exam with answered %d from %d questions
+                        ) // Congratulations, you passed the exam with answered %d from %d questions
                 }
                 // send attempt to the storage
                 launch {
@@ -280,14 +282,13 @@ class GameEngine(
             }
         } else {
             with(viewModelScope) {
-                launch(Dispatchers.Default) {
-                    _stringForFailedFrTV.postValue(
+                launch(backgroundDispatcher) {
+                    _stringForFailedFrTV.value =
                         String.format(
                             getApplication<MiningQuizApplication>().resources.getString(R.string.failed_fr_tv_text),
                             _rightAns,
                             _numberOfQuestions
-                        )
-                    ) // Sorry, but you didn\'t\'t pass the exam. You answered only %d from %d questions.
+                        ) // Sorry, but you didn't pass the exam. You answered only %d from %d questions.
                 }
                 // send attempt to the storage
                 launch {
@@ -304,28 +305,27 @@ class GameEngine(
      */
     private fun prepareGameFragmentStrings(question: QuestionUIModel) {
         // 3) format strings
-        _stringForGameFrQuestionContent.postValue(
+        _stringForGameFrQuestionContent.value =
             String.format(
                 getApplication<MiningQuizApplication>().resources.getString(
                     R.string.question_from_content
                 ), question.index, _numberOfQuestions, question.content
-            )
-        ) //Question %d from %d:\n%s
 
-        _stringForGameFrQuestionTopic.postValue(
+            ) //Question %d from %d:\n%s
+
+        _stringForGameFrQuestionTopic.value =
             String.format(
                 getApplication<MiningQuizApplication>().resources.getString(
                     R.string.topic_content
                 ), question.nameTopic
-            )
-        ) // Topic:\n%s
+            ) // Topic:\n%s
     }
 
     /**
      *
      */
     fun rightAnswerGiven() {
-        viewModelScope.launch(Dispatchers.Default) {
+        viewModelScope.launch(backgroundDispatcher) {
             ++_rightAns
         }
     }
@@ -351,7 +351,7 @@ class GameEngine(
                         )
                     )
                         .collect {
-                            showIsAttemptAddedToast(it)
+                            _showIsAttemptAddedToast.postEvent(it)
                         }
                 }
                 GameMode.TOPIC -> {
@@ -361,7 +361,7 @@ class GameEngine(
                             success = false
                         )
                     ).collect {
-                        showIsAttemptAddedToast(it)
+                        _showIsAttemptAddedToast.postEvent(it)
                     }
                 }
                 else -> {
@@ -385,7 +385,7 @@ class GameEngine(
                         )
                     )
                         .collect {
-                            showIsAttemptAddedToast(it)
+                            _showIsAttemptAddedToast.postEvent(it)
                         }
                 }
                 GameMode.TOPIC -> {
@@ -395,7 +395,7 @@ class GameEngine(
                             success = true
                         )
                     ).collect {
-                        showIsAttemptAddedToast(it)
+                        _showIsAttemptAddedToast.postEvent(it)
                     }
                 }
                 else -> {
@@ -407,22 +407,4 @@ class GameEngine(
 
     }
 
-    /**
-     * Creates Toast depends on boolean argument of successfully added attempt.
-     */
-    private fun showIsAttemptAddedToast(it: Boolean) {
-        if (it) {
-            Toast.makeText(
-                getApplication<MiningQuizApplication>(),
-                getApplication<MiningQuizApplication>().resources.getString(R.string.attempt_succ_added),
-                Toast.LENGTH_LONG
-            ).show() // Attempt successfully added
-        } else {
-            Toast.makeText(
-                getApplication<MiningQuizApplication>(),
-                getApplication<MiningQuizApplication>().resources.getString(R.string.attempt_failed_saved),
-                Toast.LENGTH_LONG
-            ).show() // Attempt would not be saved
-        }
-    }
 }

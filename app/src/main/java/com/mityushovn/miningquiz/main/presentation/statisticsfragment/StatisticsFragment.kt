@@ -105,14 +105,14 @@ class StatisticsFragment : Fragment() {
     private fun showIfDeletedStatToast(it: Boolean) {
         if (it) {
             Toast.makeText(
-                requireActivity().application,
+                requireContext(),
                 requireActivity().application.resources.getString(R.string.stat_deleted_successfuly),
                 Toast.LENGTH_SHORT
             ).show()
             statisticsViewModel.updateStats() // if deleted successfully, you need to refresh prepared strings
         } else {
             Toast.makeText(
-                requireActivity().application,
+                requireContext(),
                 requireActivity().application.resources.getString(R.string.stat_deleted_failed),
                 Toast.LENGTH_SHORT
             ).show()

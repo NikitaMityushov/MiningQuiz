@@ -3,9 +3,11 @@ package com.mityushovn.miningquiz.quiz.presentation.quiz
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.widget.Toast
 import androidx.activity.viewModels
 import com.mityushovn.miningquiz.common.MiningQuizApplication
 import com.mityushovn.miningquiz.R
+import com.mityushovn.miningquiz.common.utils.collectEventOnLifecycle
 import javax.inject.Inject
 
 private const val EXAM_OR_TOPIC_ID = "exam_or_topic_id"
@@ -35,6 +37,10 @@ class QuizActivity : AppCompatActivity() {
                 ) as GameEngine.GameMode
             )
         }
+
+        gameEngine.showIsAttemptAddedToast.collectEventOnLifecycle(this) {
+            showIsAttemptAddedToast(it)
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
@@ -44,5 +50,24 @@ class QuizActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         // disable
+    }
+
+    /**
+     * Creates Toast depends on boolean argument of successfully added attempt.
+     */
+    private fun showIsAttemptAddedToast(it: Boolean) {
+        if (it) {
+            Toast.makeText(
+                this,
+                application.resources.getString(R.string.attempt_succ_added),
+                Toast.LENGTH_SHORT
+            ).show() // Attempt successfully added
+        } else {
+            Toast.makeText(
+                this,
+                application.resources.getString(R.string.attempt_failed_saved),
+                Toast.LENGTH_SHORT
+            ).show() // Attempt would not be saved
+        }
     }
 }
