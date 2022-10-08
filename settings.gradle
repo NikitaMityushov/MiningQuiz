@@ -8,3 +8,9 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MiningQuiz"
 include ':app'
+include ':module-injector'
+include ':core-database'
+include ':home-feature'
+include ':quizlist-feature'
+include ':statistics-feature'
+include ':search-feature'
