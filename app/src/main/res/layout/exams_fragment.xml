@@ -11,7 +11,7 @@
 
         <variable
             name="adapter"
-            type="com.mityushovn.miningquiz.presentation.screens.recyclerview.adapters.ExamsFrListAdapter" />
+            type="com.mityushovn.miningquiz.main.presentation.quizList.examsfragment.recyclerview.ExamsFrListAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

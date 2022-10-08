@@ -3,7 +3,7 @@ package com.mityushovn.miningquiz.main.presentation.quizList.examsfragment
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mityushovn.miningquiz.common.domain.models.Exam
-import com.mityushovn.miningquiz.presentation.screens.recyclerview.adapters.ExamsFrListAdapter
+import com.mityushovn.miningquiz.main.presentation.quizList.examsfragment.recyclerview.ExamsFrListAdapter
 
 /**
  * Binding adapters for ExamsFragment.
