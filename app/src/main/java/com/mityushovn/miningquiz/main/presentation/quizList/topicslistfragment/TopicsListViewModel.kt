@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mityushovn.miningquiz.common.domain.models.Topic
 import com.mityushovn.miningquiz.common.domain.repositories.TopicsRepositoryAPI
-import com.mityushovn.miningquiz.common.utils.*
 import com.mityushovn.miningquiz.main.presentation.activity.Loading
 import com.mityushovn.miningquiz.main.presentation.activity.Ready
 import com.mityushovn.miningquiz.main.presentation.activity.SearchState
+import com.mityushovn.miningquiz.utils.*
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 

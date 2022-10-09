@@ -1,4 +1,4 @@
-package com.mityushovn.miningquiz.common.utils
+package com.mityushovn.miningquiz.utils
 
 import android.content.Context
 import android.text.Editable

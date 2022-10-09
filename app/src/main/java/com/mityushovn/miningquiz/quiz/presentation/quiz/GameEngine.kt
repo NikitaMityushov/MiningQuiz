@@ -13,12 +13,12 @@ import com.mityushovn.miningquiz.common.domain.models.AttemptExam
 import com.mityushovn.miningquiz.common.domain.models.AttemptTopic
 import com.mityushovn.miningquiz.common.domain.repositories.AttemptsRepositoryAPI
 import com.mityushovn.miningquiz.common.domain.repositories.QuestionsRepositoryAPI
-import com.mityushovn.miningquiz.common.utils.Event
-import com.mityushovn.miningquiz.common.utils.LiveEvent
-import com.mityushovn.miningquiz.common.utils.postEvent
-import com.mityushovn.miningquiz.common.utils.share
 import com.mityushovn.miningquiz.quiz.domain.models.QuestionUIModel
 import com.mityushovn.miningquiz.quiz.domain.models.toQuestionUIModel
+import com.mityushovn.miningquiz.utils.Event
+import com.mityushovn.miningquiz.utils.LiveEvent
+import com.mityushovn.miningquiz.utils.postEvent
+import com.mityushovn.miningquiz.utils.share
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

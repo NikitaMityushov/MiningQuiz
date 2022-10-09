@@ -88,4 +88,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
+    // 7) implementing the feature modules
+    implementation project(':home-feature')
+
 }

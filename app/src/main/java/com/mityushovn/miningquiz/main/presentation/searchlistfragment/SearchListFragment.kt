@@ -11,9 +11,9 @@ import com.mityushovn.miningquiz.main.presentation.activity.MainActivityVMFactor
 import com.mityushovn.miningquiz.databinding.SearchListFragmentBinding
 import com.mityushovn.miningquiz.common.navigation.MainNavigator
 import com.mityushovn.miningquiz.presentation.screens.recyclerview.adapters.QuestionsSearchFrAdapter
-import com.mityushovn.miningquiz.common.utils.hideKeyboard
 import com.mityushovn.miningquiz.main.presentation.activity.MainActivityViewModel
 import com.mityushovn.miningquiz.main.presentation.mainfragment.MainFragment
+import com.mityushovn.miningquiz.utils.hideKeyboard
 import javax.inject.Inject
 
 /**

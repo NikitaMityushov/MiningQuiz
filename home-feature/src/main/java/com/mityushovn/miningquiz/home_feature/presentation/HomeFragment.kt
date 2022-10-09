@@ -1,12 +1,12 @@
-package com.mityushovn.miningquiz.main.presentation.homefragment
+package com.mityushovn.miningquiz.home_feature.presentation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.mityushovn.miningquiz.R
-import com.mityushovn.miningquiz.common.utils.hideKeyboard
+import com.mityushovn.home_feature.R
+import com.mityushovn.miningquiz.utils.hideKeyboard
 
 class HomeFragment : Fragment() {
     override fun onCreateView(
@@ -26,5 +26,4 @@ class HomeFragment : Fragment() {
             v.hideKeyboard()
         }
     }
-
 }

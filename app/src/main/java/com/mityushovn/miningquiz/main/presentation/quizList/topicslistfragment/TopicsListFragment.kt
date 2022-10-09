@@ -13,7 +13,7 @@ import com.mityushovn.miningquiz.databinding.FragmentTopicsListBinding
 import com.mityushovn.miningquiz.main.presentation.activity.MainActivity
 import com.mityushovn.miningquiz.common.navigation.MainNavigator
 import com.mityushovn.miningquiz.presentation.screens.recyclerview.adapters.TopicsListFrAdapter
-import com.mityushovn.miningquiz.common.utils.hideKeyboard
+import com.mityushovn.miningquiz.utils.hideKeyboard
 import javax.inject.Inject
 
 /**

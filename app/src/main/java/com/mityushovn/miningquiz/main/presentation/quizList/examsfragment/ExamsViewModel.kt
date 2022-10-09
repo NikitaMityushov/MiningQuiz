@@ -4,10 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mityushovn.miningquiz.common.domain.models.Exam
 import com.mityushovn.miningquiz.common.domain.repositories.ExamsRepositoryAPI
-import com.mityushovn.miningquiz.common.utils.*
 import com.mityushovn.miningquiz.main.presentation.activity.Loading
 import com.mityushovn.miningquiz.main.presentation.activity.Ready
 import com.mityushovn.miningquiz.main.presentation.activity.SearchState
+import com.mityushovn.miningquiz.utils.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch

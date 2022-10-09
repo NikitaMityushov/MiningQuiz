@@ -18,8 +18,11 @@ import com.mityushovn.miningquiz.quiz.presentation.quiz.GameEngine
 import com.mityushovn.miningquiz.quiz.presentation.quiz.GameEngineFactory
 import com.mityushovn.miningquiz.databinding.FragmentGameBinding
 import com.mityushovn.miningquiz.common.navigation.QuizNavigator
-import com.mityushovn.miningquiz.common.utils.*
 import com.mityushovn.miningquiz.quiz.domain.models.QuestionUIModel
+import com.mityushovn.miningquiz.utils.collectStateFlowOnLifecycle
+import com.mityushovn.miningquiz.utils.disable
+import com.mityushovn.miningquiz.utils.toGone
+import com.mityushovn.miningquiz.utils.toVisible
 import timber.log.Timber
 import javax.inject.Inject
 

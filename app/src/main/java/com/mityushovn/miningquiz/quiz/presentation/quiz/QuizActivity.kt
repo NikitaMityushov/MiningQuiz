@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import com.mityushovn.miningquiz.common.MiningQuizApplication
 import com.mityushovn.miningquiz.R
-import com.mityushovn.miningquiz.common.utils.collectEventOnLifecycle
+import com.mityushovn.miningquiz.utils.collectEventOnLifecycle
 import javax.inject.Inject
 
 private const val EXAM_OR_TOPIC_ID = "exam_or_topic_id"

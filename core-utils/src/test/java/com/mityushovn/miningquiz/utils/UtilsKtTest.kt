@@ -1,7 +1,6 @@
-package com.mityushovn.miningquiz.common.utils
+package com.mityushovn.miningquiz.utils
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch

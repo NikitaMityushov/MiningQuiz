@@ -1,4 +1,4 @@
-package com.mityushovn.miningquiz.common.utils
+package com.mityushovn.miningquiz.utils
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner

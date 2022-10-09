@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.mityushovn.miningquiz.common.MiningQuizApplication
 import com.mityushovn.miningquiz.databinding.QuestionFragmentBinding
-import com.mityushovn.miningquiz.common.utils.hideKeyboard
+import com.mityushovn.miningquiz.utils.hideKeyboard
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -41,7 +41,9 @@ class QuestionFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (requireActivity().application as MiningQuizApplication).appComponent.injectInQuestionFragment(this)
+        (requireActivity().application as MiningQuizApplication).appComponent.injectInQuestionFragment(
+            this
+        )
         binding = QuestionFragmentBinding.inflate(inflater, container, false)
 
         /*

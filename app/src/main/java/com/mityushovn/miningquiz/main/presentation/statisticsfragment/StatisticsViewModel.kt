@@ -7,7 +7,7 @@ import com.mityushovn.miningquiz.common.MiningQuizApplication
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.common.domain.models.statisticsEntities.AbstractStatistics
 import com.mityushovn.miningquiz.common.domain.repositories.AttemptsRepositoryAPI
-import com.mityushovn.miningquiz.common.utils.*
+import com.mityushovn.miningquiz.utils.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

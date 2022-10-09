@@ -9,15 +9,18 @@
     <fragment
         android:id="@+id/searchListFragment2"
         android:name="com.mityushovn.miningquiz.main.presentation.searchlistfragment.SearchListFragment"
-        android:label="SearchListFragment" >
+        android:label="SearchListFragment">
         <action
             android:id="@+id/action_searchListFragment2_to_questionFragment"
             app:destination="@id/questionFragment" />
-    </fragment><action android:id="@+id/action_global_searchListFragment2" app:destination="@id/searchListFragment2"/>
+    </fragment>
+    <action
+        android:id="@+id/action_global_searchListFragment2"
+        app:destination="@id/searchListFragment2" />
     <fragment
         android:id="@+id/questionFragment"
         android:name="com.mityushovn.miningquiz.main.presentation.searchlistfragment.questionfragment.QuestionFragment"
-        android:label="QuestionFragment" >
+        android:label="QuestionFragment">
         <action
             android:id="@+id/action_questionFragment_to_searchListFragment2"
             app:destination="@id/searchListFragment2" />

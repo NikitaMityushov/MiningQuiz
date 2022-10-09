@@ -10,7 +10,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.databinding.FragmentQuizListBinding
-import com.mityushovn.miningquiz.common.utils.hideKeyboard
+import com.mityushovn.miningquiz.utils.hideKeyboard
 
 class QuizListFragment : Fragment() {
     private lateinit var binding: FragmentQuizListBinding

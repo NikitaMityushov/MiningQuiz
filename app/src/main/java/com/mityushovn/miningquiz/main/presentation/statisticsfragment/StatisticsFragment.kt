@@ -13,9 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.mityushovn.miningquiz.common.MiningQuizApplication
 import com.mityushovn.miningquiz.R
-import com.mityushovn.miningquiz.common.utils.collectEventOnLifecycle
 import com.mityushovn.miningquiz.databinding.StatisticsFragmentBinding
-import com.mityushovn.miningquiz.common.utils.hideKeyboard
+import com.mityushovn.miningquiz.utils.collectEventOnLifecycle
+import com.mityushovn.miningquiz.utils.hideKeyboard
 import timber.log.Timber
 import javax.inject.Inject
 

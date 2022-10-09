@@ -16,11 +16,11 @@ import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.main.presentation.activity.MainActivityVMFactory
 import com.mityushovn.miningquiz.databinding.MainFragmentBinding
 import com.mityushovn.miningquiz.common.navigation.MainNavigator
-import com.mityushovn.miningquiz.common.utils.onQueryTextChange
 import com.mityushovn.miningquiz.main.presentation.searchlistfragment.SearchListFragment
-import com.mityushovn.miningquiz.common.utils.toGone
-import com.mityushovn.miningquiz.common.utils.toVisible
 import com.mityushovn.miningquiz.main.presentation.activity.MainActivityViewModel
+import com.mityushovn.miningquiz.utils.onQueryTextChange
+import com.mityushovn.miningquiz.utils.toGone
+import com.mityushovn.miningquiz.utils.toVisible
 import timber.log.Timber
 import javax.inject.Inject
 
