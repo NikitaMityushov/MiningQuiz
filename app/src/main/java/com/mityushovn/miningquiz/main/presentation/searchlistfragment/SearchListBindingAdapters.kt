@@ -4,8 +4,8 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mityushovn.miningquiz.R
-import com.mityushovn.miningquiz.common.domain.models.Question
-import com.mityushovn.miningquiz.presentation.screens.recyclerview.adapters.QuestionsSearchFrAdapter
+import com.mityushovn.miningquiz.core_domain.domain.models.Question
+import com.mityushovn.miningquiz.main.presentation.searchlistfragment.recyclerview.QuestionsSearchFrAdapter
 import timber.log.Timber
 
 /**

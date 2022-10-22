@@ -11,7 +11,7 @@
 
         <variable
             name="adapter"
-            type="com.mityushovn.miningquiz.presentation.screens.recyclerview.adapters.QuestionsSearchFrAdapter" />
+            type="com.mityushovn.miningquiz.main.presentation.searchlistfragment.recyclerview.QuestionsSearchFrAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

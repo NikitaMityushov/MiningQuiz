@@ -1,11 +1,12 @@
 package com.mityushovn.miningquiz.main.presentation.quizList.topicslistfragment
 
-import com.mityushovn.miningquiz.common.domain.models.Topic
+import com.mityushovn.miningquiz.core_domain.domain.models.Topic
 import com.mityushovn.miningquiz.debug.MainDispatcherRule
-import com.mityushovn.miningquiz.common.domain.repositories.TopicsRepositoryAPI
+import com.mityushovn.miningquiz.core_domain.domain.repositories.TopicsRepositoryAPI
 import com.mityushovn.miningquiz.debug.CoroutineSubject
-import com.mityushovn.miningquiz.main.presentation.activity.Loading
-import com.mityushovn.miningquiz.main.presentation.activity.Ready
+import com.mityushovn.miningquiz.core_domain.domain.models.Loading
+import com.mityushovn.miningquiz.core_domain.domain.models.Ready
+import com.mityushovn.quizlist_feature.internal.presentation.topicslistfragment.TopicsListViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
@@ -43,7 +44,9 @@ class TopicsListViewModelTest {
 
     @Test
     fun `when view model is created, then initially topics list is empty`() {
-        viewModel = TopicsListViewModel(topicsRepositoryAPI)
+        viewModel = TopicsListViewModel(
+            topicsRepositoryAPI
+        )
         assertEquals(emptyList<Topic>(), viewModel.topics.value)
     }
 
@@ -53,7 +56,10 @@ class TopicsListViewModelTest {
         whenever(topicsRepositoryAPI.getAllTopics()).thenReturn(testFlow)
         // when
         launch {
-            viewModel = TopicsListViewModel(topicsRepositoryAPI)
+            viewModel =
+                TopicsListViewModel(
+                    topicsRepositoryAPI
+                )
         }.join()
         advanceUntilIdle()
         // then
@@ -69,7 +75,10 @@ class TopicsListViewModelTest {
                 .thenReturn(flow { emit(testTopicsList) })
             // when
             launch {
-                viewModel = TopicsListViewModel(topicsRepositoryAPI)
+                viewModel =
+                    TopicsListViewModel(
+                        topicsRepositoryAPI
+                    )
             }.join()
             advanceUntilIdle()
             // then
@@ -87,7 +96,10 @@ class TopicsListViewModelTest {
                 .thenReturn(flow { throw Exception(errorMessage) })
             // when
             launch {
-                viewModel = TopicsListViewModel(topicsRepositoryAPI)
+                viewModel =
+                    TopicsListViewModel(
+                        topicsRepositoryAPI
+                    )
             }.join()
             advanceUntilIdle()
             // then
@@ -104,7 +116,10 @@ class TopicsListViewModelTest {
             whenever(topicsRepositoryAPI.getAllTopics()).thenReturn(flow { emit(subject.get()) })
             // when
             launch {
-                viewModel = TopicsListViewModel(topicsRepositoryAPI)
+                viewModel =
+                    TopicsListViewModel(
+                        topicsRepositoryAPI
+                    )
             }.join()
             advanceUntilIdle()
             // then

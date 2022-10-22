@@ -1,4 +1,4 @@
-package com.mityushovn.miningquiz.presentation.screens.recyclerview.adapters
+package com.mityushovn.miningquiz.main.presentation.searchlistfragment.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.mityushovn.miningquiz.R
+import com.mityushovn.miningquiz.core_domain.domain.models.Question
 import com.mityushovn.miningquiz.databinding.QuestionItemBinding
-import com.mityushovn.miningquiz.common.domain.models.Question
 
 // TODO: 10.05.2022 Animations, ItemDecorations
 

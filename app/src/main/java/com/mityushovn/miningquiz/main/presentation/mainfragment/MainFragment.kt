@@ -11,8 +11,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.mityushovn.miningquiz.common.MiningQuizApplication
 import com.mityushovn.miningquiz.R
+import com.mityushovn.miningquiz.common.MiningQuizApplication
 import com.mityushovn.miningquiz.main.presentation.activity.MainActivityVMFactory
 import com.mityushovn.miningquiz.databinding.MainFragmentBinding
 import com.mityushovn.miningquiz.common.navigation.MainNavigator

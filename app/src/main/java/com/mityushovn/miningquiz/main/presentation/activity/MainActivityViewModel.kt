@@ -2,8 +2,12 @@ package com.mityushovn.miningquiz.main.presentation.activity
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.mityushovn.miningquiz.common.domain.models.Question
-import com.mityushovn.miningquiz.common.domain.repositories.QuestionsRepositoryAPI
+import com.mityushovn.miningquiz.core_domain.domain.models.Error
+import com.mityushovn.miningquiz.core_domain.domain.models.Loading
+import com.mityushovn.miningquiz.core_domain.domain.models.Question
+import com.mityushovn.miningquiz.core_domain.domain.models.Ready
+import com.mityushovn.miningquiz.core_domain.domain.models.SearchState
+import com.mityushovn.miningquiz.core_domain.domain.repositories.QuestionsRepositoryAPI
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import com.mityushovn.miningquiz.main.presentation.mainfragment.MainFragment

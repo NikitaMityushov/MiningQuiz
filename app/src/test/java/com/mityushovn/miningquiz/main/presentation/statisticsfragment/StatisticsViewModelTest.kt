@@ -2,8 +2,7 @@ package com.mityushovn.miningquiz.main.presentation.statisticsfragment
 
 import android.content.res.Resources
 import com.mityushovn.miningquiz.common.MiningQuizApplication
-import com.mityushovn.miningquiz.common.domain.models.statisticsEntities.AbstractStatistics
-import com.mityushovn.miningquiz.common.domain.repositories.AttemptsRepositoryAPI
+import com.mityushovn.miningquiz.core_domain.domain.models.statisticsEntities.AbstractStatistics
 import com.mityushovn.miningquiz.debug.CoroutineSubject
 import com.mityushovn.miningquiz.debug.MainDispatcherRule
 import kotlinx.coroutines.CoroutineDispatcher

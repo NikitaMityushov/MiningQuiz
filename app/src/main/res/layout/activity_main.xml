@@ -11,4 +11,3 @@
     app:navGraph="@navigation/root_nav"
     tools:context=".main.presentation.activity.MainActivity" />
 
-
