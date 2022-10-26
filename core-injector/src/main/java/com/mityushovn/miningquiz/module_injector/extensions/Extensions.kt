@@ -7,11 +7,12 @@ import androidx.fragment.app.Fragment
 import com.mityushovn.miningquiz.module_injector.interfaces.Dependencies
 import com.mityushovn.miningquiz.module_injector.interfaces.DependenciesProvider
 import java.lang.IllegalStateException
+import kotlin.reflect.KClass
 
 /**
  * Map of dependencies for entities that contains dependencies
  */
-typealias DepsMap = Map<Class<out Dependencies>, Dependencies>
+typealias DepsMap = Map<Class<out Dependencies>, @JvmSuppressWildcards Dependencies>
 
 /**
  * Get dependencies from parent(application or activity or fragment)
@@ -28,7 +29,7 @@ inline fun <reified D : Dependencies> Activity.findDependencies(): D {
     return (this.application as? DependenciesProvider)?.let {
         it.depsMap[D::class.java] as D
     }
-        ?: throw IllegalStateException("${this.application} does not implement interface [${D::class.java}]")
+        ?: throw IllegalStateException("this ${this.application} does not implement interface [${D::class.java}]")
 }
 
 /**

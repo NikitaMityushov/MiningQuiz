@@ -18,6 +18,8 @@ import com.mityushovn.miningquiz.databinding.MainFragmentBinding
 import com.mityushovn.miningquiz.common.navigation.MainNavigator
 import com.mityushovn.miningquiz.main.presentation.searchlistfragment.SearchListFragment
 import com.mityushovn.miningquiz.main.presentation.activity.MainActivityViewModel
+import com.mityushovn.miningquiz.module_injector.extensions.DepsMap
+import com.mityushovn.miningquiz.module_injector.interfaces.DependenciesProvider
 import com.mityushovn.miningquiz.utils.onQueryTextChange
 import com.mityushovn.miningquiz.utils.toGone
 import com.mityushovn.miningquiz.utils.toVisible
@@ -38,9 +40,12 @@ import javax.inject.Inject
  * @see NavHostFragment
  * @see R.id.tab_navigation
  */
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), DependenciesProvider {
     private lateinit var binding: MainFragmentBinding
     private lateinit var controller: NavController
+
+    @Inject
+    override lateinit var depsMap: DepsMap
 
     /*
         shared ViewModel with MainActivity and SearchListFragment
@@ -150,4 +155,5 @@ class MainFragment : Fragment() {
             }
         }
     }
+
 }

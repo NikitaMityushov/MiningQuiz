@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.mityushovn.miningquiz.common.MiningQuizApplication
+import com.mityushovn.miningquiz.common.di.components.AppComponent
 import com.mityushovn.miningquiz.databinding.QuestionFragmentBinding
 import com.mityushovn.miningquiz.utils.hideKeyboard
 import timber.log.Timber
@@ -21,6 +22,9 @@ class QuestionFragment : Fragment() {
     companion object {
         const val ARG_QUESTION_ID = "QUESTION_ID"
     }
+
+    @Inject
+    lateinit var appComponent: AppComponent
 
     private lateinit var binding: QuestionFragmentBinding
     private var questionId: Int = 0

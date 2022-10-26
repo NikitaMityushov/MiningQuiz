@@ -6,14 +6,15 @@ import com.mityushovn.miningquiz.common.di.components.DaggerAppComponent
 import com.mityushovn.miningquiz.module_injector.extensions.DepsMap
 import com.mityushovn.miningquiz.module_injector.interfaces.DependenciesProvider
 import timber.log.Timber
+import javax.inject.Inject
 
 class MiningQuizApplication : Application(), DependenciesProvider {
 
     lateinit var appComponent: AppComponent
         private set
 
-    override val depsMap: DepsMap
-        get() = TODO("Not yet implemented")
+    @Inject
+    override lateinit var depsMap: DepsMap
 
     override fun onCreate() {
         super.onCreate()
@@ -24,5 +25,6 @@ class MiningQuizApplication : Application(), DependenciesProvider {
          * @see AppComponent
          */
         appComponent = DaggerAppComponent.factory().create(this)
+        appComponent.injectIntoApplication(this)
     }
 }

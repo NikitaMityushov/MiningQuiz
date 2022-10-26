@@ -2,6 +2,8 @@ package com.mityushovn.miningquiz.game_feature.internal.di.modules
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.mityushovn.miningquiz.game_feature.R
 import com.mityushovn.miningquiz.game_feature.internal.navigation.QuizNavigator
 import dagger.Module
 import dagger.Provides
@@ -12,32 +14,34 @@ internal object NavigationModule {
     fun provideQuizNavigator() =
         object : QuizNavigator {
             override fun toGameFragment(fragment: Fragment, bundle: Bundle?) {
-                TODO("Not yet implemented")
+                fragment.findNavController()
+                    .navigate(R.id.action_previewGameFragment_to_gameFragment, bundle)
             }
 
             override fun toCongratsFragment(fragment: Fragment) {
-                TODO("Not yet implemented")
+                fragment.findNavController().navigate(R.id.action_gameFragment_to_congratsFragment)
             }
 
             override fun toFailedFragment(fragment: Fragment) {
-                TODO("Not yet implemented")
+                fragment.findNavController().navigate(R.id.action_gameFragment_to_failedFragment)
             }
 
             override fun quitTestFromGameFr(fragment: Fragment) {
-                TODO("Not yet implemented")
+                fragment.findNavController().navigate(R.id.action_gameFragment_to_mainActivity)
             }
 
             override fun quitTestFromCongratsFr(fragment: Fragment) {
-                TODO("Not yet implemented")
+                fragment.findNavController().navigate(R.id.action_congratsFragment_to_mainActivity)
             }
 
             override fun quitTestFromFailedFr(fragment: Fragment) {
-                TODO("Not yet implemented")
+                fragment.findNavController()
+                    .navigate(R.id.action_failedFragment_to_mainActivity)
             }
 
             override fun popStack(fragment: Fragment) {
-                TODO("Not yet implemented")
+                fragment.findNavController().popBackStack()
             }
-        }
 
+        }
 }

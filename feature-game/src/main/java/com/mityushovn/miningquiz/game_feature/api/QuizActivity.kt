@@ -21,7 +21,8 @@ private const val GAME_STARTED = "game_started"
 class QuizActivity : AppCompatActivity() {
 
     private var _component: GameComponent? = null
-    internal val component: GameComponent = _component!!
+    internal val component: GameComponent
+        get() = _component!!
 
     // essential to init because view model is shared with GameFragment
     @Inject
@@ -32,9 +33,10 @@ class QuizActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        _component = DaggerGameComponent.factory().create(findDependencies(), application)
+        _component?.inject(this)
         setContentView(R.layout.activity_quiz)
         // configure DI
-        _component = DaggerGameComponent.factory().create(findDependencies(), application)
 
         if (savedInstanceState == null) {
             // start game, you must pass id of topic or exam and game mode in the startGame method of GameEngine

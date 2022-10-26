@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MiningQuiz">
         <activity
-            android:name="com.mityushovn.miningquiz.quiz.presentation.quiz.QuizActivity"
+            android:name="com.mityushovn.miningquiz.game_feature.api.QuizActivity"
             android:exported="false" />
         <activity
             android:name="com.mityushovn.miningquiz.main.presentation.activity.MainActivity"

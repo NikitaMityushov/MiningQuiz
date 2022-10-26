@@ -1,10 +1,16 @@
 package com.mityushovn.miningquiz.common.di.modules
 
+import android.os.Bundle
 import android.view.View
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.mityushovn.miningquiz.R
 import com.mityushovn.miningquiz.common.navigation.MainNavigator
 import com.mityushovn.miningquiz.main.presentation.mainfragment.MainFragment
+import com.mityushovn.miningquiz.main.presentation.searchlistfragment.questionfragment.QuestionFragment
 import dagger.Module
 import dagger.Provides
+import timber.log.Timber
 
 @Module
 object NavigationModule {
@@ -13,11 +19,16 @@ object NavigationModule {
     fun provideMainNavigator(): MainNavigator {
         return object : MainNavigator {
             override fun onSearchViewIsFocused(fragment: MainFragment) {
-                TODO("Not yet implemented")
+                fragment.childFragmentManager.fragments[0]?.findNavController()
+                    ?.navigate(R.id.action_global_searchListFragment2)
             }
 
             override fun onQuestionSelected(view: View, questionId: Int) {
-                TODO("Not yet implemented")
+                Timber.d("Navigation.onQuestionsSelected, questionId = $questionId")
+                view.findNavController()
+                    .navigate(R.id.action_searchListFragment2_to_questionFragment, Bundle().apply {
+                        putInt(QuestionFragment.ARG_QUESTION_ID, questionId)
+                    })
             }
         }
     }

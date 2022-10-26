@@ -1,14 +1,15 @@
 package com.mityushovn.miningquiz.common.di.components
 
 import android.app.Application
-import com.mityushovn.miningquiz.common.di.modules.DatabaseModule
-import com.mityushovn.miningquiz.common.di.modules.NavigationModule
-import com.mityushovn.miningquiz.common.di.modules.RepositoryModule
-import com.mityushovn.miningquiz.common.di.modules.ViewModelModule
+import com.mityushovn.miningquiz.common.MiningQuizApplication
+import com.mityushovn.miningquiz.common.di.modules.*
+import com.mityushovn.miningquiz.game_feature.api.GameFeatureDependencies
 import com.mityushovn.miningquiz.main.presentation.activity.MainActivity
 import com.mityushovn.miningquiz.main.presentation.mainfragment.MainFragment
 import com.mityushovn.miningquiz.main.presentation.searchlistfragment.SearchListFragment
 import com.mityushovn.miningquiz.main.presentation.searchlistfragment.questionfragment.QuestionFragment
+import com.mityushovn.miningquiz.statistics_feature.api.StatisticsDeps
+import com.mityushovn.quizlist_feature.api.QuizlistFeatureDependencies
 import dagger.BindsInstance
 import dagger.Component
 
@@ -17,10 +18,13 @@ import dagger.Component
         DatabaseModule::class,
         ViewModelModule::class,
         NavigationModule::class,
-        RepositoryModule::class
+        RepositoryModule::class,
+        QuizlistFeatureDepsModule::class,
+        GameFeatureDepsModule::class,
+        StatisticsDepsModule::class
     ]
 )
-interface AppComponent {
+interface AppComponent : QuizlistFeatureDependencies, GameFeatureDependencies, StatisticsDeps {
 
     @Component.Factory
     interface Factory {
@@ -28,6 +32,8 @@ interface AppComponent {
             @BindsInstance application: Application
         ): AppComponent
     }
+
+    fun injectIntoApplication(application: MiningQuizApplication)
 
     fun injectInMainActivity(activity: MainActivity)
 

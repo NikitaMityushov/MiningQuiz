@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (this.application as MiningQuizApplication).appComponent.injectInMainActivity(this)
+        (application as MiningQuizApplication).appComponent.injectInMainActivity(this)
         setContentView(R.layout.activity_main)
     }
 

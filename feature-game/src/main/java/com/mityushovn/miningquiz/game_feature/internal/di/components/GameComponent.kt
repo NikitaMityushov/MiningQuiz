@@ -2,6 +2,7 @@ package com.mityushovn.miningquiz.game_feature.internal.di.components
 
 import android.app.Application
 import com.mityushovn.miningquiz.game_feature.api.GameFeatureDependencies
+import com.mityushovn.miningquiz.game_feature.api.QuizActivity
 import com.mityushovn.miningquiz.game_feature.internal.di.modules.GameEngineModule
 import com.mityushovn.miningquiz.game_feature.internal.di.modules.NavigationModule
 import com.mityushovn.miningquiz.game_feature.internal.di.modules.RepositoriesModule
@@ -29,6 +30,8 @@ internal interface GameComponent {
             @BindsInstance app: Application
         ): GameComponent
     }
+
+    fun inject(activity: QuizActivity)
 
     fun inject(fragment: PreviewGameFragment)
 
