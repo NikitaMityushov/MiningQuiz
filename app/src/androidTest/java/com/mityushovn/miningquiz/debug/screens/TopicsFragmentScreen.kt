@@ -1,7 +1,7 @@
 package com.mityushovn.miningquiz.debug.screens
 
 import com.mityushovn.miningquiz.R
-import com.mityushovn.miningquiz.debug.pages.RecyclerViewObject
+import com.mityushovn.miningquiz.core_testing.ui.pages.RecyclerViewObject
 
 private const val topicsRecyclerId = R.id.topics_list_fr_recycler_view
 

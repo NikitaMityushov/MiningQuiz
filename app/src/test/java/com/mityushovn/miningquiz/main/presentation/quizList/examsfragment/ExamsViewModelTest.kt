@@ -2,8 +2,8 @@ package com.mityushovn.miningquiz.main.presentation.quizList.examsfragment
 
 import com.mityushovn.miningquiz.kmm_domain.domain.models.Exam
 import com.mityushovn.miningquiz.core_domain.domain.repositories.ExamsRepositoryAPI
-import com.mityushovn.miningquiz.debug.CoroutineSubject
-import com.mityushovn.miningquiz.debug.MainDispatcherRule
+import com.mityushovn.miningquiz.core_testing.unit.coroutines.CoroutineSubject
+import com.mityushovn.miningquiz.core_testing.unit.coroutines.MainDispatcherRule
 import com.mityushovn.miningquiz.core_domain.domain.models.Loading
 import com.mityushovn.miningquiz.core_domain.domain.models.Ready
 import com.mityushovn.quizlist_feature.internal.presentation.examsfragment.ExamsViewModel

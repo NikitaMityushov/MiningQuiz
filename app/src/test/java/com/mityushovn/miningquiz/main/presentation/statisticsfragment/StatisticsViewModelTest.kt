@@ -1,10 +1,10 @@
 package com.mityushovn.miningquiz.main.presentation.statisticsfragment
 
 import android.content.res.Resources
-import com.mityushovn.miningquiz.common.MiningQuizApplication
+import com.mityushovn.miningquiz.MiningQuizApplication
 import com.mityushovn.miningquiz.core_domain.domain.models.statisticsEntities.AbstractStatistics
-import com.mityushovn.miningquiz.debug.CoroutineSubject
-import com.mityushovn.miningquiz.debug.MainDispatcherRule
+import com.mityushovn.miningquiz.core_testing.unit.coroutines.CoroutineSubject
+import com.mityushovn.miningquiz.core_testing.unit.coroutines.MainDispatcherRule
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow

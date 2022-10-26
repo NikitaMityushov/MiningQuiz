@@ -36,4 +36,6 @@ dependencies {
     testImplementation "junit:junit:$junit_version"
     testImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_version"
 
+//    implementation project(':core-testing')
+
 }

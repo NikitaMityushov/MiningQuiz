@@ -12,10 +12,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.mityushovn.miningquiz.R
-import com.mityushovn.miningquiz.common.MiningQuizApplication
+import com.mityushovn.miningquiz.MiningQuizApplication
 import com.mityushovn.miningquiz.main.presentation.activity.MainActivityVMFactory
 import com.mityushovn.miningquiz.databinding.MainFragmentBinding
-import com.mityushovn.miningquiz.common.navigation.MainNavigator
+import com.mityushovn.miningquiz.navigation.MainNavigator
 import com.mityushovn.miningquiz.main.presentation.searchlistfragment.SearchListFragment
 import com.mityushovn.miningquiz.main.presentation.activity.MainActivityViewModel
 import com.mityushovn.miningquiz.module_injector.extensions.DepsMap

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.mityushovn.miningquiz.R
-import com.mityushovn.miningquiz.common.MiningQuizApplication
+import com.mityushovn.miningquiz.MiningQuizApplication
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {

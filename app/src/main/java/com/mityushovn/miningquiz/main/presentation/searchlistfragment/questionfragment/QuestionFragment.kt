@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.mityushovn.miningquiz.common.MiningQuizApplication
-import com.mityushovn.miningquiz.common.di.components.AppComponent
+import com.mityushovn.miningquiz.MiningQuizApplication
+import com.mityushovn.miningquiz.di.components.AppComponent
 import com.mityushovn.miningquiz.databinding.QuestionFragmentBinding
 import com.mityushovn.miningquiz.utils.hideKeyboard
 import timber.log.Timber

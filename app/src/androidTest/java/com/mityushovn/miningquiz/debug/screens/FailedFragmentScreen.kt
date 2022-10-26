@@ -1,6 +1,6 @@
 package com.mityushovn.miningquiz.debug.screens
 
-import com.mityushovn.miningquiz.debug.pages.ViewObject.Companion.viewWithId
+import com.mityushovn.miningquiz.core_testing.ui.pages.ViewObject.Companion.viewWithId
 import com.mityushovn.miningquiz.R
 
 private const val CONTINUE_BUTTON_ID = R.id.failed_fr_continue_btn

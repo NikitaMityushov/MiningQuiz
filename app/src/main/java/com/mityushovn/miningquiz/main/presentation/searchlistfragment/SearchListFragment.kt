@@ -6,10 +6,10 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.mityushovn.miningquiz.common.MiningQuizApplication
+import com.mityushovn.miningquiz.MiningQuizApplication
 import com.mityushovn.miningquiz.main.presentation.activity.MainActivityVMFactory
 import com.mityushovn.miningquiz.databinding.SearchListFragmentBinding
-import com.mityushovn.miningquiz.common.navigation.MainNavigator
+import com.mityushovn.miningquiz.navigation.MainNavigator
 import com.mityushovn.miningquiz.main.presentation.searchlistfragment.recyclerview.QuestionsSearchFrAdapter
 import com.mityushovn.miningquiz.main.presentation.activity.MainActivityViewModel
 import com.mityushovn.miningquiz.main.presentation.mainfragment.MainFragment

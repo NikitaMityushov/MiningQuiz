@@ -2,8 +2,7 @@ package com.mityushovn.miningquiz.debug.screens
 
 import androidx.test.platform.app.InstrumentationRegistry
 import com.mityushovn.miningquiz.R
-import com.mityushovn.miningquiz.debug.pages.TextViewObject.Companion.textViewWithText
-import com.mityushovn.miningquiz.debug.pages.ViewPagerObject.Companion.viewPagerWithId
+import com.mityushovn.miningquiz.core_testing.ui.pages.TextViewObject.Companion.textViewWithText
 
 private const val examsTabStr = R.string.quiz
 private const val topicsTabStr = R.string.topics

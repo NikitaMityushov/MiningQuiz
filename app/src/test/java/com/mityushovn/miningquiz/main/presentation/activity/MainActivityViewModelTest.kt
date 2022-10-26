@@ -3,7 +3,7 @@ package com.mityushovn.miningquiz.main.presentation.activity
 import com.mityushovn.miningquiz.core_domain.domain.models.Error
 import com.mityushovn.miningquiz.core_domain.domain.models.Question
 import com.mityushovn.miningquiz.core_domain.domain.repositories.QuestionsRepositoryAPI
-import com.mityushovn.miningquiz.debug.MainDispatcherRule
+import com.mityushovn.miningquiz.core_testing.unit.coroutines.MainDispatcherRule
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow

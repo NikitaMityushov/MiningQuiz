@@ -92,6 +92,7 @@ dependencies {
     // 7) implementing the feature modules
     implementation project(':core-domain')
     implementation project(':core-injector')
+    implementation project(':core-testing')
     implementation project(':data-questions')
     implementation project(':feature-home')
     implementation project(':feature-statistics')

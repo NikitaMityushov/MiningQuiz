@@ -1,18 +1,13 @@
 package com.mityushovn.miningquiz.debug.screens
 
-import android.content.res.Resources
-import android.view.KeyEvent
 import android.view.View
 import android.widget.SearchView
-import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
-import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.matcher.ViewMatchers.isEnabled
-import androidx.test.espresso.matcher.ViewMatchers.withId
 import com.mityushovn.miningquiz.R
-import com.mityushovn.miningquiz.debug.pages.ViewObject.Companion.viewWithId
+import com.mityushovn.miningquiz.core_testing.ui.pages.ViewObject.Companion.viewWithId
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.Matcher
 

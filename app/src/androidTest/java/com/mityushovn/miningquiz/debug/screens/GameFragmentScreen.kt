@@ -3,8 +3,8 @@ package com.mityushovn.miningquiz.debug.screens
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import com.mityushovn.miningquiz.R
-import com.mityushovn.miningquiz.debug.pages.ToastObject
-import com.mityushovn.miningquiz.debug.pages.ViewObject.Companion.viewWithId
+import com.mityushovn.miningquiz.core_testing.ui.pages.ToastObject
+import com.mityushovn.miningquiz.core_testing.ui.pages.ViewObject.Companion.viewWithId
 
 private const val FIRST_ANS_ID = R.id.game_fr_answer_1
 private const val SECOND_ANS_ID = R.id.game_fr_answer_2
