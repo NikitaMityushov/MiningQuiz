@@ -3,7 +3,6 @@ package com.mityushovn.miningquiz.statistics_feature.internal.presentation
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.mityushovn.miningquiz.core_di.qualifiers.ViewModelBackgroundCoroutineDispatcher
 import com.mityushovn.miningquiz.core_domain.domain.repositories.AttemptsRepositoryAPI
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +16,6 @@ import javax.inject.Inject
 @Suppress("UNCHECKED_CAST")
 class StatisticsVMFactory @Inject constructor(
     private val attemptsRepository: AttemptsRepositoryAPI,
-    @ViewModelBackgroundCoroutineDispatcher
     private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
     private val application: Application
 ) : ViewModelProvider.Factory {

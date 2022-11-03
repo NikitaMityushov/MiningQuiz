@@ -79,6 +79,5 @@ dependencies {
     implementation project(':core-utils')
     implementation project(':core-design')
     implementation project(':data-attempts')
-    implementation project(':core-di')
     implementation project(':core-injector')
 }
