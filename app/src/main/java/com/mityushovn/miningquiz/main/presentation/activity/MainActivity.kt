@@ -3,8 +3,8 @@ package com.mityushovn.miningquiz.main.presentation.activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.mityushovn.miningquiz.common.MiningQuizApplication
 import com.mityushovn.miningquiz.R
+import com.mityushovn.miningquiz.MiningQuizApplication
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        (this.application as MiningQuizApplication).appComponent.injectInMainActivity(this)
+        (application as MiningQuizApplication).appComponent.injectInMainActivity(this)
         setContentView(R.layout.activity_main)
     }
 

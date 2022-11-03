@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    QuizListFragment Tabs-->
+    <string name="quiz">Quiz</string>
+    <string name="topics">Topics</string>
+    <string name="mistakes">Mistakes</string>
+
+    <string name="there_are_no_the_right_answers_in_this_questions">There are no the right answers in this questions:</string>
+    <string name="please_choose_the_exam">Please choose the Exam:</string>
+
+    <string name="choose_topic">Choose the topic:</string>
+</resources>

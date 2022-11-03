@@ -2,7 +2,7 @@ package com.mityushovn.miningquiz.main.presentation.activity
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.mityushovn.miningquiz.common.domain.repositories.QuestionsRepositoryAPI
+import com.mityushovn.miningquiz.core_domain.domain.repositories.QuestionsRepositoryAPI
 import javax.inject.Inject
 
 /**
@@ -11,7 +11,7 @@ import javax.inject.Inject
  * @see QuestionsRepositoryAPI
  */
 class MainActivityVMFactory @Inject constructor(
-    val questionsRepository: QuestionsRepositoryAPI
+    private val questionsRepository: QuestionsRepositoryAPI
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainActivityViewModel::class.java)) {

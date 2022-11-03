@@ -2,7 +2,7 @@ package com.mityushovn.miningquiz.main.presentation.searchlistfragment.questionf
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.mityushovn.miningquiz.common.domain.repositories.QuestionsRepositoryAPI
+import com.mityushovn.miningquiz.core_domain.domain.repositories.QuestionsRepositoryAPI
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject

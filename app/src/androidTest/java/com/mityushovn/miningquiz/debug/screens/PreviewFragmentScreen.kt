@@ -1,7 +1,7 @@
 package com.mityushovn.miningquiz.debug.screens
 
 import com.mityushovn.miningquiz.R
-import com.mityushovn.miningquiz.debug.pages.ViewObject.Companion.viewWithId
+import com.mityushovn.miningquiz.core_testing.ui.pages.ViewObject.Companion.viewWithId
 
 private const val LETS_START_BTN_ID = R.id.preview_fr_start_btn
 

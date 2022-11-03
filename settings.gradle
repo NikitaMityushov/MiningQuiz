@@ -8,3 +8,17 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MiningQuiz"
 include ':app'
+include ':core-injector'
+include ':feature-home'
+include ':feature-quizlist'
+include ':feature-statistics'
+include ':core-utils'
+include ':core-design'
+include ':data-attempts'
+include ':feature-game'
+include ':kmm-domain'
+include ':core-domain'
+include ':data-questions'
+include ':data-exams'
+include ':data-topics'
+include ':core-testing'

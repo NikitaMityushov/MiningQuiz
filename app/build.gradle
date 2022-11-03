@@ -2,8 +2,6 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'kotlin-parcelize'
-    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -34,6 +32,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs = ['-Xjvm-default=compatibility']
     }
     buildFeatures {
         dataBinding = true
@@ -85,7 +84,19 @@ dependencies {
     implementation "com.google.dagger:dagger-android:$dagger_version"
     implementation "com.google.dagger:dagger-android-support:$dagger_version"
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_version"
 
     implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+
+    // 7) implementing the feature modules
+    implementation project(':core-domain')
+    implementation project(':core-injector')
+    implementation project(':core-testing')
+    implementation project(':data-questions')
+    implementation project(':feature-home')
+    implementation project(':feature-statistics')
+    implementation project(':feature-quizlist')
+    implementation project(':feature-game')
 
 }

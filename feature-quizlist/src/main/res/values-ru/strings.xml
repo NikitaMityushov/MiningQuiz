@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--    QuizListFragment Tabs-->
+    <string name="quiz">Экзамены</string>
+    <string name="topics">Темы</string>
+    <string name="mistakes">Ошибки</string>
+
+    <string name="there_are_no_the_right_answers_in_this_questions">На данные вопросы были даны неправильные ответы:</string>
+    <string name="please_choose_the_exam">Выберите экзамен:</string>
+
+    <string name="choose_topic">Выберите тему:</string>
+</resources>

@@ -2,10 +2,10 @@ package com.mityushovn.miningquiz.debug.screens
 
 import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
-import com.mityushovn.miningquiz.debug.pages.ViewObject.Companion.viewWithId
+import com.mityushovn.miningquiz.core_testing.ui.pages.ViewObject.Companion.viewWithId
 import com.mityushovn.miningquiz.R
-import com.mityushovn.miningquiz.debug.pages.TextViewObject.Companion.textViewWithId
-import com.mityushovn.miningquiz.debug.pages.ToastObject.Companion.toastWithText
+import com.mityushovn.miningquiz.core_testing.ui.pages.TextViewObject.Companion.textViewWithId
+import com.mityushovn.miningquiz.core_testing.ui.pages.ToastObject.Companion.toastWithText
 
 private const val RESET_BUTTON_ID = R.id.stat_fr_reset_statistics_btn
 private const val EXAMS_ATT_TV_ID = R.id.stat_fr_attempts_exam_tv

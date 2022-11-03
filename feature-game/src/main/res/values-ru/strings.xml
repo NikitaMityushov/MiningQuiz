@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  GameFragment formats  -->
+    <string name="topic_content">Тема:\n%s</string>
+    <string name="question_from_content">Вопрос %d из %d:\n%s</string>
+    <string name="question_contains_n_questions">"Экзамен состоит из %d вопросов. Для сдачи экзамена необходимо ответить минимум на %d вопросов. Удачи!</string>
+
+    <!--  Congrats and Failed Fragments formats  -->
+    <string name="congrats_fr_tv_text">Поздравляю, вы сдали экзамен с результатом %d из %d.</string>
+    <string name="failed_fr_tv_text">Увы, Вы не сдали экзамен. Ваш результат %d из %d.</string>
+
+    <!-- Quit GameFragment alert dialog -->
+    <string name="are_you_sure_want_to_quit">Вы точно хотите покинуть экзамен?</string>
+    <string name="are_you_sure_alert_content">В таком случае данные о сдаче экзамена не сохраняются!</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
+    <!-- GameEngine toast -->
+    <string name="attempt_succ_added">Попытка успешно сохранена</string>
+    <string name="attempt_failed_saved">Попытка не сохранена</string>
+
+
+</resources>

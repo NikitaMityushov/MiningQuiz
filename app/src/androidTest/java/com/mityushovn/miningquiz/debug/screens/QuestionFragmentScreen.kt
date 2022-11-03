@@ -1,6 +1,6 @@
 package com.mityushovn.miningquiz.debug.screens
 
-import com.mityushovn.miningquiz.debug.pages.ViewObject.Companion.viewWithId
+import com.mityushovn.miningquiz.core_testing.ui.pages.ViewObject.Companion.viewWithId
 import com.mityushovn.miningquiz.R
 
 private const val EXAM_TV_ID = R.id.question_fr_exam_tv

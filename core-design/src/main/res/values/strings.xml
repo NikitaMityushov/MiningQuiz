@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MiningQuiz</string>
+    <!--    bottom navigation items-->
+    <string name="home">Home</string>
+    <string name="new_quiz">New Quiz</string>
+    <string name="statistics">Statistics</string>
+
+
+    <string name="solve_by_topic">Solve by topic</string>
+    <string name="choose_exam">Choose the exam:</string>
+    <string name="postpone">Postpone</string>
+    <string name="exit_game">Quit the test</string>
+    <string name="complete_btn">Continue</string>
+    <string name="continue_btn">Continue</string>
+    <string name="repeat_btn">Repeat</string>
+    <string name="let_s_start_btn">Let\'s start!</string>
+    <string name="correct_answer">Correct!</string>
+    <string name="incorrect_answer">Incorrect!</string>
+
+    <!-- Searching questions -->
+    <string name="enter_the_question">Enter the question:</string>
+    <string name="search_input">search input</string>
+    <string name="there_are_no_questions">There are no questions!</string>
+    <string name="founded_the_following_questions">Founded the following questions:</string>
+    <string name="questions_found">questions found:</string>
+    <string name="exam">Exam:</string>
+    <string name="topic">Topic:</string>
+    <string name="question">Question:</string>
+    <string name="right_answer">Right answer:</string>
+
+    <!-- Statistics fragment text views -->
+    <string name="st_fr_statistics">Statistics:</string>
+    <string name="reset_statistics">Reset statistics</string>
+    <string name="statistics_exam_string">Exams:\nTotal attempts: %d\nSuccessful: %d\nFailed: %d</string>
+    <string name="statistics_topic_string">Topics:\nTotal attempts: %d\nSuccessful: %d\nFailed: %d</string>
+
+    <!--  Statistics Toasts and Alert Dialogs strings  -->
+    <string name="are_you_sure_want_delete_stat">Are you sure?</string>
+    <string name="stat_deleted_successfuly">Statistics deleted successfully</string>
+    <string name="stat_deleted_failed">Statistics is not deleted</string>
+    <string name="success_image">success image</string>
+    <string name="failed">Failed</string>
+    <string name="start_exam">start exam</string>
+
+</resources>
