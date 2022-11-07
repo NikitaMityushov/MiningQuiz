@@ -15,11 +15,13 @@ __ПпОПБ__ - Правила по обеспечению промышленн
 #### 1. Стек технологий:
 * 1.1 платформа - _Android_;
 * 1.2 работа с локальной СУБД -  _SQLiteOpenHelper_;
-* 2.3 DI - _Dagger_;
-* 3.4 реактивный фреймворк - _Kotlin Flows_;
-* 3.5 навигация - _Jetpack Navigation Component_;
-* 3.6 тестирование - _JUnit 4, Espresso_;
-* 3.7 логирование - _Timber_;
+* 1.3 DI - _Dagger_;
+* 1.4 реактивный фреймворк - _Kotlin Flows_;
+* 1.5 навигация - _Jetpack Navigation Component_;
+* 1.6 тестирование - _JUnit 4, Mockito, Espresso_;
+* 1.7 логирование - _Timber_;
+* 1.8 CI - _Github Actions_;
+* 1.9 Архитектура проекта - _Многомодульная архитектура, MVVM паттерн для отдельных feature-модулей_.
 
 #### 2. Верстка:
 Для навигации в приложении используется _BottomNavigation_.
