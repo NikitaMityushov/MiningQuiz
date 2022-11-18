@@ -1,10 +1,12 @@
-package com.mityushovn.miningquiz.main.presentation.statisticsfragment
+package com.mityushovn.statistics_feature.statisticsfragment
 
+import android.app.Application
 import android.content.res.Resources
-import com.mityushovn.miningquiz.MiningQuizApplication
 import com.mityushovn.miningquiz.core_domain.domain.models.statisticsEntities.AbstractStatistics
+import com.mityushovn.miningquiz.core_domain.domain.repositories.AttemptsRepositoryAPI
 import com.mityushovn.miningquiz.core_testing.unit.coroutines.CoroutineSubject
 import com.mityushovn.miningquiz.core_testing.unit.coroutines.MainDispatcherRule
+import com.mityushovn.miningquiz.statistics_feature.internal.presentation.StatisticsViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
@@ -22,11 +24,11 @@ import org.mockito.kotlin.*
 @OptIn(ExperimentalCoroutinesApi::class)
 class StatisticsViewModelTest {
 
-    lateinit var application: MiningQuizApplication
-    lateinit var resources: Resources
-    lateinit var attemptsRepositoryAPI: AttemptsRepositoryAPI
-    lateinit var viewModel: StatisticsViewModel
-    lateinit var testStats: AbstractStatistics
+    private lateinit var application: Application
+    private lateinit var resources: Resources
+    private lateinit var attemptsRepositoryAPI: AttemptsRepositoryAPI
+    private lateinit var viewModel: StatisticsViewModel
+    private lateinit var testStats: AbstractStatistics
 
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
@@ -209,7 +211,7 @@ class StatisticsViewModelTest {
     private fun createStatisticsViewModel(
         attemptsRepositoryAPI: AttemptsRepositoryAPI,
         backgroundDispatcher: CoroutineDispatcher,
-        application: MiningQuizApplication
+        application: Application
     ): StatisticsViewModel {
         return StatisticsViewModel(
             attemptsRepositoryAPI,
