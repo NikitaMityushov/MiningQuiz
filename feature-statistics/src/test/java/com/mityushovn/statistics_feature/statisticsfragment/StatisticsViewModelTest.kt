@@ -56,6 +56,7 @@ class StatisticsViewModelTest {
     }
 
     @Test
+
     fun `if viewModel's delete is called then repository's deleteAllStatistics method was called once`() =
         runTest {
             // given
