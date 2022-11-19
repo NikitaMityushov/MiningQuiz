@@ -1,4 +1,4 @@
-package com.mityushovn.miningquiz.main.presentation.quizList.topicslistfragment
+package com.mityushovn.quizlist_feature.quizList.topicslistfragment
 
 import com.mityushovn.miningquiz.core_domain.domain.models.Topic
 import com.mityushovn.miningquiz.core_testing.unit.coroutines.MainDispatcherRule
@@ -28,7 +28,7 @@ import org.mockito.kotlin.whenever
 class TopicsListViewModelTest {
 
     lateinit var topicsRepositoryAPI: TopicsRepositoryAPI
-    lateinit var viewModel: TopicsListViewModel
+    private lateinit var viewModel: TopicsListViewModel
     lateinit var testTopicsList: List<Topic>
     lateinit var testFlow: MutableStateFlow<List<Topic>>
 

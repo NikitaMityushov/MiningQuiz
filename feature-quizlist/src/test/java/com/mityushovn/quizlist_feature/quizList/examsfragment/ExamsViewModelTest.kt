@@ -1,6 +1,6 @@
-package com.mityushovn.miningquiz.main.presentation.quizList.examsfragment
+package com.mityushovn.quizlist_feature.quizList.examsfragment
 
-import com.mityushovn.miningquiz.kmm_domain.domain.models.Exam
+import com.mityushovn.miningquiz.core_domain.domain.models.Exam
 import com.mityushovn.miningquiz.core_domain.domain.repositories.ExamsRepositoryAPI
 import com.mityushovn.miningquiz.core_testing.unit.coroutines.CoroutineSubject
 import com.mityushovn.miningquiz.core_testing.unit.coroutines.MainDispatcherRule
@@ -26,10 +26,10 @@ import java.lang.Exception
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ExamsViewModelTest {
-    lateinit var examsRepository: ExamsRepositoryAPI
-    lateinit var viewModel: ExamsViewModel
-    lateinit var testExamsList: List<Exam>
-    lateinit var testFlow: MutableStateFlow<List<Exam>>
+    private lateinit var examsRepository: ExamsRepositoryAPI
+    private lateinit var viewModel: ExamsViewModel
+    private lateinit var testExamsList: List<Exam>
+    private lateinit var testFlow: MutableStateFlow<List<Exam>>
 
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
