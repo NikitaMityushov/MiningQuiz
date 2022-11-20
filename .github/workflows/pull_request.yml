@@ -1,4 +1,4 @@
-equest Build
+name: Pull request Build
 
 on:
   push:
