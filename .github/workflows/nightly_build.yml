@@ -28,7 +28,7 @@ jobs:
   apk:
     needs: build
     runs-on: ubuntu-latest
-      steps:
+
       - name: Build APK
         run: ./gradlew assembleDebug
       - name: Upload APK
