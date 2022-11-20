@@ -28,7 +28,8 @@ jobs:
   apk:
     needs: build
     runs-on: ubuntu-latest
-
+    steps:
+      - uses: actions/checkout@v3
       - name: Build APK
         run: ./gradlew assembleDebug
       - name: Upload APK
@@ -55,5 +56,5 @@ jobs:
         service_account_key: ${{ secrets.FIREBASE_KEY }}
         project_id: ${{ secrets.PROJECT_ID }}
 
-      - name: Run Instrumentation Tests in Firebase Test Lab
-        run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=30,locale=en,orientation=portrait
+        - name: Run Instrumentation Tests in Firebase Test Lab
+          run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=30,locale=en,orientation=portrait
