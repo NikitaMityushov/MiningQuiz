@@ -51,6 +51,16 @@ jobs:
     needs: apk
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+      - name: Download app APK
+        uses: actions/download-artifact@v3
+        with:
+          name: app-debug
+      - name: Download Android test APK
+        uses: actions/download-artifact@v
+        with:
+          name: app-debug-androidTest
+
       - name: Login to Google Cloud
         uses: google-github-actions/setup-gcloud@master
         with:
@@ -58,5 +68,5 @@ jobs:
           service_account_key: ${{ secrets.FIREBASE_KEY }}
           project_id: ${{ secrets.PROJECT_ID }}
 
-        - name: Run Instrumentation Tests in Firebase Test Lab
-          run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=30,locale=en,orientation=portrait
+          - name: Run Instrumentation Tests in Firebase Test Lab
+            run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=30,locale=en,orientation=portrait
