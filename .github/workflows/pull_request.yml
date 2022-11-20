@@ -1,4 +1,4 @@
-name: Merge Build
+equest Build
 
 on:
   push:

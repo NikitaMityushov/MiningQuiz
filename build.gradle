@@ -22,6 +22,8 @@ buildscript {
         dagger_version = "2.42"
         fragment_version = "1.4.0"
         androidx_test_version = "1.4.0"
+        google_services_plugin = "4.3.8"
+        firebase_testlab_version = "0.2"
     }
     repositories {
         google()
@@ -31,6 +33,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$gradle_build_tools_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$gradle_plugin_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        classpath "com.google.gms:google-services:$google_services_plugin"  // Google Services plugin
     }
 
 }
