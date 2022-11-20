@@ -39,7 +39,7 @@ jobs:
           path: app/build/outputs/apk/debug/app-debug.apk
       - name: Assemble Android Instrumentation Test
         run: ./gradlew assembleAndroidTest
-      - name: Upload APK
+      - name: Upload Tests
           uses: actions/upload-artifact@v3
           with:
             name: app-debug-androidTest
