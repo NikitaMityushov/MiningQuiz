@@ -1,10 +1,8 @@
 name: Nightly Build
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+  schedule:
+    - cron: '0 0 * * *'
 
 jobs:
   build:
@@ -22,38 +20,6 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
       - name: Build with Gradle
         run: ./gradlew clean build
-
-  apk:
-    needs: build
-    runs-on: ubuntu-latest
-      steps:
-      - name: Build APK
-        run: ./gradlew assembleDebug
-      - name: Upload APK
-        uses: actions/upload-artifact@v3
-        with:
-          name: app-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
-      - name: Assemble Android Instrumentation Test
-        run: ./gradlew assembleAndroidTest
-      - name: Upload APK
-          uses: actions/upload-artifact@v3
-          with:
-            name: app-debug-androidTest
-            path: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-
-  firebase:
-    needs: apk
-    runs-on: ubuntu-latest
-    steps:
-      - name: Login to Google Cloud
-      uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-      with:
-        version: '290.0.1'
-        service_account_key: ${{ secrets.FIREBASE_KEY }}
-        project_id: ${{ secrets.PROJECT_ID }}
-
-      - name: Run Instrumentation Tests in Firebase Test Lab
-        run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=30,locale=en,orientation=portrait
