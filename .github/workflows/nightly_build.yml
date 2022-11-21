@@ -8,6 +8,8 @@ on:
 
 jobs:
   build:
+    schedule:
+      - cron: '0 0 * * *'
 
     runs-on: ubuntu-latest
 
@@ -68,5 +70,5 @@ jobs:
           service_account_key: ${{ secrets.FIREBASE_KEY }}
           project_id: ${{ secrets.PROJECT_ID }}
 
-          - name: Run Instrumentation Tests in Firebase Test Lab
-            run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=30,locale=en,orientation=portrait
+            - name: Run Instrumentation Tests in Firebase Test Lab
+              run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=30,locale=en,orientation=portrait
