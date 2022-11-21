@@ -51,7 +51,7 @@ jobs:
           name: app-debug
 
       - name: Download Android test APK
-        uses: actions/download-artifact@v
+        uses: actions/download-artifact@v3
         with:
           name: app-debug-androidTest
 
