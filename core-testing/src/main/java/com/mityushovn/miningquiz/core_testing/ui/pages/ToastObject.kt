@@ -10,7 +10,6 @@ class ToastObject(
     viewInteraction: ViewInteraction
 ) : ViewObject(viewInteraction) {
     companion object {
-
         fun toastWithText(text: String, block: ToastObject.() -> Unit) {
             ToastObject(Espresso.onView(ViewMatchers.withText(text))).apply(block)
         }

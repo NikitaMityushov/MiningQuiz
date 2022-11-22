@@ -54,7 +54,7 @@ class MainActivityTest {
                     clickContinueBtn()
                 }
 
-                checkToastIsDisplayed()
+//                checkToastIsDisplayed()
             }
 
             failedFragmentScreen {
@@ -75,7 +75,7 @@ class MainActivityTest {
                 clickContinueBtn()
             }
 
-            checkToastIsDisplayed()
+//            checkToastIsDisplayed()
         }
 
         failedFragmentScreen {
@@ -107,7 +107,7 @@ class MainActivityTest {
         statisticsFragmentScreen {
             clickResetStatisticsBtn()
             clickResetDialogYes()
-            checkToastIsDisplayed()
+//            checkToastIsDisplayed()
         }
         mainActivityScreen {
             clickHome()
