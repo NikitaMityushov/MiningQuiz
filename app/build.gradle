@@ -108,4 +108,7 @@ dependencies {
     // 8) Firebase
     androidTestImplementation "com.google.firebase:testlab-instr-lib:$firebase_testlab_version"
 
+    // 9) WorkManager
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+
 }

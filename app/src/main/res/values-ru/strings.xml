@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Reminder's 1 channel name -->
+    <string name="reminder_1_channel_name">Напоминание порешать</string>
+    <string name="reminder_1_channel_description">Play Notification</string>
+    <string name="reminder_1_content_title">Play Notification</string>
+    <string name="reminder_1_content_text">Play Notification</string>
+
+</resources>

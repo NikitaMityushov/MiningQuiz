@@ -24,6 +24,7 @@ buildscript {
         androidx_test_version = "1.4.0"
         google_services_plugin = "4.3.8"
         firebase_testlab_version = "0.2"
+        work_version = "2.7.1"
     }
     repositories {
         google()
