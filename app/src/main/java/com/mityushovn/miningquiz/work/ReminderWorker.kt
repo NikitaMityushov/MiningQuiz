@@ -13,14 +13,21 @@ import com.mityushovn.miningquiz.main.presentation.activity.MainActivity
 
 private const val TAG = "ReminderWorker"
 
-class ReminderWorker(
+/**
+ * @author Nikita Mityushov
+ * The WorkManager worker creates a notification with a pending intent that launch MainActivity
+ * after user's click trigger.
+ * @see MainActivity
+ */
+internal class ReminderWorker(
     context: Context,
     workerParams: WorkerParameters
 ) : CoroutineWorker(context, workerParams) {
 
     companion object {
-        const val CHANNEL_ID = "REMINDER_CHANNEL_1"
+        const val CHANNEL_ID = "REMINDER_TO_TAKE_QUIZ_CHANNEL_1"
         const val PENDING_INTENT_REQUEST_CODE = 1001
+        const val REMINDER_1_NOTIFICATION_ID = 12453
     }
 
     override suspend fun doWork(): Result {
@@ -33,6 +40,9 @@ class ReminderWorker(
         }
     }
 
+    /*
+     * Creates a notification channel and a notification
+     */
     private fun createNotificationWithPendingIntent() {
 
         // 1) create and register Notification channel
@@ -50,12 +60,18 @@ class ReminderWorker(
             .setContentText(contentText)
             .setSmallIcon(R.drawable.ic_baseline_quiz_24)
             .setAutoCancel(true)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
+            .setColorized(true)
+            .setChronometerCountDown(true)
             .build()
 
-        manager.notify(TAG, PENDING_INTENT_REQUEST_CODE, notification)
+        manager.notify(TAG, REMINDER_1_NOTIFICATION_ID, notification)
     }
 
+    /*
+     *  Creates and registers a channel
+     */
     private fun createChannel(manager: NotificationManagerCompat) {
         val channelName = applicationContext.getString(R.string.reminder_1_channel_name)
         val channelDescription =
@@ -72,6 +88,9 @@ class ReminderWorker(
         manager.createNotificationChannel(channel)
     }
 
+    /*
+     *  Creates a Pending Intent that triggers the MainActivity launch.
+     */
     private fun createPendingIntent(): PendingIntent {
         val intentActivity = Intent(applicationContext, MainActivity::class.java)
 
@@ -79,7 +98,7 @@ class ReminderWorker(
             applicationContext,
             PENDING_INTENT_REQUEST_CODE,
             intentActivity,
-            0
+            PendingIntent.FLAG_UPDATE_CURRENT
         )
     }
 }

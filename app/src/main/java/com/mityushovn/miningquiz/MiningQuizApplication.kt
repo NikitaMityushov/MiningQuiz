@@ -2,6 +2,7 @@ package com.mityushovn.miningquiz
 
 import android.app.Application
 import androidx.work.Constraints
+import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.mityushovn.miningquiz.di.components.AppComponent
@@ -13,7 +14,16 @@ import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
+/**
+ * @REMINDER_REPEAT_INTERVAL represents time duration to the next reminder notification.
+ * @see TimeUnit
+ */
 private const val REMINDER_REPEAT_INTERVAL = 7L
+
+/**
+ * Unique work name for the workManager.enqueueUniquePeriodicWork() call.
+ */
+private const val UNIQUE_WORK_NAME = "REMINDER TO PLAY"
 
 class MiningQuizApplication : Application(), DependenciesProvider {
 
@@ -37,19 +47,26 @@ class MiningQuizApplication : Application(), DependenciesProvider {
         createAndConfigureWork()
     }
 
+    /**
+     * Creates periodic work that reminds users to take a quiz one time per week.
+     */
     private fun createAndConfigureWork() {
         // 1) create constraints
         val workManager = WorkManager.getInstance(this)
 
         val constraints = Constraints.Builder()
             .build()
-
+        // 2) create WorkRequest
         val reminderWorkRequest = PeriodicWorkRequestBuilder<ReminderWorker>(
             REMINDER_REPEAT_INTERVAL, TimeUnit.DAYS
         )
             .setConstraints(constraints)
             .build()
-
-        workManager.enqueue(reminderWorkRequest)
+        // 3) Enqueue the work
+        workManager.enqueueUniquePeriodicWork(
+            UNIQUE_WORK_NAME,
+            ExistingPeriodicWorkPolicy.KEEP,
+            reminderWorkRequest
+        )
     }
 }
