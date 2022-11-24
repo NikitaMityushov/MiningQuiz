@@ -1,10 +1,7 @@
 package com.mityushovn.miningquiz
 
 import android.app.Application
-import androidx.work.Constraints
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
+import androidx.work.*
 import com.mityushovn.miningquiz.di.components.AppComponent
 import com.mityushovn.miningquiz.di.components.DaggerAppComponent
 import com.mityushovn.miningquiz.module_injector.extensions.DepsMap
@@ -21,11 +18,12 @@ import javax.inject.Inject
 private const val REMINDER_REPEAT_INTERVAL = 7L
 
 /**
+ * @UNIQUE_WORK_NAME
  * Unique work name for the workManager.enqueueUniquePeriodicWork() call.
  */
 private const val UNIQUE_WORK_NAME = "REMINDER TO PLAY"
 
-class MiningQuizApplication : Application(), DependenciesProvider {
+class MiningQuizApplication : Application(), DependenciesProvider, Configuration.Provider {
 
     lateinit var appComponent: AppComponent
         private set
@@ -46,6 +44,11 @@ class MiningQuizApplication : Application(), DependenciesProvider {
         // 3) create reminder work
         createAndConfigureWork()
     }
+
+    override fun getWorkManagerConfiguration() =
+        Configuration.Builder()
+            .setMinimumLoggingLevel(android.util.Log.DEBUG)
+            .build()
 
     /**
      * Creates periodic work that reminds users to take a quiz one time per week.
@@ -69,4 +72,5 @@ class MiningQuizApplication : Application(), DependenciesProvider {
             reminderWorkRequest
         )
     }
+
 }

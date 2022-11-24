@@ -109,6 +109,9 @@ dependencies {
     androidTestImplementation "com.google.firebase:testlab-instr-lib:$firebase_testlab_version"
 
     // 9) WorkManager
-    implementation "androidx.work:work-runtime-ktx:$work_version"
+    implementation("androidx.work:work-runtime-ktx:$work_version")
+    androidTestImplementation "androidx.work:work-testing:$work_version"
+    implementation("com.google.guava:guava:27.0-android")
+
 
 }
