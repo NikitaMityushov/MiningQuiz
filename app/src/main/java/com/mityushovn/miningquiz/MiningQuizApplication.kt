@@ -34,7 +34,9 @@ class MiningQuizApplication : Application(), DependenciesProvider, Configuration
     override fun onCreate() {
         super.onCreate()
         // 1) init Timber logging
-        Timber.plant(Timber.DebugTree())
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
         // 2) init Dagger AppComponent
         /**
          * @see AppComponent
@@ -45,10 +47,18 @@ class MiningQuizApplication : Application(), DependenciesProvider, Configuration
         createAndConfigureWork()
     }
 
-    override fun getWorkManagerConfiguration() =
-        Configuration.Builder()
-            .setMinimumLoggingLevel(android.util.Log.DEBUG)
-            .build()
+    override fun getWorkManagerConfiguration(): Configuration {
+        return if (BuildConfig.DEBUG) {
+            Configuration.Builder()
+                .setMinimumLoggingLevel(android.util.Log.DEBUG)
+                .build()
+        } else {
+            Configuration.Builder()
+                .setMinimumLoggingLevel(android.util.Log.ERROR)
+                .build()
+        }
+    }
+
 
     /**
      * Creates periodic work that reminds users to take a quiz one time per week.
@@ -72,5 +82,6 @@ class MiningQuizApplication : Application(), DependenciesProvider, Configuration
             reminderWorkRequest
         )
     }
-
 }
+
+// TODO: 25.11.22 1) WorkManager advance configuration and testing

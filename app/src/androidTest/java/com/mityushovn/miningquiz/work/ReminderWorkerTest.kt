@@ -56,7 +56,12 @@ class ReminderWorkerTest {
             ExistingPeriodicWorkPolicy.KEEP,
             request
         ).result.get()
-        testDriver.setPeriodDelayMet(request.id)
+
+        with(testDriver) {
+            setPeriodDelayMet(request.id)
+            setAllConstraintsMet(request.id)
+        }
+
         val workInfo = workManager.getWorkInfoById(request.id).get()
 
         // then

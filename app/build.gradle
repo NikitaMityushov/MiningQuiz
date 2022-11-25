@@ -111,7 +111,7 @@ dependencies {
     // 9) WorkManager
     implementation("androidx.work:work-runtime-ktx:$work_version")
     androidTestImplementation "androidx.work:work-testing:$work_version"
-    implementation("com.google.guava:guava:27.0-android")
+    implementation("com.google.guava:guava:27.0-android") // !!! для работы тестов в WorkManager 2.7.1 подходит только такая Guava, тк есть конфликт по ListenableFuture
 
 
 }
