@@ -10,6 +10,7 @@ import javax.inject.Inject
  * @since 1.0
  * @see QuestionsRepositoryAPI
  */
+@Suppress("UNCHECKED_CAST")
 class MainActivityVMFactory @Inject constructor(
     private val questionsRepository: QuestionsRepositoryAPI
 ) : ViewModelProvider.Factory {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Reminder's 1 channel name -->
+    <string name="reminder_1_channel_name">Reminder to take a quiz channel</string>
+    <string name="reminder_1_channel_description">Reminds users to take a quiz one time per week</string>
+    <string name="reminder_1_content_title">Mining Quiz</string>
+    <string name="reminder_1_content_text">Let\'s play</string>
+
+</resources>

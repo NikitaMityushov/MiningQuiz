@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Reminder's 1 channel name -->
+    <string name="reminder_1_channel_name">Канал напоминания пройти тест</string>
+    <string name="reminder_1_channel_description">Один раз в неделю приходит уведомление с предложение пройти тест.</string>
+    <string name="reminder_1_content_title">Экзамен</string>
+    <string name="reminder_1_content_text">Порешаем?</string>
+
+</resources>
