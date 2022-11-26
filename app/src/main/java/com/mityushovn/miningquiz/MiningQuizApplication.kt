@@ -83,5 +83,3 @@ class MiningQuizApplication : Application(), DependenciesProvider, Configuration
         )
     }
 }
-
-// TODO: 25.11.22 1) WorkManager advance configuration and testing

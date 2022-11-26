@@ -14,13 +14,14 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MiningQuiz">
+        android:theme="@style/Theme.App.Starting">
         <activity
             android:name="com.mityushovn.miningquiz.game_feature.api.QuizActivity"
             android:exported="false" />
         <activity
             android:name="com.mityushovn.miningquiz.main.presentation.activity.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.App.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
