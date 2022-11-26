@@ -63,8 +63,9 @@ class ReminderWorkerTest {
         }
 
         val workInfo = workManager.getWorkInfoById(request.id).get()
-
         // then
-        assertEquals(WorkInfo.State.RUNNING, workInfo.state)
+        val result =
+            (workInfo.state == WorkInfo.State.RUNNING) || (workInfo.state == WorkInfo.State.ENQUEUED)
+        assertTrue(result)
     }
 }

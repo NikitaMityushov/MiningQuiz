@@ -99,19 +99,18 @@ dependencies {
     // 7) implementing the feature modules
     implementation project(':core-domain')
     implementation project(':core-injector')
+    implementation project(':core-design')
     implementation project(':data-questions')
     implementation project(':feature-home')
     implementation project(':feature-statistics')
     implementation project(':feature-quizlist')
     implementation project(':feature-game')
-
     // 8) Firebase
     androidTestImplementation "com.google.firebase:testlab-instr-lib:$firebase_testlab_version"
 
     // 9) WorkManager
     implementation("androidx.work:work-runtime-ktx:$work_version")
     androidTestImplementation "androidx.work:work-testing:$work_version"
-    implementation("com.google.guava:guava:27.0-android") // !!! для работы тестов в WorkManager 2.7.1 подходит только такая Guava, тк есть конфликт по ListenableFuture
-
+    implementation("com.google.guava:guava:27.0-android") // !!! для работы тестов в WorkManager 2.7.1 подходит только Guava 27, тк есть конфликт по ListenableFuture
 
 }
