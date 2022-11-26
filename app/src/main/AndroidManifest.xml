@@ -18,7 +18,7 @@
         <activity
             android:name="com.mityushovn.miningquiz.game_feature.api.QuizActivity"
             android:exported="false"
-            android:theme="@style/Theme.MiningQui"
+            android:theme="@style/Theme.MiningQuiz"
             />
         <activity
             android:name="com.mityushovn.miningquiz.main.presentation.activity.MainActivity"
