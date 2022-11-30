@@ -1,6 +1,6 @@
 ## Feature creating guideline
 
-### for UI feature:
+### for all features:
 1. create Android library module with path __com.mityushovn.miningquiz.FEATURE_NAME_FOLDER__.
 2. configure module's __build.gradle__ file(clean up, set the compile and target SDK, add _:core-injector_ etc.).
 3. in _com.mityushovn.miningquiz.FEATURE_NAME_FOLDER_ create 2 folders: __API__ and __internal__.
@@ -20,3 +20,5 @@ Example:<br />
 interface StatisticsDeps: Dependencies {<br />
    val db: SQLiteDatabase<br />
 }<br />
+5. for non-UI feature create Factory that provides an instance of API implementation.
+6. for UI feature create a Fragment that represents a screen.

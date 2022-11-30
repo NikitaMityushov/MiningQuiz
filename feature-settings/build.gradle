@@ -81,4 +81,5 @@ dependencies {
     androidTestImplementation "androidx.test:rules:$androidx_test_version"
 
     implementation project(':core-injector')
+    implementation project(':data-settings')
 }
