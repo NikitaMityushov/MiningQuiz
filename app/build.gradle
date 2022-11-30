@@ -105,6 +105,7 @@ dependencies {
     implementation project(':feature-statistics')
     implementation project(':feature-quizlist')
     implementation project(':feature-game')
+    implementation project(':feature-settings')
     // 8) Firebase
     androidTestImplementation "com.google.firebase:testlab-instr-lib:$firebase_testlab_version"
 

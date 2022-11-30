@@ -2,10 +2,12 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/statistics"
-    app:startDestination="@+id/statisticsFragment">
+    app:startDestination="@+id/statisticsFragment"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <fragment
         android:id="@+id/statisticsFragment"
         android:name="com.mityushovn.miningquiz.statistics_feature.api.StatisticsFragment"
-        android:label="StatisticsFragment" />
+        android:label="StatisticsFragment"
+        tools:layout="@layout/statistics_fragment"/>
 </navigation>

@@ -42,4 +42,7 @@
     <string name="failed">провал</string>
     <string name="start_exam">начало экзамена</string>
 
+    <!--Settings fragment-->
+    <string name="settings">Настройки</string>
+
 </resources>
