@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".API.SettingsFragment">
+    tools:context=".api.SettingsFragment">
 
     <TextView
         android:id="@+id/settings_screen_title"
@@ -14,23 +15,26 @@
         android:text="Hello" />
 
     <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/settings_screen_switch_theme"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="Switch" />
-
+        android:checked="false"
+        android:text="Dark mode" />
 
     <com.google.android.material.slider.Slider
+        android:id="@+id/settings_screen_slider_exams"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stepSize="10.0"
+        android:stepSize="1.0"
         android:valueFrom="0.0"
-        android:valueTo="100.0" />
+        android:valueTo="100.0"
+        app:values="@array/exams_slider_values" />
 
     <com.google.android.material.slider.Slider
+        android:id="@+id/settings_screen_slider_topics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stepSize="10.0"
+        android:stepSize="1.0"
         android:valueFrom="0.0"
         android:valueTo="100.0" />
 

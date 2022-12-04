@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.mityushovn.mining_quiz.feature_settings.API.SettingsFragment"
+        android:name="com.mityushovn.mining_quiz.feature_settings.api.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_settings" />
 </navigation>
