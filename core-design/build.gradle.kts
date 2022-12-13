@@ -1,11 +1,10 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-parcelize")
 }
 
 android {
-    namespace = "com.mityushovn.miningquiz.core_domain"
+    namespace = "com.mityushovn.miningquiz.core_design"
     compileSdk = 31
 
     defaultConfig {
@@ -40,10 +39,8 @@ android {
 }
 
 dependencies {
-    // 1) Coroutines
-    val coroutinesVersion = "1.6.4"
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion")
-
-    implementation(project(":core-utils"))
+    // 1) Material components
+    implementation(libs.android.material)
+    // 2) Splash screen
+    api(libs.android.core.splashscreen)
 }

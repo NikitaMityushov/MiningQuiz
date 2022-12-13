@@ -78,4 +78,5 @@ dependencies {
     implementation project(':data-topics')
     implementation project(':data-questions')
     implementation project(':data-attempts')
+    implementation project(':data-settings')
 }

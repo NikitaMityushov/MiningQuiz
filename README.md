@@ -18,7 +18,7 @@ __ПпОПБ__ - Правила по обеспечению промышленн
 * 1.3 DI - _Dagger_;
 * 1.4 реактивный фреймворк - _Kotlin Flows_;
 * 1.5 навигация - _Jetpack Navigation Component_;
-* 1.6 тестирование - _JUnit 4, Mockito, Espresso_;
+* 1.6 тестирование - _JUnit 4, Mockito, Espresso_, Firebase Test Lab;
 * 1.7 логирование - _Timber_;
 * 1.8 CI/CD - _Github Actions_;
 * 1.9 Архитектура проекта - _Многомодульная архитектура, MVVM паттерн для отдельных feature-модулей_.

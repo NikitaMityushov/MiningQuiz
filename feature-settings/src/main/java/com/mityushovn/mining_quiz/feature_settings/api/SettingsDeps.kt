@@ -7,5 +7,4 @@ interface SettingsDeps : Dependencies {
     val prefs: SharedPreferences
 }
 
-
-// TODO: 1.12.22 1) Fragment and ViewModel 2) create docs for non-UI feature creating. 3) create dagger graph and modules
+// TODO: 4.12.22  1) create docs for non-UI feature creating. 2) slider and switch improvements

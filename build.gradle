@@ -1,6 +1,4 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-
     ext {
         kotlin_version = "1.5.21"
         version_navigation = '1.0.0'
@@ -25,22 +23,20 @@ buildscript {
         google_services_plugin = "4.3.8"
         firebase_testlab_version = "0.2"
         work_version = "2.7.1"
+        gradle_build_tool = '7.3.1'
 
         compile_sdk = 31
         target_sdk = 31
         min_sdk = 24
-
     }
+
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.2"
+        classpath "com.android.tools.build:gradle:$gradle_build_tool"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$gradle_plugin_version"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
-        classpath "com.google.gms:google-services:$google_services_plugin"  // Google Services plugin
-
     }
 
 }

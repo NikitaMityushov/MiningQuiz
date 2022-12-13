@@ -1,13 +1,12 @@
 package com.mityushovn.miningquiz.game_feature.internal.di.modules
 
+import android.content.SharedPreferences
 import android.database.sqlite.SQLiteDatabase
-import com.mityushovn.miningquiz.core_domain.domain.repositories.AttemptsRepositoryAPI
-import com.mityushovn.miningquiz.core_domain.domain.repositories.ExamsRepositoryAPI
-import com.mityushovn.miningquiz.core_domain.domain.repositories.QuestionsRepositoryAPI
-import com.mityushovn.miningquiz.core_domain.domain.repositories.TopicsRepositoryAPI
+import com.mityushovn.miningquiz.core_domain.domain.repositories.*
 import com.mityushovn.miningquiz.data_attempts.api.factory.AttemptsRepositoryFactory
 import com.mityushovn.miningquiz.data_exams.api.ExamsRepositoryFactory
 import com.mityushovn.miningquiz.data_questions.api.QuestionsRepositoryFactory
+import com.mityushovn.miningquiz.data_settings.api.SettingsRepositoryFactory
 import com.mityushovn.miningquiz.data_topics.api.TopicsRepositoryFactory
 import dagger.Module
 import dagger.Provides
@@ -34,4 +33,9 @@ internal object RepositoriesModule {
     fun provideTopicsRepository(
         db: SQLiteDatabase
     ): TopicsRepositoryAPI = TopicsRepositoryFactory.createInstance(db)
+
+    @Provides
+    fun provideSettingsRepository(
+        prefs: SharedPreferences
+    ): SettingsRepositoryAPI = SettingsRepositoryFactory.createInstance(prefs)
 }

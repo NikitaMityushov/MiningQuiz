@@ -49,22 +49,21 @@ android {
 
 dependencies {
     // 1) common
-    implementation "androidx.core:core-ktx:$core_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "com.google.android.material:material:$material_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constaintlayout_version"
-    implementation "androidx.legacy:legacy-support-v4:$legacy_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version"
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.android.material
+    implementation libs.android.constraintlayout
+    implementation libs.lifecycle.livedata
+    implementation libs.lifecycle.viewmodel
+    implementation libs.lifecycle.runtime.ktx
 
     // 2) Logging
-    implementation "com.jakewharton.timber:timber:$timber_version"
+    implementation libs.timber
 
     // 3) Test
-    testImplementation "junit:junit:$junit_version"
-    testImplementation "org.mockito.kotlin:mockito-kotlin:$mockito_version"
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
+    testImplementation libs.junit
+    testImplementation libs.mockito
+    testImplementation libs.android.arch.core.testing
     androidTestImplementation "androidx.test.ext:junit:$junit_ext_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
     implementation "androidx.test.espresso:espresso-contrib:$espresso_version"
@@ -106,12 +105,14 @@ dependencies {
     implementation project(':feature-quizlist')
     implementation project(':feature-game')
     implementation project(':feature-settings')
+
     // 8) Firebase
     androidTestImplementation "com.google.firebase:testlab-instr-lib:$firebase_testlab_version"
 
     // 9) WorkManager
     implementation("androidx.work:work-runtime-ktx:$work_version")
     androidTestImplementation "androidx.work:work-testing:$work_version"
-    implementation("com.google.guava:guava:27.0-android") // !!! для работы тестов в WorkManager 2.7.1 подходит только Guava 27, тк есть конфликт по ListenableFuture
+    implementation("com.google.guava:guava:27.0-android")
+    // !!! для работы тестов в WorkManager 2.7.1 подходит только Guava 27, тк есть конфликт по ListenableFuture
 
 }

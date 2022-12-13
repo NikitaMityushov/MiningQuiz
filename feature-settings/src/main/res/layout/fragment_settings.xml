@@ -1,41 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".api.SettingsFragment">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/settings_screen_title"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Hello" />
+        android:orientation="vertical"
+        tools:context=".api.SettingsFragment">
 
-    <com.google.android.material.switchmaterial.SwitchMaterial
-        android:id="@+id/settings_screen_switch_theme"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="false"
-        android:text="Dark mode" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/settings_screen_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_spacing"
+            android:text="@string/settings_title"
+            android:textAlignment="center"
+            android:textSize="@dimen/title_text_size" />
 
-    <com.google.android.material.slider.Slider
-        android:id="@+id/settings_screen_slider_exams"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stepSize="1.0"
-        android:valueFrom="0.0"
-        android:valueTo="100.0"
-        app:values="@array/exams_slider_values" />
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/settings_screen_switch_theme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_spacing"
+            android:checked="false"
+            android:text="@string/dark_mode" />
 
-    <com.google.android.material.slider.Slider
-        android:id="@+id/settings_screen_slider_topics"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:stepSize="1.0"
-        android:valueFrom="0.0"
-        android:valueTo="100.0" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/settings_screen_exams_slider_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_spacing"
+            android:text="@string/number_of_questions_of_exams"
+            />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+        <com.google.android.material.slider.Slider
+            android:id="@+id/settings_screen_slider_exams"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_spacing"
+            android:stepSize="5.0"
+            android:valueFrom="5.0"
+            android:valueTo="100.0"
+            app:values="@array/exams_slider_values" />
+
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/settings_screen_chose_all_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_spacing"
+            android:checked="false"
+            android:text="@string/choose_all"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/settings_screen_percent_of_right_ans_slider_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_spacing"
+            android:text="@string/percent_of_right_answers"
+            />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/settings_screen_percent_of_right_ans_slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/normal_spacing"
+            android:stepSize="1.0"
+            android:valueFrom="0.0"
+            android:valueTo="100.0"
+            app:values="@array/exams_slider_values" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</ScrollView>
+

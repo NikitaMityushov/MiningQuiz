@@ -2,7 +2,6 @@ package com.mityushovn.mining_quiz.feature_settings.api
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +12,8 @@ import com.mityushovn.mining_quiz.feature_settings.internal.di.components.Dagger
 import com.mityushovn.mining_quiz.feature_settings.internal.presentation.SettingsVMFactory
 import com.mityushovn.mining_quiz.feature_settings.internal.presentation.SettingsViewModel
 import com.mityushovn.miningquiz.module_injector.extensions.findDependencies
+import com.mityushovn.miningquiz.utils.toGone
+import com.mityushovn.miningquiz.utils.toVisible
 import javax.inject.Inject
 
 private const val TAG = "SettingsFragment"
@@ -48,17 +49,34 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
+            // 1) set start values for the settings
+            settingsScreenSwitchTheme.isChecked = viewModel.getDarkMode()
+            settingsScreenSliderExams.value = viewModel.getStartExamNumberQuestions()
+            settingsScreenChoseAllSwitch.isChecked = viewModel.getStartAllQuestionsAreChosen()
+            settingsScreenPercentOfRightAnsSlider.value = viewModel.getStartPercentOfRightAnswers()
+
+            // 2) set on change listeners for every view
+            settingsScreenSwitchTheme.setOnCheckedChangeListener { _, isChecked ->
+                viewModel.setDarkMode(isChecked)
+            }
 
             settingsScreenSliderExams.addOnChangeListener { _, value, _ ->
-                Log.d(TAG, "exam value is $value")
-                viewModel.setExamNumberQuestions(value.toInt())
+                viewModel.setExamNumberQuestions(value)
             }
 
-            settingsScreenSliderTopics.addOnChangeListener { _, value, _ ->
-                Log.d(TAG, "topic value is $value")
-                viewModel.setTopicNumberQuestions(value.toInt())
+            settingsScreenPercentOfRightAnsSlider.addOnChangeListener { _, value, _ ->
+                viewModel.setPercentOfRightAnswers(value)
             }
 
+            settingsScreenChoseAllSwitch.setOnCheckedChangeListener { _, isChecked ->
+
+                if (isChecked) {
+                   settingsScreenSliderExams.toGone()
+                } else {
+                    settingsScreenSliderExams.toVisible()
+                }
+                viewModel.setAllQuestionsAreChosen(isChecked)
+            }
 
         }
     }
