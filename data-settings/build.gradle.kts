@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.mityushovn.miningquiz.data_topics"
+    namespace = "com.mityushovn.miningquiz.data_settings"
     compileSdk = 31
 
     defaultConfig {
@@ -20,10 +20,5 @@ android {
 }
 
 dependencies {
-    implementation(libs.timber)
-
-    implementation(libs.coroutines.android)
-    testImplementation(libs.coroutines.test)
-
     implementation(project(":core-domain"))
 }

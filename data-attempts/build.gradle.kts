@@ -4,13 +4,12 @@ plugins {
 }
 
 android {
-    namespace = "com.mityushovn.miningquiz.data_topics"
-    compileSdk = 31
+    namespace = "com.mityushovn.miningquiz.data_attempts"
 
+    compileSdk = 31
     defaultConfig {
         minSdk = 24
         targetSdk = 31
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -25,5 +24,6 @@ dependencies {
     implementation(libs.coroutines.android)
     testImplementation(libs.coroutines.test)
 
-    implementation(project(":core-domain"))
+    implementation(project(":core-utils"))
+    api(project(":core-domain"))
 }
