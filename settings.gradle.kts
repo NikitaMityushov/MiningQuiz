@@ -18,6 +18,7 @@ dependencyResolutionManagement {
             library("lifecycle-livedata", "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1")
             library("lifecycle-viewmodel", "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
             library("lifecycle-runtime-ktx", "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1")
+            library("androidx-recyclerview", "androidx.recyclerview:recyclerview:1.2.1")
             // 2) Logging
             library("timber", "com.jakewharton.timber:timber:5.0.1")
             // 3) Testing libraries
