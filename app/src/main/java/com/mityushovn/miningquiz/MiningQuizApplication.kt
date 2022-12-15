@@ -1,6 +1,8 @@
 package com.mityushovn.miningquiz
 
 import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.work.*
 import com.mityushovn.miningquiz.di.components.AppComponent
 import com.mityushovn.miningquiz.di.components.DaggerAppComponent
@@ -23,6 +25,11 @@ private const val REMINDER_REPEAT_INTERVAL = 7L
  */
 private const val UNIQUE_WORK_NAME = "REMINDER TO PLAY"
 
+/**
+ *
+ */
+private const val PREFS_NAME = "MINING QUIZ"
+
 class MiningQuizApplication : Application(), DependenciesProvider, Configuration.Provider {
 
     lateinit var appComponent: AppComponent
@@ -41,7 +48,10 @@ class MiningQuizApplication : Application(), DependenciesProvider, Configuration
         /**
          * @see AppComponent
          */
-        appComponent = DaggerAppComponent.factory().create(this)
+        val prefs: SharedPreferences = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        appComponent = DaggerAppComponent
+            .factory()
+            .create(prefs, this)
         appComponent.injectIntoApplication(this)
         // 3) create reminder work
         createAndConfigureWork()

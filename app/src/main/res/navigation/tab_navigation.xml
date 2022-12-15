@@ -3,9 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/tab_navigation"
     app:startDestination="@id/home">
+
     <include app:graph="@navigation/home" />
     <include app:graph="@navigation/quizlist" />
     <include app:graph="@navigation/statistics" />
+    <include app:graph="@navigation/settings" />
+
     <fragment
         android:id="@+id/searchListFragment2"
         android:name="com.mityushovn.miningquiz.main.presentation.searchlistfragment.SearchListFragment"
@@ -25,4 +28,5 @@
             android:id="@+id/action_questionFragment_to_searchListFragment2"
             app:destination="@id/searchListFragment2" />
     </fragment>
+
 </navigation>

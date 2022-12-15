@@ -33,18 +33,19 @@ class QuizActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _component = DaggerGameComponent.factory().create(findDependencies(), application)
+
+        val gameMode = intent.extras?.get(GAME_MODE) as GameMode
+        val examOrTopicId = intent.extras?.get(EXAM_OR_TOPIC_ID) as Int
+
+        _component = DaggerGameComponent.factory()
+            .create(findDependencies(), application, gameMode, examOrTopicId)
         _component?.inject(this)
         setContentView(R.layout.activity_quiz)
         // configure DI
 
         if (savedInstanceState == null) {
             // start game, you must pass id of topic or exam and game mode in the startGame method of GameEngine
-            gameEngine.startGame(
-                intent.extras?.get(EXAM_OR_TOPIC_ID) as Int, intent.extras?.get(
-                    GAME_MODE
-                ) as GameMode
-            )
+            gameEngine.startGame()
         }
 
         gameEngine.showIsAttemptAddedToast.collectEventOnLifecycle(this) {

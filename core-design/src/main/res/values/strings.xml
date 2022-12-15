@@ -43,4 +43,7 @@
     <string name="failed">Failed</string>
     <string name="start_exam">start exam</string>
 
+    <!--Settings fragment-->
+    <string name="settings">Settings</string>
+
 </resources>

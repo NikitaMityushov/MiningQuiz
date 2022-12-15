@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_title">Настройки:</string>
+    <string name="dark_mode">Темная тема:</string>
+    <string name="number_of_questions_of_exams">Number of questions of exams:</string>
+    <string name="choose_all">Choose all</string>
+    <string name="percent_of_right_answers">Percent of right answers</string>
+</resources>

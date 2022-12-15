@@ -1,6 +1,8 @@
 package com.mityushovn.miningquiz.di.components
 
 import android.app.Application
+import android.content.SharedPreferences
+import com.mityushovn.mining_quiz.feature_settings.api.SettingsDeps
 import com.mityushovn.miningquiz.MiningQuizApplication
 import com.mityushovn.miningquiz.di.modules.*
 import com.mityushovn.miningquiz.game_feature.api.GameFeatureDependencies
@@ -21,14 +23,17 @@ import dagger.Component
         RepositoryModule::class,
         QuizlistFeatureDepsModule::class,
         GameFeatureDepsModule::class,
-        StatisticsDepsModule::class
+        StatisticsDepsModule::class,
+        SettingsFeatureDepsModule::class
     ]
 )
-interface AppComponent : QuizlistFeatureDependencies, GameFeatureDependencies, StatisticsDeps {
+interface AppComponent : QuizlistFeatureDependencies, GameFeatureDependencies, StatisticsDeps,
+    SettingsDeps {
 
     @Component.Factory
     interface Factory {
         fun create(
+            @BindsInstance prefs: SharedPreferences,
             @BindsInstance application: Application
         ): AppComponent
     }

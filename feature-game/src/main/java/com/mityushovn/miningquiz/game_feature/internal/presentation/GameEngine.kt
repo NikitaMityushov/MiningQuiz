@@ -9,6 +9,7 @@ import com.mityushovn.miningquiz.core_domain.domain.models.AttemptExam
 import com.mityushovn.miningquiz.core_domain.domain.models.AttemptTopic
 import com.mityushovn.miningquiz.core_domain.domain.repositories.AttemptsRepositoryAPI
 import com.mityushovn.miningquiz.core_domain.domain.repositories.QuestionsRepositoryAPI
+import com.mityushovn.miningquiz.core_domain.domain.repositories.SettingsRepositoryAPI
 import com.mityushovn.miningquiz.game_feature.R
 import com.mityushovn.miningquiz.game_feature.api.GameMode
 import com.mityushovn.miningquiz.game_feature.internal.domain.models.QuestionUIModel
@@ -28,8 +29,7 @@ import kotlinx.coroutines.runBlocking
 import timber.log.Timber
 import java.util.*
 import java.util.concurrent.ConcurrentLinkedDeque
-
-private const val ILLEGAL_GAME_STATE = "Game mode must be chosen! Something with logic."
+import kotlin.math.roundToInt
 
 /**
  * @author Nikita Mityushov 25.04.22
@@ -43,16 +43,18 @@ private const val ILLEGAL_GAME_STATE = "Game mode must be chosen! Something with
 internal class GameEngine(
     private val questionsRepository: QuestionsRepositoryAPI,
     private val attemptsRepository: AttemptsRepositoryAPI,
+    private val settingsRepository: SettingsRepositoryAPI,
     private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.Default,
+    private val gameMode: GameMode,
+    private val examOrTopicId: Int,
     app: Application
 ) : AndroidViewModel(app) {
 
-    /**
-     * @property cacheGameMode
-     * @property cacheId this 2 properties cache game mode and exam or topic ids for the following repeating the game.
-     */
-    private var cacheId: Int = 0
-    private var cacheGameMode: GameMode = GameMode.NONE
+    companion object {
+        private const val DEFAULT_QUESTIONS_NUMBER = 10
+        private const val DEFAULT_PERCENT_OF_RIGHT_ANSWERS = 0.799f
+        private const val ILLEGAL_GAME_STATE = "Game mode must be chosen! Something with logic."
+    }
 
     /**
      * @property _rightAns is a private counter of given right answers of the game.
@@ -72,7 +74,7 @@ internal class GameEngine(
     /**
      * @property _numberOfQuestions is a questions number of the game.
      */
-    private var _numberOfQuestions: Int = 0
+    private var _numberOfQuestions: Int = DEFAULT_QUESTIONS_NUMBER
         set(value) {
             synchronized(this) {
                 field = value
@@ -80,10 +82,15 @@ internal class GameEngine(
         }
 
     /**
+     * @property _percentOfRightAnswers represents percent of right answers you should done.
+     */
+    private var _percentOfRightAnswers: Float = DEFAULT_PERCENT_OF_RIGHT_ANSWERS
+
+    /**
      * @property loading is an observable property of loading questions from database.
      * Since loading of questions happens before onViewCreated, initial value of [_loading] is true.
      */
-    private val _loading = MutableStateFlow<Boolean>(true)
+    private val _loading = MutableStateFlow(true)
     val loading: StateFlow<Boolean>
         get() = _loading
 
@@ -126,21 +133,72 @@ internal class GameEngine(
     private val _showIsAttemptAddedToast = MutableStateFlow<Event<Boolean>>(Event())
     val showIsAttemptAddedToast: LiveEvent<Boolean> = _showIsAttemptAddedToast.share()
 
+    init {
+        initQuestionsNumber()
+        initPercentOfRightAnswers()
+    }
+
+    /**
+     * Initialize the [_numberOfQuestions] value
+     */
+    private fun initQuestionsNumber() {
+        viewModelScope.launch(backgroundDispatcher) {
+            _numberOfQuestions = try {
+                when (gameMode) {
+                    GameMode.EXAM -> {
+                        settingsRepository.gameSettings.numberOfExamsQuestions.toInt()
+                    }
+                    else -> {
+                        DEFAULT_QUESTIONS_NUMBER
+                    }
+                }
+            } catch (e: Exception) {
+                Timber.e("Init _numberOfQuestions exception", e)
+                DEFAULT_QUESTIONS_NUMBER
+            }
+        }
+    }
+
+    private fun initPercentOfRightAnswers() {
+        viewModelScope.launch(backgroundDispatcher) {
+            _percentOfRightAnswers = try {
+                when (gameMode) {
+                    GameMode.EXAM -> {
+                        settingsRepository.gameSettings.percentOfRightAnswers / 100
+                    }
+                    else -> {
+                        DEFAULT_PERCENT_OF_RIGHT_ANSWERS
+                    }
+                }
+            } catch (e: Exception) {
+                Timber.e("Init _numberOfQuestions exception", e)
+                DEFAULT_PERCENT_OF_RIGHT_ANSWERS
+            }
+        }
+    }
+
     /**
      *
      */
-    private fun sendSearchRequestExam(examId: Int) {
+    private fun sendSearchRequestExam() {
         viewModelScope.launch(backgroundDispatcher) {
             questionsRepository
-                .getRandomQuestionsFromExamIdAndNumberOfQuestions(examId)
+                .getRandomQuestionsFromExamIdAndNumberOfQuestions(examOrTopicId, _numberOfQuestions)
                 .onEach {
+                    val numberOfQuestions = it.size
+                    val percentOfRightAnswers =
+                        when (val percent = (it.size * _percentOfRightAnswers).roundToInt()) {
+                            0 -> 1
+                            else -> {
+                                percent
+                            }
+                        }
                     clearGameInternalCounters() // clear all counters, set 0 to start new game
-                    _numberOfQuestions = it.size
                     _stringForPreviewGameTextView.value =
                         String.format(
                             getApplication<Application>().resources.getString(
                                 R.string.question_contains_n_questions
-                            ), it.size, it.size * 80 / 100
+                            ), numberOfQuestions, percentOfRightAnswers
                         ) // "This exam contains %d questions. You need to answer at least %d questions to pass exam. Good luck!
                 }.onStart {
                     _loading.value = true
@@ -157,10 +215,10 @@ internal class GameEngine(
     /**
      *
      */
-    private fun sendSearchRequestTopic(topicId: Int) {
+    private fun sendSearchRequestTopic() {
         viewModelScope.launch(backgroundDispatcher) {
             questionsRepository
-                .getAllQuestionsFromTopic(topicId)
+                .getAllQuestionsFromTopic(examOrTopicId)
                 .onEach {
                     clearGameInternalCounters() // clear all counters, set 0 to start new game
                     _numberOfQuestions = it.size
@@ -168,7 +226,7 @@ internal class GameEngine(
                         String.format(
                             getApplication<Application>().resources.getString(
                                 R.string.question_contains_n_questions
-                            ), it.size, it.size * 80 / 100
+                            ), it.size, it.size * _percentOfRightAnswers
                         ) // "This exam contains %d questions. You need to answer at least %d questions to pass exam. Good luck!
                 }.onStart {
                     _loading.value = true
@@ -188,9 +246,9 @@ internal class GameEngine(
      *
      */
     private fun startOrRepeatGameFromCache() {
-        when (cacheGameMode) {
-            GameMode.EXAM -> sendSearchRequestExam(cacheId)
-            GameMode.TOPIC -> sendSearchRequestTopic(cacheId)
+        when (gameMode) {
+            GameMode.EXAM -> sendSearchRequestExam()
+            GameMode.TOPIC -> sendSearchRequestTopic()
 //            GameMode.MISTAKES -> sendSearchRequestMistakes(id) todo
             else -> {
                 Timber.e(IllegalStateException(ILLEGAL_GAME_STATE))
@@ -203,10 +261,7 @@ internal class GameEngine(
     /**
      *
      */
-    fun startGame(id: Int, mode: GameMode) {
-        // caching ids for repeating the game
-        cacheId = id
-        cacheGameMode = mode
+    fun startGame() {
         startOrRepeatGameFromCache()
     }
 
@@ -244,14 +299,13 @@ internal class GameEngine(
     fun postponeQuestion() {
         _questions.offer(_currentQuestion)
         nextQuestion()
-
     }
 
     /**
      *
      */
     fun endGame(): Boolean {
-        val result = (_rightAns.toFloat() / _numberOfQuestions.toFloat()) >= 0.799
+        val result = (_rightAns.toFloat() / _numberOfQuestions.toFloat()) >= _percentOfRightAnswers
 
         if (result) {
             with(viewModelScope) {
@@ -264,7 +318,7 @@ internal class GameEngine(
                         ) // Congratulations, you passed the exam with answered %d from %d questions
                 }
                 // send attempt to the storage
-                launch {
+                launch(backgroundDispatcher) {
                     createSuccessAttempt()
                 }
             }
@@ -279,7 +333,7 @@ internal class GameEngine(
                         ) // Sorry, but you didn't pass the exam. You answered only %d from %d questions.
                 }
                 // send attempt to the storage
-                launch {
+                launch(backgroundDispatcher) {
                     createFailedAttempt()
                 }
             }
@@ -327,72 +381,65 @@ internal class GameEngine(
     }
 
     private suspend fun createFailedAttempt() {
-        Timber.d(Thread.currentThread().name)
-        Timber.d("createFailedAttempt, cacheGameMode is $cacheGameMode, id is $cacheId")
-        viewModelScope.launch {
-            when (cacheGameMode) {
-                GameMode.EXAM -> {
-                    attemptsRepository.insertAttemptExam(
-                        AttemptExam(
-                            examId = cacheId,
-                            success = false
-                        )
+        when (gameMode) {
+            GameMode.EXAM -> {
+                attemptsRepository.insertAttemptExam(
+                    AttemptExam(
+                        examId = examOrTopicId,
+                        success = false
                     )
-                        .collect {
-                            _showIsAttemptAddedToast.postEvent(it)
-                        }
-                }
-                GameMode.TOPIC -> {
-                    attemptsRepository.insertAttemptTopic(
-                        AttemptTopic(
-                            topicId = cacheId,
-                            success = false
-                        )
-                    ).collect {
+                )
+                    .collect {
                         _showIsAttemptAddedToast.postEvent(it)
                     }
-                }
-                else -> {
-                    Timber.e(IllegalStateException(ILLEGAL_GAME_STATE))
-                    throw IllegalStateException(ILLEGAL_GAME_STATE)
+            }
+            GameMode.TOPIC -> {
+                attemptsRepository.insertAttemptTopic(
+                    AttemptTopic(
+                        topicId = examOrTopicId,
+                        success = false
+                    )
+                ).collect {
+                    _showIsAttemptAddedToast.postEvent(it)
                 }
             }
+            else -> {
+                Timber.e(IllegalStateException(ILLEGAL_GAME_STATE))
+                throw IllegalStateException(ILLEGAL_GAME_STATE)
+            }
+
         }
 
     }
 
     private suspend fun createSuccessAttempt() {
-        Timber.d("createSuccessAttempt, cacheGameMode is $cacheGameMode, id is $cacheId")
-        viewModelScope.launch {
-            when (cacheGameMode) {
-                GameMode.EXAM -> {
-                    attemptsRepository.insertAttemptExam(
-                        AttemptExam(
-                            examId = cacheId,
-                            success = true
-                        )
+        when (gameMode) {
+            GameMode.EXAM -> {
+                attemptsRepository.insertAttemptExam(
+                    AttemptExam(
+                        examId = examOrTopicId,
+                        success = true
                     )
-                        .collect {
-                            _showIsAttemptAddedToast.postEvent(it)
-                        }
-                }
-                GameMode.TOPIC -> {
-                    attemptsRepository.insertAttemptTopic(
-                        AttemptTopic(
-                            topicId = cacheId,
-                            success = true
-                        )
-                    ).collect {
+                )
+                    .collect {
                         _showIsAttemptAddedToast.postEvent(it)
                     }
-                }
-                else -> {
-                    Timber.e(IllegalStateException(ILLEGAL_GAME_STATE))
-                    throw IllegalStateException(ILLEGAL_GAME_STATE)
+            }
+            GameMode.TOPIC -> {
+                attemptsRepository.insertAttemptTopic(
+                    AttemptTopic(
+                        topicId = examOrTopicId,
+                        success = true
+                    )
+                ).collect {
+                    _showIsAttemptAddedToast.postEvent(it)
                 }
             }
+            else -> {
+                Timber.e(IllegalStateException(ILLEGAL_GAME_STATE))
+                throw IllegalStateException(ILLEGAL_GAME_STATE)
+            }
         }
-
     }
 
 }
