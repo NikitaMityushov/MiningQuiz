@@ -1,28 +1,9 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    `library-android`
 }
 
 android {
     namespace = "com.mityushovn.miningquiz.core_testing"
-    compileSdk = 31
-
-    defaultConfig {
-        minSdk = 24
-        targetSdk = 31
-    }
-
-    lint {
-        abortOnError = false
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
 }
 
 dependencies {

@@ -1,20 +1,9 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    `library-android`
 }
 
 android {
     namespace = "com.mityushovn.miningquiz.data_questions"
-    compileSdk = 31
-
-    defaultConfig {
-        minSdk = 24
-        targetSdk = 31
-    }
-
-    lint {
-        abortOnError = false
-    }
 }
 
 dependencies {

@@ -1,21 +1,10 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    `library-android`
     id("kotlin-kapt")
 }
 
 android {
     namespace = "com.mityushovn.miningquiz.core_injector"
-    compileSdk = 31
-
-    defaultConfig {
-        minSdk = 24
-        targetSdk = 31
-    }
-
-    lint {
-        abortOnError = false
-    }
 }
 
 dependencies {
