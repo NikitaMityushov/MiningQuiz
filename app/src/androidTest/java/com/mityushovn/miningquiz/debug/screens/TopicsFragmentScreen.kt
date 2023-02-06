@@ -27,7 +27,7 @@ class TopicsFragmentScreen {
     }
 
     fun clickTopicsRecycleViewOnPosition(position: Int) {
-        RecyclerViewObject.recycleViewWithId(topicsRecyclerId) {
+        com.mityushovn.miningquiz.core_testing.ui.pages.RecyclerViewObject.recycleViewWithId(topicsRecyclerId) {
             scrollToPosition(position)
             clickAtPosition(position)
         }

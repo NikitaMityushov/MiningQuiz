@@ -1,22 +1,11 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    `library-android`
     id("kotlin-kapt")
 }
 
 android {
-    compileSdk = 31
+    namespace = "com.mityushovn.miningquiz.home_feature"
 
-    defaultConfig {
-        minSdk = 24
-        targetSdk = 31
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-    kotlinOptions {
-        jvmTarget = "1.8"
-        freeCompilerArgs = listOf("-Xjvm-default=compatibility")
-    }
     buildFeatures {
         dataBinding = true
     }

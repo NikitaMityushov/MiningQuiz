@@ -1,28 +1,11 @@
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    `library-android`
     id("kotlin-kapt")
 }
 
 android {
-    compileSdk = 31
+    namespace = "com.mityushovn.miningquiz.statistics_feature"
 
-    defaultConfig {
-        minSdk = 24
-        targetSdk = 31
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    lint {
-        abortOnError = false
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-        freeCompilerArgs = listOf(
-                "-Xjvm-default=all",
-                "-opt-in=kotlin.RequiresOptIn")
-    }
     buildFeatures {
         dataBinding = true
     }
@@ -61,7 +44,7 @@ dependencies {
     // implementation of core modules
     implementation(project(":core-utils"))
     implementation(project(":core-design"))
-    implementation(project(":core-testing"))
+    testImplementation(project(":core-testing"))
     implementation(project(":data-attempts"))
     implementation(project(":core-injector"))
 }

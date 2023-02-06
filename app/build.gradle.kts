@@ -1,47 +1,9 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
+    `app-android`
     id("kotlin-kapt")
 }
 
 android {
-    compileSdk = 31
-
-    defaultConfig {
-        applicationId = "com.mityushovn.miningquiz"
-        minSdk = 24
-        targetSdk = 31
-        versionCode = 5
-        versionName = "1.0.4"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-
-    lint {
-        abortOnError = false
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-        freeCompilerArgs = listOf("-Xjvm-default=compatibility")
-    }
-
-
     buildFeatures {
         dataBinding = true
     }
@@ -108,5 +70,20 @@ dependencies {
     implementation(project(":feature-quizlist"))
     implementation(project(":feature-game"))
     implementation(project(":feature-settings"))
+}
+
+tasks.withType<Test>().configureEach {
+    maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
+    setForkEvery(100)
+    reports.html.required.set(false)
+    reports.junitXml.required.set(false)
+    if (!project.hasProperty("createReports")) {
+        reports.html.required.set(false)
+        reports.junitXml.required.set(false)
+    }
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.isFork = true
 }
 

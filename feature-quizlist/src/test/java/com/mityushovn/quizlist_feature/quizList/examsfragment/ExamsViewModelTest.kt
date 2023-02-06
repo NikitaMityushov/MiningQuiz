@@ -2,11 +2,11 @@ package com.mityushovn.quizlist_feature.quizList.examsfragment
 
 import com.mityushovn.miningquiz.core_domain.domain.models.Exam
 import com.mityushovn.miningquiz.core_domain.domain.repositories.ExamsRepositoryAPI
-import com.mityushovn.miningquiz.core_testing.unit.coroutines.CoroutineSubject
-import com.mityushovn.miningquiz.core_testing.unit.coroutines.MainDispatcherRule
+import com.mityushovn.miningquiz.core_testing.coroutines.CoroutineSubject
+import com.mityushovn.miningquiz.core_testing.coroutines.MainDispatcherRule
 import com.mityushovn.miningquiz.core_domain.domain.models.Loading
 import com.mityushovn.miningquiz.core_domain.domain.models.Ready
-import com.mityushovn.quizlist_feature.internal.presentation.examsfragment.ExamsViewModel
+import com.mityushovn.miningquiz.quizlist_feature.internal.presentation.examsfragment.ExamsViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
@@ -32,7 +32,7 @@ class ExamsViewModelTest {
     private lateinit var testFlow: MutableStateFlow<List<Exam>>
 
     @get:Rule
-    val mainDispatcherRule = MainDispatcherRule()
+    val mainDispatcherRule = com.mityushovn.miningquiz.core_testing.coroutines.MainDispatcherRule()
 
     @Before
     fun setUp() {
@@ -101,7 +101,8 @@ class ExamsViewModelTest {
     fun `when updateExamsList is called then loadingState should be Loading but after emitting value should by Ready`() =
         runTest {
             // given
-            val subject = CoroutineSubject<List<Exam>>()
+            val subject =
+                com.mityushovn.miningquiz.core_testing.coroutines.CoroutineSubject<List<Exam>>()
             whenever(examsRepository.getAllExams()).thenReturn(flow { emit(subject.get()) })
             // when
             viewModel = ExamsViewModel(

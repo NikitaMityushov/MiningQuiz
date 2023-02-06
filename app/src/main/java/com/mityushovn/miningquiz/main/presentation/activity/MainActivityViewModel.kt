@@ -71,9 +71,12 @@ class MainActivityViewModel(
             queryFlow
                 .debounce(TEXT_ENTERED_DEBOUNCE_MILLIS)
                 .filter { it.isNotBlank() }
+//                .onEach { _searchState.value = Loading }
+                .flatMapLatest { query ->
+                    sendSearchRequest(query)
+                        .onEach { _searchState.value = Loading }
+                }
                 .distinctUntilChanged()
-                .onEach { _searchState.value = Loading }
-                .flatMapLatest(::sendSearchRequest)
                 .retry(RETRIES_NUMBER)
                 .catch {
                     _searchState.value = Error(it)

@@ -95,7 +95,7 @@ class GameFragmentScreen {
 
     fun checkToastIsDisplayed() {
         val text = context.getString(R.string.attempt_succ_added)
-        ToastObject.toastWithText(text) {
+        com.mityushovn.miningquiz.core_testing.ui.pages.ToastObject.toastWithText(text) {
             checkIsDisplayed()
         }
     }

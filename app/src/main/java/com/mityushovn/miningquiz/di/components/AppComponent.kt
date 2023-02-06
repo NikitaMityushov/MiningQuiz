@@ -11,7 +11,7 @@ import com.mityushovn.miningquiz.main.presentation.mainfragment.MainFragment
 import com.mityushovn.miningquiz.main.presentation.searchlistfragment.SearchListFragment
 import com.mityushovn.miningquiz.main.presentation.searchlistfragment.questionfragment.QuestionFragment
 import com.mityushovn.miningquiz.statistics_feature.api.StatisticsDeps
-import com.mityushovn.quizlist_feature.api.QuizlistFeatureDependencies
+import com.mityushovn.miningquiz.quizlist_feature.api.QuizlistFeatureDependencies
 import dagger.BindsInstance
 import dagger.Component
 
