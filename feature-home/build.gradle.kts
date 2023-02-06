@@ -5,6 +5,7 @@ plugins {
 }
 
 android {
+    namespace = "com.mityushovn.miningquiz.home_feature"
     compileSdk = 31
 
     defaultConfig {
@@ -15,7 +16,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
-        freeCompilerArgs = listOf("-Xjvm-default=compatibility")
+        freeCompilerArgs = listOf("-Xjvm-default=compatibility", "-opt-in=kotlin.RequiresOptIn")
     }
     buildFeatures {
         dataBinding = true

@@ -6,7 +6,7 @@ import com.mityushovn.miningquiz.core_testing.unit.coroutines.CoroutineSubject
 import com.mityushovn.miningquiz.core_testing.unit.coroutines.MainDispatcherRule
 import com.mityushovn.miningquiz.core_domain.domain.models.Loading
 import com.mityushovn.miningquiz.core_domain.domain.models.Ready
-import com.mityushovn.quizlist_feature.internal.presentation.examsfragment.ExamsViewModel
+import com.mityushovn.miningquiz.quizlist_feature.internal.presentation.examsfragment.ExamsViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow

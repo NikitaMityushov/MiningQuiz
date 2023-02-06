@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-
+    namespace = "com.mityushovn.miningquiz.quizlist_feature"
     compileSdk = 31
 
     defaultConfig {

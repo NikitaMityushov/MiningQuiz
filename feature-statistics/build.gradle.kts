@@ -5,6 +5,7 @@ plugins {
 }
 
 android {
+    namespace = "com.mityushovn.miningquiz.statistics_feature"
     compileSdk = 31
 
     defaultConfig {

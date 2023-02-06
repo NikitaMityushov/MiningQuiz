@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.mityushovn.quizlist_feature.internal.presentation.mistakesfragment.MistakesFragment">
+        tools:context="com.mityushovn.miningquiz.quizlist_feature.internal.presentation.mistakesfragment.MistakesFragment">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/mistakes_fr_title_tv"
