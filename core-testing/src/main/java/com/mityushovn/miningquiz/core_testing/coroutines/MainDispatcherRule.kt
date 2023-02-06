@@ -1,4 +1,4 @@
-package com.mityushovn.miningquiz.core_testing.unit.coroutines
+package com.mityushovn.miningquiz.core_testing.coroutines
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

@@ -1,9 +1,9 @@
 package com.mityushovn.quizlist_feature.quizList.topicslistfragment
 
 import com.mityushovn.miningquiz.core_domain.domain.models.Topic
-import com.mityushovn.miningquiz.core_testing.unit.coroutines.MainDispatcherRule
+import com.mityushovn.miningquiz.core_testing.coroutines.MainDispatcherRule
 import com.mityushovn.miningquiz.core_domain.domain.repositories.TopicsRepositoryAPI
-import com.mityushovn.miningquiz.core_testing.unit.coroutines.CoroutineSubject
+import com.mityushovn.miningquiz.core_testing.coroutines.CoroutineSubject
 import com.mityushovn.miningquiz.core_domain.domain.models.Loading
 import com.mityushovn.miningquiz.core_domain.domain.models.Ready
 import com.mityushovn.miningquiz.quizlist_feature.internal.presentation.topicslistfragment.TopicsListViewModel
@@ -33,7 +33,7 @@ class TopicsListViewModelTest {
     lateinit var testFlow: MutableStateFlow<List<Topic>>
 
     @get:Rule
-    val coroutineRule = MainDispatcherRule()
+    val coroutineRule = com.mityushovn.miningquiz.core_testing.coroutines.MainDispatcherRule()
 
     @Before
     fun setUp() = runBlocking {
@@ -112,7 +112,8 @@ class TopicsListViewModelTest {
     fun `when init viewModel then loading state is Loading and after successful result state is Ready`() =
         runTest {
             // given
-            val subject = CoroutineSubject<List<Topic>>()
+            val subject =
+                com.mityushovn.miningquiz.core_testing.coroutines.CoroutineSubject<List<Topic>>()
             whenever(topicsRepositoryAPI.getAllTopics()).thenReturn(flow { emit(subject.get()) })
             // when
             launch {

@@ -1,47 +1,9 @@
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
+    `app-android`
     id("kotlin-kapt")
 }
 
 android {
-    compileSdk = 31
-
-    defaultConfig {
-        applicationId = "com.mityushovn.miningquiz"
-        minSdk = 24
-        targetSdk = 31
-        versionCode = 5
-        versionName = "1.0.4"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-
-    lint {
-        abortOnError = false
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    kotlinOptions {
-        jvmTarget = "1.8"
-        freeCompilerArgs = listOf("-Xjvm-default=compatibility")
-    }
-
-
     buildFeatures {
         dataBinding = true
     }

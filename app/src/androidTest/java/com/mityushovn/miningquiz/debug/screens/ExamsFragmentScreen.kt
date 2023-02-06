@@ -26,7 +26,7 @@ class ExamsFragmentScreen {
     }
 
     fun clickExamsRecycleViewOnPosition(position: Int) {
-        RecyclerViewObject.recycleViewWithId(examsRecyclerId) {
+        com.mityushovn.miningquiz.core_testing.ui.pages.RecyclerViewObject.recycleViewWithId(examsRecyclerId) {
             scrollToPosition(position)
             clickAtPosition(position)
         }

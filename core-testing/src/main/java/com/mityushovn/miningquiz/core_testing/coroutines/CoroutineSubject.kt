@@ -1,4 +1,4 @@
-package com.mityushovn.miningquiz.core_testing.unit.coroutines
+package com.mityushovn.miningquiz.core_testing.coroutines
 
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.resume

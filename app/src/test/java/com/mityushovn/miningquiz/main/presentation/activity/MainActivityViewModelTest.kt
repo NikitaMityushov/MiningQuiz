@@ -3,7 +3,7 @@ package com.mityushovn.miningquiz.main.presentation.activity
 import com.mityushovn.miningquiz.core_domain.domain.models.Error
 import com.mityushovn.miningquiz.core_domain.domain.models.Question
 import com.mityushovn.miningquiz.core_domain.domain.repositories.QuestionsRepositoryAPI
-import com.mityushovn.miningquiz.core_testing.unit.coroutines.MainDispatcherRule
+import com.mityushovn.miningquiz.core_testing.coroutines.MainDispatcherRule
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
@@ -21,7 +21,7 @@ class MainActivityViewModelTest {
     lateinit var expectedList: List<Question>
 
     @get:Rule
-    val mainDispatcherRule = MainDispatcherRule()
+    val mainDispatcherRule = com.mityushovn.miningquiz.core_testing.coroutines.MainDispatcherRule()
 
     @Before
     fun setUp() = runBlocking {

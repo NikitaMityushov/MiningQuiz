@@ -44,7 +44,7 @@ dependencies {
     // implementation of core modules
     implementation(project(":core-utils"))
     implementation(project(":core-design"))
-    implementation(project(":core-testing"))
+    testImplementation(project(":core-testing"))
     implementation(project(":data-attempts"))
     implementation(project(":core-injector"))
 }
