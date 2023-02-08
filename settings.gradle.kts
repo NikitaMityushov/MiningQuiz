@@ -54,6 +54,8 @@ dependencyResolutionManagement {
             // 10) utils
             library("google-guava", "com.google.guava:guava:27.0-android")
             // !!! для работы тестов в WorkManager 2.7.1 подходит только Guava 27, тк есть конфликт по ListenableFuture
+            library("google-agp", "com.android.tools.build:gradle:7.4.0")
+            library("jetbrains-kotlin", "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10")
         }
     }
 }

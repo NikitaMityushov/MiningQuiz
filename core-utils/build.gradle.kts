@@ -2,10 +2,6 @@ plugins {
     `library-android`
 }
 
-android {
-    namespace = "com.mityushovn.miningquiz.core_utils"
-}
-
 dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.recyclerview)

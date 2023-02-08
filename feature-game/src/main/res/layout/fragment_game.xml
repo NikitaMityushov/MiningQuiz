@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.mityushovn.miningquiz.game_feature.internal.presentation.GameEngine" />
+            type="com.mityushovn.miningquiz.feature_game.internal.presentation.GameEngine" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

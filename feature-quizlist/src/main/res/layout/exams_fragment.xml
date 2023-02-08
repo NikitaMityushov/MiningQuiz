@@ -7,11 +7,11 @@
 
         <variable
             name="viewModel"
-            type="com.mityushovn.miningquiz.quizlist_feature.internal.presentation.examsfragment.ExamsViewModel" />
+            type="com.mityushovn.miningquiz.feature_quizlist.internal.presentation.examsfragment.ExamsViewModel" />
 
         <variable
             name="adapter"
-            type="com.mityushovn.miningquiz.quizlist_feature.internal.presentation.examsfragment.recyclerview.ExamsFrListAdapter" />
+            type="com.mityushovn.miningquiz.feature_quizlist.internal.presentation.examsfragment.recyclerview.ExamsFrListAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

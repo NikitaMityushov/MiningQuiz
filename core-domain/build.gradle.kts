@@ -3,10 +3,6 @@ plugins {
     id("kotlin-parcelize")
 }
 
-android {
-    namespace = "com.mityushovn.miningquiz.core_domain"
-}
-
 dependencies {
     // 1) Coroutines
     implementation(libs.coroutines.android)

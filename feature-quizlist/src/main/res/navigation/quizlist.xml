@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/quizListFragment"
-        android:name="com.mityushovn.miningquiz.quizlist_feature.api.QuizListFragment"
+        android:name="com.mityushovn.miningquiz.feature_quizlist.api.QuizListFragment"
         android:label="fragment_quiz_list"
         tools:layout="@layout/fragment_quiz_list" />
 </navigation>

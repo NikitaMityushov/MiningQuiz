@@ -19,7 +19,28 @@ configure<BaseAppModuleExtension> {
 
     buildTypes {
         release {
+            isShrinkResources = true
+            isCrunchPngs = true
+            isMinifyEnabled = true
+            // enable ProGuard
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+
+        debug {
+            isShrinkResources = false
             isMinifyEnabled = false
+        }
+
+        maybeCreate("debugShrank").apply {
+            initWith(getByName("debug"))
+            isShrinkResources = true
+            isCrunchPngs = true
+            isMinifyEnabled = true
+            isDebuggable = true
+            // enable ProGuard
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -29,11 +50,6 @@ configure<BaseAppModuleExtension> {
 
     lint {
         abortOnError = false
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {

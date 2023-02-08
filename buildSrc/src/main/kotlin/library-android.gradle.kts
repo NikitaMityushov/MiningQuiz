@@ -8,18 +8,24 @@ plugins {
 configure<LibraryExtension> {
     compileSdk = Contract.COMPILE_SDK
 
+    namespace = "${Contract.NAMESPACE}.${
+        projectDir.nameWithoutExtension.replace(
+            "-",
+            "_"
+        )
+    }" // for example "com.mityushov.miningquiz.core_utils"
+
     defaultConfig {
         minSdk = Contract.MIN_SDK
         targetSdk = Contract.TARGET_SDK
     }
 
-    lint {
-        abortOnError = false
+    buildTypes {
+        maybeCreate("debugShrank")
     }
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+    lint {
+        abortOnError = false
     }
 
     kotlinOptions {

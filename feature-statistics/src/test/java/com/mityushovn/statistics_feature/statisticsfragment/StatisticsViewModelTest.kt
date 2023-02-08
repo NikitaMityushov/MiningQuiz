@@ -6,7 +6,7 @@ import com.mityushovn.miningquiz.core_domain.domain.models.statisticsEntities.Ab
 import com.mityushovn.miningquiz.core_domain.domain.repositories.AttemptsRepositoryAPI
 import com.mityushovn.miningquiz.core_testing.coroutines.CoroutineSubject
 import com.mityushovn.miningquiz.core_testing.coroutines.MainDispatcherRule
-import com.mityushovn.miningquiz.statistics_feature.internal.presentation.StatisticsViewModel
+import com.mityushovn.miningquiz.feature_statistics.internal.presentation.StatisticsViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow

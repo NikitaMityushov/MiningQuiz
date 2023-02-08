@@ -19,3 +19,21 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-addconfigurationdebugging
+-printconfiguration config1.txt
+
+# print all shrinked code in usage.txt
+-printusage
+
+#obfuscation
+# all in one package
+-flattenpackagehierarchy
+# reuse names
+-overloadaggressively
+
+#kotlin
+-keep class kotlin.Metadata { *; }
+-dontnote kotlin.internal.PlatformImplementationsKt
+-dontnote kotlin.reflect.jvm.internal.**
+-dontwarn sun.misc.**
