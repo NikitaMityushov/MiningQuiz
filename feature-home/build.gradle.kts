@@ -4,8 +4,6 @@ plugins {
 }
 
 android {
-    namespace = "com.mityushovn.miningquiz.home_feature"
-
     buildFeatures {
         dataBinding = true
     }

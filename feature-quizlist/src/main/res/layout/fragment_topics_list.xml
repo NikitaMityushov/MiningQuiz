@@ -7,16 +7,16 @@
 
         <variable
             name="viewModel"
-            type="com.mityushovn.miningquiz.quizlist_feature.internal.presentation.topicslistfragment.TopicsListViewModel" />
+            type="com.mityushovn.miningquiz.feature_quizlist.internal.presentation.topicslistfragment.TopicsListViewModel" />
         <variable
             name="adapter"
-            type="com.mityushovn.miningquiz.quizlist_feature.internal.presentation.topicslistfragment.recyclerview.TopicsListFrAdapter" />
+            type="com.mityushovn.miningquiz.feature_quizlist.internal.presentation.topicslistfragment.recyclerview.TopicsListFrAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.mityushovn.miningquiz.quizlist_feature.internal.presentation.topicslistfragment.TopicsListFragment">
+        tools:context="com.mityushovn.miningquiz.feature_quizlist.internal.presentation.topicslistfragment.TopicsListFragment">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/topics_list_fr_title_tv"

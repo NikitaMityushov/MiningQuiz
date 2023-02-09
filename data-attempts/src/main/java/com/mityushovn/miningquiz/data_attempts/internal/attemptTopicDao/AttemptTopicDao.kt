@@ -4,7 +4,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import com.mityushovn.miningquiz.core_domain.domain.models.AttemptTopic
 import com.mityushovn.miningquiz.data_attempts.internal.data.AppSQLiteContract
-import com.mityushovn.miningquiz.utils.toIntForDB
+import com.mityushovn.miningquiz.core_utils.toIntForDB
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import timber.log.Timber

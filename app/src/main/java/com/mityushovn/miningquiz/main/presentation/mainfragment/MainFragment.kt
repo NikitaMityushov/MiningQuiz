@@ -20,9 +20,9 @@ import com.mityushovn.miningquiz.main.presentation.searchlistfragment.SearchList
 import com.mityushovn.miningquiz.main.presentation.activity.MainActivityViewModel
 import com.mityushovn.miningquiz.module_injector.extensions.DepsMap
 import com.mityushovn.miningquiz.module_injector.interfaces.DependenciesProvider
-import com.mityushovn.miningquiz.utils.onQueryTextChange
-import com.mityushovn.miningquiz.utils.toGone
-import com.mityushovn.miningquiz.utils.toVisible
+import com.mityushovn.miningquiz.core_utils.onQueryTextChange
+import com.mityushovn.miningquiz.core_utils.toGone
+import com.mityushovn.miningquiz.core_utils.toVisible
 import timber.log.Timber
 import javax.inject.Inject
 

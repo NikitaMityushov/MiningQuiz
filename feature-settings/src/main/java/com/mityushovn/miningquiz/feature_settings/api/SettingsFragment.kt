@@ -12,8 +12,8 @@ import com.mityushovn.miningquiz.feature_settings.internal.di.components.DaggerS
 import com.mityushovn.miningquiz.feature_settings.internal.presentation.SettingsVMFactory
 import com.mityushovn.miningquiz.feature_settings.internal.presentation.SettingsViewModel
 import com.mityushovn.miningquiz.module_injector.extensions.findDependencies
-import com.mityushovn.miningquiz.utils.toGone
-import com.mityushovn.miningquiz.utils.toVisible
+import com.mityushovn.miningquiz.core_utils.toGone
+import com.mityushovn.miningquiz.core_utils.toVisible
 import javax.inject.Inject
 
 private const val TAG = "SettingsFragment"

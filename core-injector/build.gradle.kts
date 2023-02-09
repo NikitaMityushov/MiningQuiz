@@ -3,10 +3,6 @@ plugins {
     id("kotlin-kapt")
 }
 
-android {
-    namespace = "com.mityushovn.miningquiz.core_injector"
-}
-
 dependencies {
     implementation(libs.fragment.ktx)
     debugImplementation(libs.fragment.testing)

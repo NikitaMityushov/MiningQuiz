@@ -2,10 +2,6 @@ plugins {
     `library-android`
 }
 
-android {
-    namespace = "com.mityushovn.miningquiz.core_testing"
-}
-
 dependencies {
     implementation(libs.junit)
     implementation(libs.mockito)

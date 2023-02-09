@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/previewGameFragment"
-        android:name="com.mityushovn.miningquiz.game_feature.internal.presentation.previewgamefragment.PreviewGameFragment"
+        android:name="com.mityushovn.miningquiz.feature_game.internal.presentation.previewgamefragment.PreviewGameFragment"
         android:label="PreviewGameFragment" >
         <action
             android:id="@+id/action_previewGameFragment_to_gameFragment"
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.mityushovn.miningquiz.game_feature.internal.presentation.gamefragment.GameFragment"
+        android:name="com.mityushovn.miningquiz.feature_game.internal.presentation.gamefragment.GameFragment"
         android:label="GameFragment" >
         <action
             android:id="@+id/action_gameFragment_to_congratsFragment"
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/congratsFragment"
-        android:name="com.mityushovn.miningquiz.game_feature.internal.presentation.congratsfragment.CongratsFragment"
+        android:name="com.mityushovn.miningquiz.feature_game.internal.presentation.congratsfragment.CongratsFragment"
         android:label="CongratsFragment" >
         <action
             android:id="@+id/action_congratsFragment_to_previewGameFragment"
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/failedFragment"
-        android:name="com.mityushovn.miningquiz.game_feature.internal.presentation.failedfragment.FailedFragment"
+        android:name="com.mityushovn.miningquiz.feature_game.internal.presentation.failedfragment.FailedFragment"
         android:label="FailedFragment" >
         <action
             android:id="@+id/action_failedFragment_to_previewGameFragment"

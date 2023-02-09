@@ -1,6 +1,6 @@
 package com.mityushovn.miningquiz.core_domain.domain.models
 
-import com.mityushovn.miningquiz.utils.now
+import com.mityushovn.miningquiz.core_utils.now
 import java.util.Date
 import kotlin.random.Random
 

@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import com.mityushovn.miningquiz.MiningQuizApplication
 import com.mityushovn.miningquiz.di.components.AppComponent
 import com.mityushovn.miningquiz.databinding.QuestionFragmentBinding
-import com.mityushovn.miningquiz.utils.hideKeyboard
+import com.mityushovn.miningquiz.core_utils.hideKeyboard
 import timber.log.Timber
 import javax.inject.Inject
 

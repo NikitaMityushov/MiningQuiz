@@ -1,12 +1,10 @@
 package com.mityushovn.quizlist_feature.quizList.topicslistfragment
 
 import com.mityushovn.miningquiz.core_domain.domain.models.Topic
-import com.mityushovn.miningquiz.core_testing.coroutines.MainDispatcherRule
 import com.mityushovn.miningquiz.core_domain.domain.repositories.TopicsRepositoryAPI
-import com.mityushovn.miningquiz.core_testing.coroutines.CoroutineSubject
 import com.mityushovn.miningquiz.core_domain.domain.models.Loading
 import com.mityushovn.miningquiz.core_domain.domain.models.Ready
-import com.mityushovn.miningquiz.quizlist_feature.internal.presentation.topicslistfragment.TopicsListViewModel
+import com.mityushovn.miningquiz.feature_quizlist.internal.presentation.topicslistfragment.TopicsListViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flow
