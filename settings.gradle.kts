@@ -1,6 +1,3 @@
-// enables Version Catalog feature for Gradle 7.4
-enableFeaturePreview("VERSION_CATALOGS")
-
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {

@@ -5,7 +5,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-configure<BaseAppModuleExtension> {
+android {
     compileSdk = Contract.COMPILE_SDK
 
     defaultConfig {
@@ -32,8 +32,8 @@ configure<BaseAppModuleExtension> {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
