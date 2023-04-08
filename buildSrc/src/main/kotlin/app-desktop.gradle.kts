@@ -4,11 +4,10 @@ plugins {
 }
 
 dependencies {
+    implementation(compose.desktop.common)
     implementation(compose.desktop.currentOs)
 }
 
 compose.desktop {
-    application {
-        
-    }
+
 }
