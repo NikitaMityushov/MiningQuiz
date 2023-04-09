@@ -3,11 +3,3 @@ plugins {
     id("org.jetbrains.compose")
 }
 
-dependencies {
-    implementation(compose.desktop.common)
-    implementation(compose.desktop.currentOs)
-}
-
-compose.desktop {
-
-}

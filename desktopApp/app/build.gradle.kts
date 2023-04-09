@@ -1,6 +1,5 @@
 plugins {
     `app-desktop`
-    application
 }
 
 group = "com.mityushovn.miningquiz.app"
@@ -10,6 +9,17 @@ sourceSets.main {
     java.srcDirs("src/jvmMain/kotlin")
 }
 
-application {
-    mainClass.set("com.mityushovn.miningquiz.app.MainKt") // The main class of the application
+sourceSets.test {
+    java.srcDirs("src/jvmTest/kotlin")
+}
+
+dependencies {
+    implementation(compose.desktop.common)
+    implementation(compose.desktop.currentOs)
+}
+
+compose.desktop {
+    application {
+        mainClass = "com.mityushovn.miningquiz.app.MainKt"
+    }
 }
