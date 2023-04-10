@@ -29,6 +29,7 @@ dependencyResolutionManagement {
             library("androidx-test-runner", "androidx.test:runner:1.4.0")
             library("androidx-test-rules", "androidx.test:rules:1.4.0")
             // 4) Coroutines
+            library("coroutines-core", "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
             library("coroutines-android", "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
             library("coroutines-test", "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
             // 5) Navigation component
@@ -51,6 +52,8 @@ dependencyResolutionManagement {
             // 10) utils
             library("google-guava", "com.google.guava:guava:27.0-android")
             // !!! для работы тестов в WorkManager 2.7.1 подходит только Guava 27, тк есть конфликт по ListenableFuture
+            // 11) multiplatform
+            library("kotlin-datetime", "org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
         }
     }
 }
@@ -73,5 +76,9 @@ include(":androidApp:data-topics")
 include(":androidApp:core-testing")
 include(":androidApp:feature-settings")
 include(":androidApp:data-settings")
+
 include(":desktopApp")
 include(":desktopApp:app")
+
+include(":shared")
+include(":shared:core-domain")

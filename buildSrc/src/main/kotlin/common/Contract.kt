@@ -1,3 +1,5 @@
+package common
+
 object Contract  {
     // android
     const val APP_ID = "com.mityushovn.miningquiz"

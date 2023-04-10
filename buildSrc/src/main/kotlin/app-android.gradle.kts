@@ -1,4 +1,6 @@
-import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
+import common.Contract
+import gradle.kotlin.dsl.accessors._ec5312ae47488e8d285aabe2e0babffa.android
+import gradle.kotlin.dsl.accessors._ec5312ae47488e8d285aabe2e0babffa.kotlinOptions
 
 plugins {
     id("com.android.application")
@@ -32,8 +34,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
