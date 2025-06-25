@@ -226,7 +226,7 @@ internal class GameEngine(
                         String.format(
                             getApplication<Application>().resources.getString(
                                 R.string.question_contains_n_questions
-                            ), it.size, it.size * _percentOfRightAnswers
+                            ), it.size, (it.size * _percentOfRightAnswers).toInt()
                         ) // "This exam contains %d questions. You need to answer at least %d questions to pass exam. Good luck!
                 }.onStart {
                     _loading.value = true

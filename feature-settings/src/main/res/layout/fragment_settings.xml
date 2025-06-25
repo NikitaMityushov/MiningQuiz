@@ -26,7 +26,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/normal_spacing"
             android:checked="false"
-            android:text="@string/dark_mode" />
+            android:text="@string/dark_mode"
+            android:visibility="gone" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/settings_screen_exams_slider_title"
